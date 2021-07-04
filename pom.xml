@@ -77,6 +77,34 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+          <groupId>com.diffplug.spotless</groupId>
+          <artifactId>spotless-maven-plugin</artifactId>
+          <configuration>
+            <java>
+              <licenseHeader>
+                <file>${basedir}/LICENSE</file>
+              </licenseHeader>
+              <googleJavaFormat>
+                <version>1.7</version>
+                <style>GOOGLE</style>
+              </googleJavaFormat>
+              <removeUnusedImports />
+              <importOrder>
+                <order>io.github.hexarchtraining,java,javax,org,com,lombok</order>
+              </importOrder>
+            </java>
+          </configuration>
+          <executions>
+            <execution>
+              <id>spotless-check</id>
+              <phase>process-test-classes</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>
