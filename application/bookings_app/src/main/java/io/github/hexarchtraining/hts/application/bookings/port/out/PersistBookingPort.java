@@ -2,7 +2,7 @@ package io.github.hexarchtraining.hts.application.bookings.port.out;
 
 import io.github.hexarchtraining.hts.domain.bookings.Booking;
 
-public interface CreateBookingPort {
+public interface PersistBookingPort {
 
-    void createBooking(Booking booking);
+    Booking persist(Booking booking);
 }

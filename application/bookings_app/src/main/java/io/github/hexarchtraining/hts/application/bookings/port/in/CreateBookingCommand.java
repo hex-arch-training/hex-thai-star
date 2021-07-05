@@ -10,16 +10,22 @@ import java.util.regex.Pattern;
 @Value
 public class CreateBookingCommand {
 
-    Instant bookingTime;
+    Instant bookingFrom;
+
+    Instant bookingTo;
 
     String email;
 
     int seatsNumber;
 
-    public CreateBookingCommand(@NonNull Instant bookingTime, @NonNull String email, int seatsNumber) {
-        this.bookingTime = bookingTime;
+    public CreateBookingCommand(@NonNull Instant bookingFrom, @NonNull Instant bookingTo, @NonNull String email, int seatsNumber) {
+        this.bookingFrom = bookingFrom;
+        this.bookingTo = bookingTo;
         this.email = email;
         this.seatsNumber = seatsNumber;
+        if (bookingFrom.isAfter(bookingTo)) {
+            throw new BusinessException("Invalid booking window");
+        }
         checkEmail(this.email);
         checkSeatsNumber(this.seatsNumber);
     }
