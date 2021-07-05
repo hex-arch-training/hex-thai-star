@@ -4,5 +4,5 @@ import io.github.hexarchtraining.hts.domain.bookings.TableBooking;
 
 public interface PersistTableBookingPort {
 
-    void persistTableBooking(TableBooking tableBooking);
+    void persist(TableBooking tableBooking);
 }

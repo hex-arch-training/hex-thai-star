@@ -30,7 +30,7 @@ public class CreateBookingService implements CreateBookingUseCase {
     public void createBooking(CreateBookingCommand command) {
 
         final List<Table> freeTables = findFreeTablesPort
-                .findFreeTables(command.getBookingFrom(), command.getBookingTo()).stream()
+                .find(command.getBookingFrom(), command.getBookingTo()).stream()
                 .sorted(Comparator.comparingInt(Table::getMaxSeats))
                 .filter(table -> table.getMaxSeats() >= command.getSeatsNumber())
                 .collect(Collectors.toList());
@@ -45,6 +45,6 @@ public class CreateBookingService implements CreateBookingUseCase {
         final Booking bookingPersisted = persistBookingPort.persist(booking);
 
         final TableBooking tableBooking = TableBooking.createTableBooking(bookingPersisted, freeTables.get(0), command.getBookingFrom(), command.getBookingTo());
-        persistTableBookingPort.persistTableBooking(tableBooking);
+        persistTableBookingPort.persist(tableBooking);
     }
 }

@@ -9,5 +9,5 @@ import java.util.List;
  * Finds free (unbooked) tables for given time period.
  */
 public interface FindFreeTablesPort {
-    List<Table> findFreeTables(Instant from, Instant to);
+    List<Table> find(Instant from, Instant to);
 }
