@@ -12,22 +12,19 @@ jobs:
     docker:
       - image: cimg/openjdk:11.0
     steps:
-      # Checkout the code as the first step.
       - checkout
-      # Use mvn clean and install as the standard maven build phase
       - run:
           name: Build
-          command: mvn -B -DskipTests clean install
-      # Then run your tests!
+          command: ./mvnw -B -DskipTests clean install
       - run:
           name: Test
-          command: mvn test
+          command: ./mvnw test
 
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
   # CircleCI will run this workflow on every commit.
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
-  sample: 
+  ci:
     jobs:
       - build-and-test
