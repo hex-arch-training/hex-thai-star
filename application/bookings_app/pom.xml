@@ -7,19 +7,15 @@
     <groupId>io.github.hex-arch-training</groupId>
     <artifactId>hex-thai-star</artifactId>
     <version>${revision}</version>
+    <relativePath>../..</relativePath>
   </parent>
-  <artifactId>application</artifactId>
+  <artifactId>bookings_app</artifactId>
   <version>${revision}</version>
 
   <dependencies>
     <dependency>
       <groupId>io.github.hex-arch-training</groupId>
       <artifactId>bookings</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.hex-arch-training</groupId>
-      <artifactId>orders</artifactId>
       <version>${revision}</version>
     </dependency>
   </dependencies>
@@ -29,5 +25,15 @@
       <plugins>
       </plugins>
     </pluginManagement>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
+      </plugin>
+    </plugins>
   </build>
 </project>

@@ -3,32 +3,38 @@ package io.github.hexarchtraining.hts.domain.bookings;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.regex.Pattern;
 
-@Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Booking {
+    @Getter
+    private final BookingId id;
+
+    @Getter
     private final Instant creationDate;
 
+    @Getter
     private final Instant bookingDate;
 
+    @Getter
     private final Instant expirationDate;
 
+    @Getter
     private final String email;
 
-    private final int seatsNumber;
+    @Getter
+    private int seatsNumber;
 
-    public static Booking createNewBooking(Instant bookingDate, String email, int seatsNumber) {
-        if (seatsNumber < 1) {
-            throw new BusinessException(String.format("Illegal number of seats in the booking: %d.", seatsNumber));
-        }
+    @Getter
+    private BookingStatus status;
 
-        if (bookingDate == null) {
-            throw new NullPointerException("bookingDate is null");
-        }
+    /**
+     * Create new booking instance.
+    */
+    public static Booking createNewBooking(@NonNull Instant bookingDate, @NonNull String email, int seatsNumber) {
 
         final Instant now = Instant.now();
         final Duration expiry = Duration.ofDays(1);
@@ -36,17 +42,45 @@ public class Booking {
             throw new BusinessException("Too late to do the booking for given time");
         }
 
-        checkEmail(email);
-
-        return new Booking(now, bookingDate, bookingDate.minus(expiry), email, seatsNumber);
+        return new Booking(null, now, bookingDate, bookingDate.minus(expiry), email, seatsNumber, BookingStatus.NEW);
     }
 
-    private static void checkEmail(String email) {
-        // TODO: lame
-        final String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-        final Pattern pattern = Pattern.compile(regex);
-        if (!pattern.matcher(email).matches()) {
-            throw new BusinessException("Invalid email provided.");
+    /**
+     * Recreate existing booking instance from its persistence source.
+     */
+    public static Booking hydrate(@NonNull BookingId id, @NonNull Instant creationDate, @NonNull Instant bookingDate, @NonNull Instant expirationDate, @NonNull String email, int seatsNumber, @NonNull BookingStatus bookingStatus) {
+        return new Booking(id, creationDate, bookingDate, expirationDate, email, seatsNumber, bookingStatus);
+    }
+
+    /**
+     * Cancels booking.
+     */
+    public void cancel() {
+        if (status == BookingStatus.NEW || status == BookingStatus.CONFIRMED) {
+            status = BookingStatus.CANCELLED;
+        } else {
+            throw new BusinessException(String.format("A booking with status %s cannot be cancelled", status.name()));
         }
+    }
+
+    /**
+     * Confirms booking.
+     */
+    public void confirm() {
+        if (status == BookingStatus.NEW) {
+            status = BookingStatus.CONFIRMED;
+        } else {
+            throw new BusinessException(String.format("A booking with status %s cannot be confirmed", status.name()));
+        }
+    }
+
+    /**
+     * Change number of seats in the booking.
+     *
+     * TODO tricky, maybe we should disallow this; use an use case for this and drop & create new booking instead.
+     * But maybe we should just treat it as eventual consistency case?
+     */
+    public void changeBookingSize(int newSeatsNumber) {
+        seatsNumber = newSeatsNumber;
     }
 }

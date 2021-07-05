@@ -19,7 +19,7 @@
   <modules>
     <module>domain/bookings</module>
     <module>domain/orders</module>
-    <module>application</module>
+    <module>application/bookings_app</module>
     <module>adapters/springboot</module>
   </modules>
 

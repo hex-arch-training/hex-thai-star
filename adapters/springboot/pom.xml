@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>application</artifactId>
+            <artifactId>bookings_app</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
