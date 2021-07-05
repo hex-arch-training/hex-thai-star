@@ -5,23 +5,28 @@
     <parent>
         <groupId>io.github.hex-arch-training</groupId>
         <artifactId>hex-thai-star</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${revision}</version>
         <relativePath>../..</relativePath>
     </parent>
     <artifactId>springboot</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <name>springboot</name>
     <description>Demo project for Spring Boot</description>
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
             <artifactId>application</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>domain</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <artifactId>bookings</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>orders</artifactId>
+            <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

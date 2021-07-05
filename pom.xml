@@ -6,17 +6,19 @@
 
   <groupId>io.github.hex-arch-training</groupId>
   <artifactId>hex-thai-star</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>${revision}</version>
   <name>hex-thai-star</name>
   <packaging>pom</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
+    <revision>1.0.0-SNAPSHOT</revision>
   </properties>
 
   <modules>
-    <module>domain</module>
+    <module>domain/bookings</module>
+    <module>domain/orders</module>
     <module>application</module>
     <module>adapters/springboot</module>
   </modules>
