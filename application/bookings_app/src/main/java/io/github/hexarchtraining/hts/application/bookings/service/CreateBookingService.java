@@ -39,12 +39,17 @@ public class CreateBookingService implements CreateBookingUseCase {
             throw new BusinessException("Cannot find free table of given size");
         }
 
+        // if there is a table preference, we pick it first; if not, we just take a best match
+        final Table selectedTable = command.getSuggestedTable()
+                .flatMap(tableId -> freeTables.stream().filter(table -> table.getId().equals(tableId)).findFirst())
+                .orElse(freeTables.get(0));
+
         final Instant bookingDate = command.getBookingFrom().truncatedTo(ChronoUnit.DAYS);
 
         final Booking booking = Booking.createNewBooking(bookingDate, command.getEmail(), command.getSeatsNumber());
         final Booking bookingPersisted = persistBookingPort.persist(booking);
 
-        final TableBooking tableBooking = TableBooking.createTableBooking(bookingPersisted, freeTables.get(0), command.getBookingFrom(), command.getBookingTo());
+        final TableBooking tableBooking = TableBooking.createTableBooking(bookingPersisted, selectedTable, command.getBookingFrom(), command.getBookingTo());
         persistTableBookingPort.persist(tableBooking);
     }
 }

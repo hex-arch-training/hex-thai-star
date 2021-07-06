@@ -1,10 +1,12 @@
 package io.github.hexarchtraining.hts.application.bookings.port.in;
 
 import io.github.hexarchtraining.hts.domain.bookings.BusinessException;
+import io.github.hexarchtraining.hts.domain.bookings.TableId;
 import lombok.NonNull;
 import lombok.Value;
 
 import java.time.Instant;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Value
@@ -18,11 +20,14 @@ public class CreateBookingCommand {
 
     int seatsNumber;
 
-    public CreateBookingCommand(@NonNull Instant bookingFrom, @NonNull Instant bookingTo, @NonNull String email, int seatsNumber) {
+    Optional<TableId> suggestedTable;
+
+    public CreateBookingCommand(@NonNull Instant bookingFrom, @NonNull Instant bookingTo, @NonNull String email, int seatsNumber, TableId suggestedTable) {
         this.bookingFrom = bookingFrom;
         this.bookingTo = bookingTo;
         this.email = email;
         this.seatsNumber = seatsNumber;
+        this.suggestedTable = Optional.ofNullable(suggestedTable);
         if (bookingFrom.isAfter(bookingTo)) {
             throw new BusinessException("Invalid booking window");
         }
