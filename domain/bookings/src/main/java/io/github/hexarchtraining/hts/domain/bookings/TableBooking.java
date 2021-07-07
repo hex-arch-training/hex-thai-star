@@ -5,7 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class TableBooking {
@@ -37,4 +41,5 @@ public class TableBooking {
 
         return new TableBooking(booking.getId(), table.getId(), bookingFrom, bookingTo);
     }
+
 }
