@@ -89,6 +89,7 @@ public class Booking {
 
     private static String buildToken(String email, String type) {
 
+        // TODO: please refactor this ugly code from original mts
         Instant now = Instant.now();
         LocalDateTime ldt1 = LocalDateTime.ofInstant(now, ZoneId.systemDefault());
         String date = String.format("%04d", ldt1.getYear()) + String.format("%02d", ldt1.getMonthValue())
@@ -97,7 +98,7 @@ public class Booking {
         String time = String.format("%02d", ldt1.getHour()) + String.format("%02d", ldt1.getMinute())
                 + String.format("%02d", ldt1.getSecond());
 
-        MessageDigest md = null;
+        MessageDigest md;
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
