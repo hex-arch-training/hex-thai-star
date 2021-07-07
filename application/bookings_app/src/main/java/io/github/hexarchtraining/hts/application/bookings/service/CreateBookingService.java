@@ -2,9 +2,11 @@ package io.github.hexarchtraining.hts.application.bookings.service;
 
 import io.github.hexarchtraining.hts.application.bookings.port.in.CreateBookingCommand;
 import io.github.hexarchtraining.hts.application.bookings.port.in.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.application.bookings.port.out.BookingConfimationEvent;
 import io.github.hexarchtraining.hts.application.bookings.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.application.bookings.port.out.PersistBookingPort;
 import io.github.hexarchtraining.hts.application.bookings.port.out.PersistTableBookingPort;
+import io.github.hexarchtraining.hts.application.bookings.port.out.SendBookingConfirmationPort;
 import io.github.hexarchtraining.hts.domain.bookings.Booking;
 import io.github.hexarchtraining.hts.domain.bookings.BusinessException;
 import io.github.hexarchtraining.hts.domain.bookings.Table;
@@ -25,6 +27,8 @@ public class CreateBookingService implements CreateBookingUseCase {
     private final PersistTableBookingPort persistTableBookingPort;
 
     private final FindFreeTablesPort findFreeTablesPort;
+
+    private final SendBookingConfirmationPort sendBookingConfirmationPort;
 
     @Override
     public void createBooking(CreateBookingCommand command) {
@@ -51,5 +55,7 @@ public class CreateBookingService implements CreateBookingUseCase {
 
         final TableBooking tableBooking = TableBooking.createTableBooking(bookingPersisted, selectedTable, command.getBookingFrom(), command.getBookingTo());
         persistTableBookingPort.persist(tableBooking);
+
+        sendBookingConfirmationPort.send(BookingConfimationEvent.fromBooking(bookingPersisted, tableBooking));
     }
 }
