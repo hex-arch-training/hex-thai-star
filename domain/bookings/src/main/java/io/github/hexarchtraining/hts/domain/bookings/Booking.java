@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Booking {
@@ -19,6 +20,12 @@ public class Booking {
 
     @Getter
     private final Instant creationDate;
+
+    @Getter
+    private final Instant bookingFromTime;
+
+    @Getter
+    private final Instant bookingToTime;
 
     @Getter
     private final Instant bookingDate;
@@ -40,23 +47,44 @@ public class Booking {
 
     /**
      * Create new booking instance.
-    */
-    public static Booking createNewBooking(@NonNull Instant bookingDate, @NonNull String email, int seatsNumber) {
+     */
+    public static Booking createNewBooking(@NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull String email, int seatsNumber) {
 
         final Instant now = Instant.now();
         final Duration expiry = Duration.ofDays(1);
+        final Instant bookingDate = bookingFromTime.truncatedTo(ChronoUnit.DAYS);
         if (bookingDate.isBefore(now.plus(expiry))) {
             throw new BusinessException("Too late to do the booking for given time");
         }
 
-        return new Booking(null, now, bookingDate, bookingDate.minus(expiry), email, seatsNumber, BookingStatus.NEW, buildToken(email, "CB_"));
+        return new Booking(
+                null,
+                now,
+                bookingDate,
+                bookingFromTime,
+                bookingToTime,
+                bookingDate.minus(expiry),
+                email,
+                seatsNumber,
+                BookingStatus.NEW,
+                buildToken(email, "CB_"));
     }
 
     /**
      * Recreate existing booking instance from its persistence source.
      */
-    public static Booking hydrate(@NonNull BookingId id, @NonNull Instant creationDate, @NonNull Instant bookingDate, @NonNull Instant expirationDate, @NonNull String email, int seatsNumber, @NonNull BookingStatus bookingStatus, @NonNull String token) {
-        return new Booking(id, creationDate, bookingDate, expirationDate, email, seatsNumber, bookingStatus, token);
+    public static Booking hydrate(@NonNull BookingId id, @NonNull Instant creationDate, @NonNull Instant bookingDate, @NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull Instant expirationDate, @NonNull String email, int seatsNumber, @NonNull BookingStatus bookingStatus, @NonNull String token) {
+        return new Booking(
+                id,
+                creationDate,
+                bookingDate,
+                bookingFromTime,
+                bookingToTime,
+                expirationDate,
+                email,
+                seatsNumber,
+                bookingStatus,
+                token);
     }
 
     private static String buildToken(String email, String type) {
@@ -85,7 +113,6 @@ public class Booking {
     }
 
 
-
     /**
      * Cancels booking.
      */
@@ -110,7 +137,7 @@ public class Booking {
 
     /**
      * Change number of seats in the booking.
-     *
+     * <p>
      * TODO tricky, maybe we should disallow this; use an use case for this and drop & create new booking instead.
      * But maybe we should just treat it as eventual consistency case?
      */

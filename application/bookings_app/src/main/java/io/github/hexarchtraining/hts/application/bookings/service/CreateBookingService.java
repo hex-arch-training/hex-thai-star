@@ -8,13 +8,10 @@ import io.github.hexarchtraining.hts.application.bookings.port.out.PersistBookin
 import io.github.hexarchtraining.hts.application.bookings.port.out.PersistTableBookingPort;
 import io.github.hexarchtraining.hts.application.bookings.port.out.SendBookingConfirmationPort;
 import io.github.hexarchtraining.hts.domain.bookings.Booking;
-import io.github.hexarchtraining.hts.domain.bookings.BusinessException;
 import io.github.hexarchtraining.hts.domain.bookings.Table;
 import io.github.hexarchtraining.hts.domain.bookings.TableBooking;
 import lombok.AllArgsConstructor;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,29 +30,25 @@ public class CreateBookingService implements CreateBookingUseCase {
     @Override
     public void createBooking(CreateBookingCommand command) {
 
+        final Booking booking = Booking.createNewBooking(command.getBookingFrom(), command.getBookingTo(), command.getEmail(), command.getSeatsNumber());
+        final Booking bookingPersisted = persistBookingPort.persist(booking);
+
         final List<Table> freeTables = findFreeTablesPort
                 .find(command.getBookingFrom(), command.getBookingTo()).stream()
                 .sorted(Comparator.comparingInt(Table::getMaxSeats))
                 .filter(table -> table.getMaxSeats() >= command.getSeatsNumber())
                 .collect(Collectors.toList());
 
-        if (freeTables.size() == 0) {
-            throw new BusinessException("Cannot find free table of given size");
+        if (!freeTables.isEmpty()) {
+            // if there is a table preference, we pick it first; if not, we just take a best match
+            final Table selectedTable = command.getSuggestedTable()
+                    .flatMap(tableId -> freeTables.stream().filter(table -> table.getId().equals(tableId)).findFirst())
+                    .orElse(freeTables.get(0));
+
+            final TableBooking tableBooking = TableBooking.createTableBooking(bookingPersisted, selectedTable, command.getBookingFrom(), command.getBookingTo());
+            persistTableBookingPort.persist(tableBooking);
+
+            sendBookingConfirmationPort.send(BookingConfimationEvent.fromBooking(bookingPersisted, tableBooking));
         }
-
-        // if there is a table preference, we pick it first; if not, we just take a best match
-        final Table selectedTable = command.getSuggestedTable()
-                .flatMap(tableId -> freeTables.stream().filter(table -> table.getId().equals(tableId)).findFirst())
-                .orElse(freeTables.get(0));
-
-        final Instant bookingDate = command.getBookingFrom().truncatedTo(ChronoUnit.DAYS);
-
-        final Booking booking = Booking.createNewBooking(bookingDate, command.getEmail(), command.getSeatsNumber());
-        final Booking bookingPersisted = persistBookingPort.persist(booking);
-
-        final TableBooking tableBooking = TableBooking.createTableBooking(bookingPersisted, selectedTable, command.getBookingFrom(), command.getBookingTo());
-        persistTableBookingPort.persist(tableBooking);
-
-        sendBookingConfirmationPort.send(BookingConfimationEvent.fromBooking(bookingPersisted, tableBooking));
     }
 }
