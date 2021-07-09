@@ -21,6 +21,7 @@
     <module>domain/orders</module>
     <module>application/bookings_app</module>
     <module>adapters/springboot</module>
+    <module>adapters/bookings_jpa_adapter</module>
   </modules>
 
   <dependencies>
