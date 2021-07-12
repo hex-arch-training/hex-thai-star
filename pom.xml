@@ -13,6 +13,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
     <revision>1.0.0-SNAPSHOT</revision>
     <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
     <springboot.version>2.5.2</springboot.version>
@@ -20,10 +22,12 @@
   </properties>
 
   <modules>
+    <module>configuration/maven/spring-boot-parent</module>
+    <module>configuration/springboot</module>
+    <module>booking/booking-adapter-in-springweb</module>
     <module>domain/bookings</module>
     <module>domain/orders</module>
     <module>application/bookings_app</module>
-    <module>adapters/springboot</module>
     <module>adapters/bookings_jpa_adapter</module>
   </modules>
 

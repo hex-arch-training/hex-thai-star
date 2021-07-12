@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "2bfd49d5-12c8-4c08-a07c-5b0b4f8e7fe7",
+		"name": "booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const bookingNo = \"0ZRH005517\";",
+							"const equipmentNo = \"MRSU3717096\";",
+							"pm.environment.set(\"bookingNo\", bookingNo);",
+							"pm.environment.set(\"equipmentNo\", equipmentNo);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookingFrom\":\"2021-02-23T19:00:00.00Z\",\r\n    \"bookingTo\":\"2021-02-23T23:00:00.00Z\",\r\n    \"email\":\"bos@cap.pl\",\r\n    \"seatsNumber\":\"1\"\r\n    }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:7777/booking/booking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"booking",
+						"booking"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const bookingNo = \"0ZRH005517\";",
+							"const equipmentNo = \"MRSU3717096\";",
+							"pm.environment.set(\"bookingNo\", bookingNo);",
+							"pm.environment.set(\"equipmentNo\", equipmentNo);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:7777/booking/booking/confirm/XYZ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"booking",
+						"booking",
+						"confirm",
+						"XYZ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cancel booking",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const bookingNo = \"0ZRH005517\";",
+							"const equipmentNo = \"MRSU3717096\";",
+							"pm.environment.set(\"bookingNo\", bookingNo);",
+							"pm.environment.set(\"equipmentNo\", equipmentNo);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:7777/booking/booking/cancel/XYZ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"booking",
+						"booking",
+						"cancel",
+						"XYZ"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
