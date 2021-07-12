@@ -2,6 +2,7 @@ package io.github.hexarchtraining.hts.bookings.domain;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -14,6 +15,7 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 public class Booking {
     @Getter
     private final BookingId id;
@@ -68,23 +70,6 @@ public class Booking {
                 seatsNumber,
                 BookingStatus.NEW,
                 buildToken(email, "CB_"));
-    }
-
-    /**
-     * Recreate existing booking instance from its persistence source.
-     */
-    public static Booking hydrate(@NonNull BookingId id, @NonNull Instant creationDate, @NonNull Instant bookingDate, @NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull Instant expirationDate, @NonNull String email, int seatsNumber, @NonNull BookingStatus bookingStatus, @NonNull String token) {
-        return new Booking(
-                id,
-                creationDate,
-                bookingDate,
-                bookingFromTime,
-                bookingToTime,
-                expirationDate,
-                email,
-                seatsNumber,
-                bookingStatus,
-                token);
     }
 
     private static String buildToken(String email, String type) {

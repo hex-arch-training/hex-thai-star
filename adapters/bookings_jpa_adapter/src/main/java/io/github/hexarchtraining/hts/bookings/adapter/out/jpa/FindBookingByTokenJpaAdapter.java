@@ -11,7 +11,7 @@ public class FindBookingByTokenJpaAdapter implements FindBookingByTokenPort {
 
     private final BookingRepository bookingRepository;
 
-    private final BookingMapper mapper = new BookingMapper();
+    private final BookingMapper mapper = BookingMapper.INSTANCE;
 
     @Override
     public Optional<Booking> find(String token) {

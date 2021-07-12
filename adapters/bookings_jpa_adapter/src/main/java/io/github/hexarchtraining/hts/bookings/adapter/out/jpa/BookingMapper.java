@@ -1,33 +1,19 @@
 package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
 
 import io.github.hexarchtraining.hts.bookings.domain.Booking;
-import io.github.hexarchtraining.hts.bookings.domain.BookingId;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.factory.Mappers;
 
-class BookingMapper {
+@Mapper
+public interface BookingMapper {
 
-    Booking toDomain(BookingEntity bookingEntity) {
-        return Booking.hydrate(
-                new BookingId(bookingEntity.getId()),
-                bookingEntity.getCreationDate(),
-                bookingEntity.getBookingDate(),
-                bookingEntity.getBookingFromTime(),
-                bookingEntity.getBookingToTime(),
-                bookingEntity.getExpirationDate(),
-                bookingEntity.getEmail(),
-                bookingEntity.getSeatsNumber(),
-                bookingEntity.getStatus(),
-                bookingEntity.getToken());
-    }
+    BookingMapper INSTANCE = Mappers.getMapper(BookingMapper.class);
 
-    void toEntity(Booking booking, BookingEntity bookingEntity) {
-        bookingEntity.setCreationDate(booking.getCreationDate());
-        bookingEntity.setBookingDate(booking.getBookingDate());
-        bookingEntity.setBookingFromTime(booking.getBookingFromTime());
-        bookingEntity.setBookingToTime(booking.getBookingToTime());
-        bookingEntity.setExpirationDate(booking.getExpirationDate());
-        bookingEntity.setEmail(booking.getEmail());
-        bookingEntity.setSeatsNumber(booking.getSeatsNumber());
-        bookingEntity.setStatus(booking.getStatus());
-        bookingEntity.setToken(booking.getToken());
-    }
+    @Mapping(target="id.value", source="id")
+    Booking toDomain(BookingEntity bookingEntity);
+
+    @Mapping(target="id", source="id.value")
+    void toEntity(Booking booking, @MappingTarget BookingEntity bookingEntity);
 }

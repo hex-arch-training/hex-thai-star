@@ -9,7 +9,7 @@ public class PersistBookingJpaAdapter implements PersistBookingPort {
 
     private final BookingRepository bookingRepository;
 
-    private final BookingMapper mapper = new BookingMapper();
+    private final BookingMapper mapper = BookingMapper.INSTANCE;
 
     public Booking persist(Booking booking) {
         final BookingEntity entity = new BookingEntity();

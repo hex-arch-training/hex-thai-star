@@ -10,7 +10,7 @@ public class SaveBookingJpaAdapter implements SaveBookingPort {
 
     private final BookingRepository bookingRepository;
 
-    private final BookingMapper mapper = new BookingMapper();
+    private final BookingMapper mapper = BookingMapper.INSTANCE;
 
     @Override
     public void save(Booking booking) {
