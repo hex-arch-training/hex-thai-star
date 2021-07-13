@@ -22,14 +22,17 @@
   </properties>
 
   <modules>
+    <module>common/common-application</module>
+
+    <module>booking/booking-domain</module>
+    <module>booking/booking-application</module>
+    <module>booking/booking-adapter-in-springweb</module>
+    <module>booking/booking-adapter-out-jpa</module>
+
+    <module>order/order-domain</module>
+
     <module>configuration/maven/spring-boot-parent</module>
     <module>configuration/springboot</module>
-    <module>booking/booking-adapter-in-springweb</module>
-    <module>domain/bookings</module>
-    <module>domain/orders</module>
-    <module>application/common-application</module>
-    <module>application/bookings_app</module>
-    <module>adapters/bookings_jpa_adapter</module>
   </modules>
 
   <dependencies>
