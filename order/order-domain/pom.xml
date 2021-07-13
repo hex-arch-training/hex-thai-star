@@ -9,7 +9,7 @@
     <version>${revision}</version>
     <relativePath>../..</relativePath>
   </parent>
-  <artifactId>orders</artifactId>
+  <artifactId>order-domain</artifactId>
   <version>${revision}</version>
 
   <dependencies>

@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>bookings_jpa_adapter</artifactId>
+            <artifactId>booking-adapter-out-jpa</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -25,17 +25,17 @@
         </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>bookings_app</artifactId>
+            <artifactId>booking-application</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>bookings</artifactId>
+            <artifactId>booking-domain</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>orders</artifactId>
+            <artifactId>order-domain</artifactId>
             <version>${revision}</version>
         </dependency>
 
