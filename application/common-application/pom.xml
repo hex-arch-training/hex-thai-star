@@ -9,20 +9,10 @@
     <version>${revision}</version>
     <relativePath>../..</relativePath>
   </parent>
-  <artifactId>bookings_app</artifactId>
+  <artifactId>common-application</artifactId>
   <version>${revision}</version>
 
   <dependencies>
-    <dependency>
-      <groupId>io.github.hex-arch-training</groupId>
-      <artifactId>bookings</artifactId>
-      <version>${revision}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.github.hex-arch-training</groupId>
-      <artifactId>common-application</artifactId>
-      <version>${revision}</version>
-    </dependency>
   </dependencies>
 
   <build>

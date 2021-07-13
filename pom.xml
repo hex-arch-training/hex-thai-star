@@ -27,6 +27,7 @@
     <module>booking/booking-adapter-in-springweb</module>
     <module>domain/bookings</module>
     <module>domain/orders</module>
+    <module>application/common-application</module>
     <module>application/bookings_app</module>
     <module>adapters/bookings_jpa_adapter</module>
   </modules>

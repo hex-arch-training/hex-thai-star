@@ -1,18 +1,20 @@
 package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
 
 import io.github.hexarchtraining.hts.bookings.domain.BookingStatus;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.Instant;
 
 @Entity
-@Getter
-@Setter
+@Data
+@Table(name = "booking")
 public class BookingEntity {
     @Id
+    @GeneratedValue
     private Long id;
 
     private Instant creationDate;
