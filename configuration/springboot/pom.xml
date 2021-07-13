@@ -4,15 +4,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.hex-arch-training</groupId>
-        <artifactId>hex-thai-star</artifactId>
+        <artifactId>spring-boot-parent</artifactId>
         <version>${revision}</version>
-        <relativePath>../..</relativePath>
+        <relativePath>../maven/spring-boot-parent/pom.xml</relativePath>
     </parent>
     <artifactId>springboot</artifactId>
     <version>${revision}</version>
     <name>springboot</name>
     <description>Demo project for Spring Boot</description>
     <dependencies>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>bookings_jpa_adapter</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>booking-adapter-in-springweb</artifactId>
+            <version>${revision}</version>
+        </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
             <artifactId>bookings_app</artifactId>
@@ -28,27 +38,20 @@
             <artifactId>orders</artifactId>
             <version>${revision}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>2.5.2</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.5.2</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-            <version>2.5.2</version>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.h2database</groupId>-->
-<!--            <artifactId>h2</artifactId>-->
-<!--            <scope>runtime</scope>-->
-<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -56,14 +59,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>
