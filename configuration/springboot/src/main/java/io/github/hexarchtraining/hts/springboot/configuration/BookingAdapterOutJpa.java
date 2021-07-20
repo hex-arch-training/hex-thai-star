@@ -5,6 +5,7 @@ import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.DeleteTableBooking
 import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindBookingByTokenJpaAdapter;
 import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindFreeTablesJpaAdapter;
 import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindTableBookingJpaAdapter;
+import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindTablesJpaAdapter;
 import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.PersistBookingJpaAdapter;
 import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.PersistTableBookingJpaAdapter;
 import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.SaveBookingJpaAdapter;
@@ -14,6 +15,7 @@ import io.github.hexarchtraining.hts.bookings.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.bookings.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.bookings.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.bookings.port.out.FindTableBookingPort;
+import io.github.hexarchtraining.hts.bookings.port.out.FindTablesPort;
 import io.github.hexarchtraining.hts.bookings.port.out.PersistBookingPort;
 import io.github.hexarchtraining.hts.bookings.port.out.PersistTableBookingPort;
 import io.github.hexarchtraining.hts.bookings.port.out.SaveBookingPort;
@@ -67,5 +69,10 @@ public class BookingAdapterOutJpa {
     @Bean
     public SaveBookingPort saveBookingPort() {
         return new SaveBookingJpaAdapter(bookingRepository);
+    }
+
+    @Bean
+    public FindTablesPort findTablesPort() {
+        return new FindTablesJpaAdapter(tableRepository);
     }
 }
