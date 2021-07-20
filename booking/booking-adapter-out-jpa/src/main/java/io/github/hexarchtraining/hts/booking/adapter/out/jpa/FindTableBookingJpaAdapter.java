@@ -2,9 +2,9 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.TableBookingMapper;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBookingRepository;
-import io.github.hexarchtraining.hts.bookings.domain.BookingId;
-import io.github.hexarchtraining.hts.bookings.domain.TableBooking;
-import io.github.hexarchtraining.hts.bookings.port.out.FindTableBookingPort;
+import io.github.hexarchtraining.hts.booking.domain.BookingId;
+import io.github.hexarchtraining.hts.booking.domain.TableBooking;
+import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;

@@ -2,8 +2,8 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.TableMapper;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
-import io.github.hexarchtraining.hts.bookings.domain.Table;
-import io.github.hexarchtraining.hts.bookings.port.out.FindTablesPort;
+import io.github.hexarchtraining.hts.booking.domain.Table;
+import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import lombok.AllArgsConstructor;
 import org.springframework.data.util.Streamable;
 

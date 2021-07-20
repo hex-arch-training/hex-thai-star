@@ -1,7 +1,7 @@
 package io.github.hexarchtraining.hts.springboot.configuration;
 
-import io.github.hexarchtraining.hts.bookings.port.out.BookingConfimationEvent;
-import io.github.hexarchtraining.hts.bookings.port.out.SendBookingConfirmationPort;
+import io.github.hexarchtraining.hts.booking.port.out.BookingConfimationEvent;
+import io.github.hexarchtraining.hts.booking.port.out.SendBookingConfirmationPort;
 import org.springframework.stereotype.Service;
 
 @Service

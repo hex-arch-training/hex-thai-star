@@ -1,7 +1,7 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.springweb;
 
-import io.github.hexarchtraining.hts.bookings.port.in.ConfirmBookingCommand;
-import io.github.hexarchtraining.hts.bookings.port.in.ConfirmBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingCommand;
+import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -3,8 +3,8 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.BookingEntity;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.BookingMapper;
-import io.github.hexarchtraining.hts.bookings.domain.Booking;
-import io.github.hexarchtraining.hts.bookings.port.out.PersistBookingPort;
+import io.github.hexarchtraining.hts.booking.domain.Booking;
+import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

@@ -1,8 +1,8 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.springweb;
 
-import io.github.hexarchtraining.hts.bookings.domain.TableId;
-import io.github.hexarchtraining.hts.bookings.port.in.CreateBookingCommand;
-import io.github.hexarchtraining.hts.bookings.port.in.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.domain.TableId;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingCommand;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

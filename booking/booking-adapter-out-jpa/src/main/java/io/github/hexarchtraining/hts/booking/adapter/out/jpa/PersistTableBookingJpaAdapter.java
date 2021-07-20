@@ -5,9 +5,9 @@ import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.TableBooking
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBookingRepository;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
-import io.github.hexarchtraining.hts.bookings.domain.BusinessException;
-import io.github.hexarchtraining.hts.bookings.domain.TableBooking;
-import io.github.hexarchtraining.hts.bookings.port.out.PersistTableBookingPort;
+import io.github.hexarchtraining.hts.booking.domain.BusinessException;
+import io.github.hexarchtraining.hts.booking.domain.TableBooking;
+import io.github.hexarchtraining.hts.booking.port.out.PersistTableBookingPort;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
