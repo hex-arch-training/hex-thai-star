@@ -1,4 +1,4 @@
-package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
+package io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity;
 
 import io.github.hexarchtraining.hts.bookings.domain.BookingStatus;
 import lombok.Data;

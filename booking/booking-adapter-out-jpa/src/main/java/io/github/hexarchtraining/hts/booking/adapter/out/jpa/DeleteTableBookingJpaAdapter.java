@@ -1,5 +1,6 @@
-package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
+package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBookingRepository;
 import io.github.hexarchtraining.hts.bookings.domain.TableBooking;
 import io.github.hexarchtraining.hts.bookings.port.out.DeleteTableBookingPort;
 import lombok.AllArgsConstructor;

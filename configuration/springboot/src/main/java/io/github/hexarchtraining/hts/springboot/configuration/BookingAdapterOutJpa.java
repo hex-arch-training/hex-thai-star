@@ -1,16 +1,16 @@
 package io.github.hexarchtraining.hts.springboot.configuration;
 
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.BookingRepository;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.DeleteTableBookingJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindBookingByTokenJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindFreeTablesJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindTableBookingJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.FindTablesJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.PersistBookingJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.PersistTableBookingJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.SaveBookingJpaAdapter;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.TableBookingRepository;
-import io.github.hexarchtraining.hts.bookings.adapter.out.jpa.TableRepository;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.DeleteTableBookingJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.FindBookingByTokenJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.FindFreeTablesJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.FindTableBookingJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.FindTablesJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.PersistBookingJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.PersistTableBookingJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.SaveBookingJpaAdapter;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBookingRepository;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
 import io.github.hexarchtraining.hts.bookings.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.bookings.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.bookings.port.out.FindFreeTablesPort;

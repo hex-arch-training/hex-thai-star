@@ -1,5 +1,6 @@
-package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
+package io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository;
 
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.BookingEntity;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

@@ -1,5 +1,6 @@
-package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
+package io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper;
 
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.TableEntity;
 import io.github.hexarchtraining.hts.bookings.domain.Table;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

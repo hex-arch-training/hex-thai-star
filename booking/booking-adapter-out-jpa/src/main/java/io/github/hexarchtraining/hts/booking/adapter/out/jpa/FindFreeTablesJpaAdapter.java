@@ -1,5 +1,7 @@
-package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
+package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.TableMapper;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
 import io.github.hexarchtraining.hts.bookings.domain.Table;
 import io.github.hexarchtraining.hts.bookings.port.out.FindFreeTablesPort;
 import lombok.AllArgsConstructor;

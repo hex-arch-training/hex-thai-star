@@ -1,5 +1,10 @@
-package io.github.hexarchtraining.hts.bookings.adapter.out.jpa;
+package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.TableBookingEntity;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.TableBookingMapper;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBookingRepository;
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
 import io.github.hexarchtraining.hts.bookings.domain.BusinessException;
 import io.github.hexarchtraining.hts.bookings.domain.TableBooking;
 import io.github.hexarchtraining.hts.bookings.port.out.PersistTableBookingPort;
