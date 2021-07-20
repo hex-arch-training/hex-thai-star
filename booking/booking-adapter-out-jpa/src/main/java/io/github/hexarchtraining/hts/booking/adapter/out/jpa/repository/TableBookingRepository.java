@@ -18,4 +18,7 @@ public interface TableBookingRepository extends CrudRepository<TableBookingEntit
     // TODO change compiler settings to use -parameters switch
     @Query("from TableBookingEntity where (bookingFrom <= :fromTime and bookingTo >= :fromTime) or (bookingFrom <= :toTime and bookingTo >= :toTime) or (bookingFrom > :fromTime and bookingTo < :toTime)")
     List<TableBookingEntity> findBookingsIntersect(@Param("fromTime") Instant from, @Param("toTime") Instant to);
+
+    @Query("from TableBookingEntity tb join fetch tb.booking")
+    List<TableBookingEntity> findAllWithBookings();
 }

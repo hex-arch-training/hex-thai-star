@@ -1,6 +1,7 @@
 package io.github.hexarchtraining.hts.springboot.configuration;
 
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
+import io.github.hexarchtraining.hts.common.port.out.TransactionalConsumer;
 import io.github.hexarchtraining.hts.common.port.out.TransactionalMapper;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,11 @@ public class TransactionAdapterOut implements TransactionPort {
     @Transactional
     public <T> T inTransaction(TransactionalMapper<T> handler) {
         return handler.accept();
+    }
+
+    @Override
+    @Transactional
+    public void withTransaction(TransactionalConsumer consumer) {
+        TransactionPort.super.withTransaction(consumer);
     }
 }
