@@ -48,7 +48,7 @@ public class BookingAdapterOutJpa {
 
     @Bean
     public FindFreeTablesPort findFreeTablesPort() {
-        return new FindFreeTablesJpaAdapter(tableRepository);
+        return new FindFreeTablesJpaAdapter(tableRepository, tableBookingRepository);
     }
 
     @Bean

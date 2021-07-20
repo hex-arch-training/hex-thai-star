@@ -2,6 +2,7 @@ package io.github.hexarchtraining.hts.booking.adapter.in.springweb;
 
 import io.github.hexarchtraining.hts.booking.domain.TableId;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingCommand;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingResult;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,9 +20,9 @@ public class CreateBookingController {
   final CreateBookingUseCase createBookingUseCase;
 
   @PostMapping(value = "/booking")
-  public void createBooking(@RequestBody CreateBookingResource createBookingResource) {
+  public CreateBookingResult createBooking(@RequestBody CreateBookingResource createBookingResource) {
     final CreateBookingCommand createBookingCommand = mapInputToCommand(createBookingResource);
-    createBookingUseCase.createBooking(createBookingCommand);
+    return createBookingUseCase.createBooking(createBookingCommand);
   }
 
   private CreateBookingCommand mapInputToCommand(CreateBookingResource createBookingResource) {

@@ -62,9 +62,9 @@ public class Booking {
         return new Booking(
                 null,
                 now,
-                bookingDate,
                 bookingFromTime,
                 bookingToTime,
+                bookingDate,
                 bookingDate.minus(expiry),
                 email,
                 seatsNumber,

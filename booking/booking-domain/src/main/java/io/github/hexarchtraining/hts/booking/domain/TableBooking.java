@@ -28,7 +28,7 @@ public class TableBooking {
             throw new BusinessException("Booking is not persisted");
         }
         if (bookingFrom.isBefore(booking.getBookingDate())) {
-            throw new BusinessException("Booking window starts before booking date");
+            throw new BusinessException("Booking window " + bookingFrom +" starts before booking date " + booking.getBookingDate());
         }
         if (bookingTo.isBefore(bookingFrom)) {
             throw new BusinessException("Invalid booking window");
