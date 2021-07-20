@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("booking")
 public class ConfirmBookingController {
 
-//  final ConfirmBookingUseCase createBookingUseCase;
+  final ConfirmBookingUseCase createBookingUseCase;
 
   @PostMapping(value = "/booking/confirm/{token}")
   public void confirmBooking(@PathVariable String token) {
-
     final ConfirmBookingCommand createBookingCommand = mapInputToCommand(token);
-
-//    createBookingUseCase.confirm(createBookingCommand);
+    createBookingUseCase.confirm(createBookingCommand);
   }
 
   private ConfirmBookingCommand mapInputToCommand(String token) {

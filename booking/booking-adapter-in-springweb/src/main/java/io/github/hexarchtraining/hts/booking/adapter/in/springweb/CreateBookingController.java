@@ -16,14 +16,12 @@ import java.util.Optional;
 @RequestMapping("booking")
 public class CreateBookingController {
 
-//  final CreateBookingUseCase createBookingUseCase;
+  final CreateBookingUseCase createBookingUseCase;
 
   @PostMapping(value = "/booking")
   public void createBooking(@RequestBody CreateBookingResource createBookingResource) {
-
     final CreateBookingCommand createBookingCommand = mapInputToCommand(createBookingResource);
-
-//    createBookingUseCase.createBooking(createBookingCommand);
+    createBookingUseCase.createBooking(createBookingCommand);
   }
 
   private CreateBookingCommand mapInputToCommand(CreateBookingResource createBookingResource) {

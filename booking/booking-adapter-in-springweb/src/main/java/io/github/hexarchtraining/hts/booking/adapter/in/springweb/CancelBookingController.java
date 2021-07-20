@@ -14,14 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("booking")
 public class CancelBookingController {
 
-//  final CancelBookingUseCase cancelBookingUseCase;
+  final CancelBookingUseCase cancelBookingUseCase;
 
   @PostMapping(value = "/booking/cancel/{token}")
   public void cancelBooking(@PathVariable String token) {
-
     final CancelBookingCommand cancelBookingCommand = mapInputToCommand(token);
-
-//    cancelBookingUseCase.cancel(cancelBookingCommand);
+    cancelBookingUseCase.cancel(cancelBookingCommand);
   }
 
   private CancelBookingCommand mapInputToCommand(String token) {

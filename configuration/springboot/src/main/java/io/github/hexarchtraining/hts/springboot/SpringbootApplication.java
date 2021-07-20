@@ -2,11 +2,13 @@ package io.github.hexarchtraining.hts.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = SpringbootApplication.APPLICATION_BASE_PACKAGE)
+@SpringBootApplication(scanBasePackages = {
+        "io.github.hexarchtraining.hts.springboot",
+       "io.github.hexarchtraining.hts.booking.adapter.in.springweb"})
+@EnableJpaRepositories(basePackages = "io.github.hexarchtraining.hts.bookings.adapter.out.jpa")
 public class SpringbootApplication {
-
-    public static final String APPLICATION_BASE_PACKAGE = "io.github.hexarchtraining.hts";
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootApplication.class, args);
