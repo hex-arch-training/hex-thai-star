@@ -1,5 +1,6 @@
 package io.github.hexarchtraining.hts.springboot.configuration;
 
+import io.github.hexarchtraining.hts.booking.adapter.out.jpa.FindBookinsJpaAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.DeleteTableBookingJpaAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.FindBookingByTokenJpaAdapter;
@@ -13,6 +14,7 @@ import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBoo
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
 import io.github.hexarchtraining.hts.booking.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
+import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
@@ -74,5 +76,10 @@ public class BookingAdapterOutJpa {
     @Bean
     public FindTablesPort findTablesPort() {
         return new FindTablesJpaAdapter(tableRepository);
+    }
+
+    @Bean
+    public FindBookingsPort findBookingsPort() {
+        return new FindBookinsJpaAdapter(tableBookingRepository);
     }
 }

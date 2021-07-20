@@ -3,9 +3,11 @@ package io.github.hexarchtraining.hts.springboot.configuration;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesUseCase;
 import io.github.hexarchtraining.hts.booking.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
+import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
@@ -16,6 +18,7 @@ import io.github.hexarchtraining.hts.booking.port.out.SendBookingConfirmationPor
 import io.github.hexarchtraining.hts.booking.service.CancelBookingService;
 import io.github.hexarchtraining.hts.booking.service.ConfirmBookingService;
 import io.github.hexarchtraining.hts.booking.service.CreateBookingService;
+import io.github.hexarchtraining.hts.booking.service.ShowBookingsService;
 import io.github.hexarchtraining.hts.booking.service.ShowTablesService;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import lombok.AllArgsConstructor;
@@ -46,6 +49,8 @@ public class BookingAdapterIn {
 
     private final FindTablesPort findTablesPort;
 
+    private final FindBookingsPort findBookingsPort;
+
     @Bean
     public CancelBookingUseCase cancelBookingUseCase() {
         return new CancelBookingService(findBookingByTokenPort, findTableBookingPort, saveBookingPort, deleteTableBookingPort, transactionPort);
@@ -64,5 +69,10 @@ public class BookingAdapterIn {
     @Bean
     public ShowTablesUseCase showTablesUseCase() {
         return new ShowTablesService(findTablesPort);
+    }
+
+    @Bean
+    public ShowBookingsUseCase showBookingsUseCase() {
+        return new ShowBookingsService(findBookingsPort);
     }
 }
