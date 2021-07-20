@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "2bfd49d5-12c8-4c08-a07c-5b0b4f8e7fe7",
+		"_postman_id": "53493f56-f101-4ade-81d9-574a5e3af15e",
 		"name": "booking",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -144,6 +144,26 @@
 						"booking",
 						"cancel",
 						"XYZ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show tables",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7777/booking/tables",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"booking",
+						"tables"
 					]
 				}
 			},
