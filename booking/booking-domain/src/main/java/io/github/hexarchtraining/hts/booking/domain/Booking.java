@@ -1,5 +1,8 @@
 package io.github.hexarchtraining.hts.booking.domain;
 
+import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
+import io.github.hexarchtraining.hts.booking.common.exception.BusinessException;
+import io.github.hexarchtraining.hts.booking.domain.exception.IllegalBookingStateException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,7 +59,7 @@ public class Booking {
         final Duration expiry = Duration.ofDays(1);
         final Instant bookingDate = bookingFromTime.truncatedTo(ChronoUnit.DAYS);
         if (bookingDate.isBefore(now.plus(expiry))) {
-            throw new BusinessException("Too late to do the booking for given time");
+            throw new BookingValidationException(String.format("The booking date %tT is too late to do the booking for given time.", bookingDate));
         }
 
         return new Booking(
@@ -87,7 +90,7 @@ public class Booking {
         try {
             md = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw new BusinessException(e);
         }
         md.update((email + date + time).getBytes());
         byte[] digest = md.digest();
@@ -106,7 +109,7 @@ public class Booking {
         if (status == BookingStatus.NEW || status == BookingStatus.CONFIRMED) {
             status = BookingStatus.CANCELLED;
         } else {
-            throw new BusinessException(String.format("A booking with status %s cannot be cancelled", status.name()));
+            throw new IllegalBookingStateException(id, status, BookingStatus.CANCELLED);
         }
     }
 
@@ -117,7 +120,7 @@ public class Booking {
         if (status == BookingStatus.NEW) {
             status = BookingStatus.CONFIRMED;
         } else {
-            throw new BusinessException(String.format("A booking with status %s cannot be confirmed", status.name()));
+            throw new IllegalBookingStateException(id, status, BookingStatus.CONFIRMED);
         }
     }
 
