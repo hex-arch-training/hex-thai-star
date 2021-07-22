@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @AllArgsConstructor
 @Configuration
-public class BookingAdapterOutJpa {
+public class BookingAdapterOutJpaConfiguration {
 
     private final TableBookingRepository tableBookingRepository;
 

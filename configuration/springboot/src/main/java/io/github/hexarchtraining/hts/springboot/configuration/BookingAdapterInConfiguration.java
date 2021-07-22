@@ -27,7 +27,7 @@ import org.springframework.context.annotation.Configuration;
 
 @AllArgsConstructor
 @Configuration
-public class BookingAdapterIn {
+public class BookingAdapterInConfiguration {
 
     private final FindBookingByTokenPort findBookingByTokenPort;
 
