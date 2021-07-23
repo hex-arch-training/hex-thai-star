@@ -1,5 +1,6 @@
 package io.github.hexarchtraining.hts.booking.domain;
 
+import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,16 +26,16 @@ public class TableBooking {
 
     public static TableBooking createTableBooking(@NonNull Booking booking, @NonNull Table table, @NonNull Instant bookingFrom, @NonNull Instant bookingTo) {
         if (booking.getId() == null) {
-            throw new BusinessException("Booking is not persisted");
+            throw new BookingValidationException("Booking is not persisted.");
         }
         if (bookingFrom.isBefore(booking.getBookingDate())) {
-            throw new BusinessException("Booking window " + bookingFrom +" starts before booking date " + booking.getBookingDate());
+            throw new BookingValidationException(String.format("Booking window %tT starts before booking date %tT.", bookingFrom, booking.getBookingDate()));
         }
         if (bookingTo.isBefore(bookingFrom)) {
-            throw new BusinessException("Invalid booking window");
+            throw new BookingValidationException(String.format("Start of the booking window %tT is after end of the booking window %tT.", bookingFrom, bookingTo));
         }
         if (booking.getSeatsNumber() > table.getMaxSeats()) {
-            throw new BusinessException("Table is too small for reservation");
+            throw new BookingValidationException(String.format("Chosen table (%d) is too small for reservation size (%d).", table.getMaxSeats(), booking.getSeatsNumber()));
         }
 
         return new TableBooking(booking.getId(), table.getId(), bookingFrom, bookingTo);
