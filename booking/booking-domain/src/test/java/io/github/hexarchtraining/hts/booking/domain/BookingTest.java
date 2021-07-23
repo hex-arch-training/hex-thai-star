@@ -14,23 +14,20 @@ class BookingTest {
 
     private final Instant now = Instant.now();
 
+    private final Instant validFromTime = now.plus(25, ChronoUnit.HOURS);
+
+    private final Instant validToTime = now.plus(27, ChronoUnit.HOURS);
+
     @Test
     void shouldAllowToCreateBookingInProperAdvance() {
-        // given
-        final Instant bookingFromTime = now.plus(25, ChronoUnit.HOURS);
-        final Instant bookingToTime = now.plus(27, ChronoUnit.HOURS);
         // when
-        final Booking booking = Booking.createNewBooking(
-                bookingFromTime,
-                bookingToTime,
-                VALID_EMAIL,
-                2);
+        final Booking booking = createValidBooking();
         // then
         assertNotNull(booking);
         assertEquals(VALID_EMAIL, booking.getEmail());
-        assertEquals(bookingFromTime, booking.getBookingFromTime());
-        assertEquals(bookingToTime, booking.getBookingToTime());
-        assertEquals(bookingFromTime.truncatedTo(ChronoUnit.DAYS), booking.getBookingDate());
+        assertEquals(validFromTime, booking.getBookingFromTime());
+        assertEquals(validToTime, booking.getBookingToTime());
+        assertEquals(validFromTime.truncatedTo(ChronoUnit.DAYS), booking.getBookingDate());
         assertEquals(2, booking.getSeatsNumber());
         assertEquals(BookingStatus.NEW, booking.getStatus());
         assertNotNull(booking.getToken());
@@ -53,5 +50,38 @@ class BookingTest {
                 now.minus(20, ChronoUnit.HOURS),
                 VALID_EMAIL,
                 2));
+    }
+
+    @Test
+    void shouldAllowCancellingOfNewBooking() {
+        // given
+        final Booking booking = createValidBooking();
+        // when
+        booking.cancel();
+        // then
+        assertEquals(BookingStatus.CANCELLED, booking.getStatus());
+    }
+
+    @Test
+    void shouldAllowConfirmingOfNewBooking() {
+        // given
+        final Booking booking = createValidBooking();
+        // when
+        booking.confirm();
+        // then
+        assertEquals(BookingStatus.CONFIRMED, booking.getStatus());
+    }
+
+    @Test
+    void shouldDenyConfirmingOfCancelledBooking() {
+        // given
+        final Booking booking = createValidBooking();
+        booking.cancel();
+        // when
+        assertThrows(BusinessException.class, booking::confirm);
+    }
+
+    private Booking createValidBooking() {
+        return Booking.createNewBooking(validFromTime, validToTime, VALID_EMAIL, 2);
     }
 }
