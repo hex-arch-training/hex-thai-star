@@ -58,8 +58,13 @@ public class Booking {
         final Instant now = Instant.now();
         final Duration expiry = Duration.ofDays(1);
         final Instant bookingDate = bookingFromTime.truncatedTo(ChronoUnit.DAYS);
-        if (bookingDate.isBefore(now.plus(expiry))) {
+        if (bookingToTime.isBefore(bookingFromTime)) {
+            throw new BusinessException("Invalid time window");
+        }
+        if (bookingToTime.isBefore(bookingFromTime)) {
             throw new BookingValidationException(String.format("The booking date %tT is too late to do the booking for given time.", bookingDate));
+        }
+        if (bookingFromTime.isBefore(now.plus(expiry))) {
         }
 
         return new Booking(
