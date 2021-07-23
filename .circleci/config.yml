@@ -19,6 +19,8 @@ jobs:
       - run:
           name: Test
           command: ./mvnw test
+      - store_test_results:
+          path: booking/booking-domain/target/surefire-reports
 
 workflows:
   # Below is the definition of your workflow.
