@@ -1,6 +1,8 @@
 package io.github.hexarchtraining.hts.booking.domain;
 
 
+import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
+import io.github.hexarchtraining.hts.booking.domain.exception.IllegalBookingStateException;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -36,7 +38,7 @@ class BookingTest {
 
     @Test
     void shouldFailIfCreatingBookingWithInvalidTimeWindow() {
-        assertThrows(BusinessException.class, () -> Booking.createNewBooking(
+        assertThrows(BookingValidationException.class, () -> Booking.createNewBooking(
                 now.plus(26, ChronoUnit.HOURS),
                 now.plus(25, ChronoUnit.HOURS),
                 VALID_EMAIL,
@@ -45,7 +47,7 @@ class BookingTest {
 
     @Test
     void shouldFailIfTryingToBookInThePast() {
-        assertThrows(BusinessException.class, () -> Booking.createNewBooking(
+        assertThrows(BookingValidationException.class, () -> Booking.createNewBooking(
                 now.minus(24, ChronoUnit.HOURS),
                 now.minus(20, ChronoUnit.HOURS),
                 VALID_EMAIL,
@@ -78,7 +80,7 @@ class BookingTest {
         final Booking booking = createValidBooking();
         booking.cancel();
         // when
-        assertThrows(BusinessException.class, booking::confirm);
+        assertThrows(IllegalBookingStateException.class, booking::confirm);
     }
 
     private Booking createValidBooking() {

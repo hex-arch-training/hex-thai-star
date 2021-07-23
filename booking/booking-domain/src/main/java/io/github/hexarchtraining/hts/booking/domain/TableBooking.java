@@ -29,10 +29,10 @@ public class TableBooking {
             throw new BookingValidationException("Booking is not persisted.");
         }
         if (bookingFrom.isBefore(booking.getBookingDate())) {
-            throw new BookingValidationException(String.format("Booking window %tT starts before booking date %tT.", bookingFrom, booking.getBookingDate()));
+            throw new BookingValidationException(String.format("Booking window %tT starts before booking date %s.", bookingFrom, booking.getBookingDate()));
         }
         if (bookingTo.isBefore(bookingFrom)) {
-            throw new BookingValidationException(String.format("Start of the booking window %tT is after end of the booking window %tT.", bookingFrom, bookingTo));
+            throw new BookingValidationException(String.format("Start of the booking window %s is after end of the booking window %s.", bookingFrom, bookingTo));
         }
         if (booking.getSeatsNumber() > table.getMaxSeats()) {
             throw new BookingValidationException(String.format("Chosen table (%d) is too small for reservation size (%d).", table.getMaxSeats(), booking.getSeatsNumber()));
