@@ -54,7 +54,13 @@ public class Booking {
      * Create new booking instance.
      */
     public static Booking createNewBooking(@NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull String email, int seatsNumber) {
+        return createNewBooking(null, bookingFromTime, bookingToTime, email, seatsNumber);
+    }
 
+    /**
+     * For tests mostly.
+     */
+    public static Booking createNewBooking(BookingId id, @NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull String email, int seatsNumber) {
         final Instant now = Instant.now();
         final Duration expiry = Duration.ofDays(1);
         final Instant bookingDate = bookingFromTime.truncatedTo(ChronoUnit.DAYS);
@@ -66,7 +72,7 @@ public class Booking {
         }
 
         return new Booking(
-                null,
+                id,
                 now,
                 bookingFromTime,
                 bookingToTime,
