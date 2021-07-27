@@ -34,7 +34,7 @@ public class CancelBookingService implements CancelBookingUseCase {
             final Booking booking = findBookingByTokenPort.find(command.getToken()).orElseThrow(() -> new BookingNotFoundException(command.getToken()));
 
             final Instant now = Instant.now();
-            if (now.minus(Duration.ofHours(4L)).isAfter(booking.getBookingFromTime())) {
+            if (now.plus(Duration.ofHours(4L)).isAfter(booking.getBookingFromTime())) {
                 throw new BookingValidationException("Too late to cancel the booking.");
             }
 

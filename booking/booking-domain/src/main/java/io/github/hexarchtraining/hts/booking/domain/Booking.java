@@ -54,16 +54,25 @@ public class Booking {
      * Create new booking instance.
      */
     public static Booking createNewBooking(@NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull String email, int seatsNumber) {
+        return createNewBooking(null, bookingFromTime, bookingToTime, email, seatsNumber);
+    }
 
+    /**
+     * For tests mostly.
+     */
+    public static Booking createNewBooking(BookingId id, @NonNull Instant bookingFromTime, @NonNull Instant bookingToTime, @NonNull String email, int seatsNumber) {
         final Instant now = Instant.now();
         final Duration expiry = Duration.ofDays(1);
         final Instant bookingDate = bookingFromTime.truncatedTo(ChronoUnit.DAYS);
-        if (bookingDate.isBefore(now.plus(expiry))) {
-            throw new BookingValidationException(String.format("The booking date %tT is too late to do the booking for given time.", bookingDate));
+        if (bookingToTime.isBefore(bookingFromTime)) {
+            throw new BookingValidationException(String.format("The booking time is invalid, end time %2$s precedes start time %1$s.", bookingFromTime, bookingToTime));
+        }
+        if (bookingFromTime.isBefore(now.plus(expiry))) {
+            throw new BookingValidationException(String.format("The booking date %s is too late to do the booking for given time.", bookingDate));
         }
 
         return new Booking(
-                null,
+                id,
                 now,
                 bookingFromTime,
                 bookingToTime,
