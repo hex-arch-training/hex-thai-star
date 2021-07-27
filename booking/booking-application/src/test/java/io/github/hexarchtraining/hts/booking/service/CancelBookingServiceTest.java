@@ -22,8 +22,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
@@ -88,13 +87,12 @@ class CancelBookingServiceTest {
     @Test
     public void shouldCancelBookingAndReleaseTable() {
         // given
-        final Instant now = Instant.now();
         final BookingId id = new BookingId(678L);
         final Booking booking = Booking.createNewBooking(
                 id,
-                now.plus(Duration.ofHours(25)),
-                now.plus(Duration.ofHours(30)),
-                "john.doe@acme.com",
+                validFromTime,
+                validToTime,
+                VALID_EMAIL,
                 5);
         final Table table = Table.builder()
                 .id(new TableId(456))
@@ -113,6 +111,7 @@ class CancelBookingServiceTest {
         cancelBookingService.cancel(command);
         // then
         assertEquals(BookingStatus.CANCELLED, booking.getStatus());
+        assertTrue(testTransactionAdapter.hasBeenCalled());
         verify(deleteTableBookingPort).delete(tableBooking);
         verify(saveBookingPort).save(booking);
     }
