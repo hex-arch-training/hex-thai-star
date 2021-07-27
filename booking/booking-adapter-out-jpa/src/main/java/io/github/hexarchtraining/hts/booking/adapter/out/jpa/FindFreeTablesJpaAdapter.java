@@ -25,7 +25,6 @@ public class FindFreeTablesJpaAdapter implements FindFreeTablesPort {
     @Override
     public List<Table> find(Instant from, Instant to) {
         final Set<Long> bookedTableIds = tableBookingRepository.findBookingsIntersect(from, to).stream().map(entity -> entity.getTable().getId()).collect(Collectors.toSet());
-        System.out.println(bookedTableIds.size());
         return Streamable.of(tableRepository.findAll())
                 .filter(entity -> !bookedTableIds.contains(entity.getId()))
                 .map(tableMapper::toDomain)
