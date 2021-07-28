@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TableDao {
 
-    @SqlQuery("SELECT * FROM Table_Entity")
+    @SqlQuery("SELECT id, max_seats FROM Table_Entity")
     @RegisterBeanMapper(TableRecord.class)
     List<TableRecord> findAll();
 }

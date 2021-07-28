@@ -12,17 +12,19 @@ import java.util.Optional;
 
 public interface BookingDao {
 
-    @SqlQuery("SELECT * FROM Booking WHERE token=:token")
+    @SqlQuery("SELECT id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, token " +
+            "FROM Booking WHERE token=:token")
     @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingByToken(@Bind("token") String token);
 
-    @SqlQuery("SELECT * FROM Booking WHERE id=:id")
+    @SqlQuery("SELECT id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, token " +
+            "FROM Booking WHERE id=:id")
     @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingById(@Bind("id") long id);
 
     @SqlUpdate("INSERT INTO " +
-            "Booking(id, creation_date, booking_from_time, booking_to_time, expiration_date, email, seats_number, status, token) " +
-            "VALUES (hibernate_sequence.nextval, :creationDate, :bookingFromTime, :bookingToTime, :expirationDate, :email, :seatsNumber, :status, :token)")
+            "Booking(id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, status, token) " +
+            "VALUES (hibernate_sequence.nextval, :creationDate, :bookingFromTime, :bookingToTime, :bookingDate, :expirationDate, :email, :seatsNumber, :status, :token)")
     @GetGeneratedKeys
     long insertBooking(@BindBean BookingRecord booking);
 
