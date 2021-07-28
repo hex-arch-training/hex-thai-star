@@ -27,7 +27,7 @@ public class FindFreeTablesJdbiAdapter implements FindFreeTablesPort {
         return db.withHandle(handle -> {
             final TableDao tableDao = handle.attach(TableDao.class);
             final TableBookingDao tableBookingDao = handle.attach(TableBookingDao.class);
-            
+
             final Set<Long> bookedTableIds = tableBookingDao.findBookingsIntersect(from, to).stream()
                     .map(TableBookingRecord::getTableId)
                     .collect(Collectors.toSet());

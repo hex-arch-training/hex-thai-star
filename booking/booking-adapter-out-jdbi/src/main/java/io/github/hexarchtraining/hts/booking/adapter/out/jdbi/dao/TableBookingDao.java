@@ -31,6 +31,7 @@ public interface TableBookingDao {
             "WHERE (booking_from <= :fromTime AND booking_to >= :fromTime) " +
             "OR (booking_from <= :toTime AND booking_to >= :toTime) " +
             "OR (booking_from > :fromTime AND booking_to < :toTime)")
+    @RegisterBeanMapper(TableBookingRecord.class)
     List<TableBookingRecord> findBookingsIntersect(@Bind("fromTime") Instant from, @Bind("toTime") Instant to);
 
     @SqlUpdate("INSERT INTO Table_Booking (booking_from, booking_to, table_id, booking_id) " +
