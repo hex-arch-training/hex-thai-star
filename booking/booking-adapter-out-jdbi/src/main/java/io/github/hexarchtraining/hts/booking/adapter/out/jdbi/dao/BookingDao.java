@@ -1,6 +1,7 @@
 package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.dao;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.BookingRecord;
+import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.statement.GetGeneratedKeys;
 import org.jdbi.v3.sqlobject.statement.SqlQuery;
@@ -11,9 +12,11 @@ import java.util.Optional;
 public interface BookingDao {
 
     @SqlQuery("SELECT * FROM Booking WHERE token=:token")
+    @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingByToken(@Bind("token") String token);
 
     @SqlQuery("SELECT * FROM Booking WHERE id=:id")
+    @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingById(@Bind("id") long id);
 
     @SqlUpdate("INSERT INTO " +
