@@ -6,6 +6,7 @@ import io.github.hexarchtraining.hts.booking.domain.BookingId;
 import io.github.hexarchtraining.hts.booking.domain.TableBooking;
 import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.jdbi.v3.core.Jdbi;
 
 import java.util.Optional;
@@ -18,7 +19,7 @@ public class FindTableBookingJdbiAdapter implements FindTableBookingPort {
     private final TableBookingMapper tableBookingMapper = TableBookingMapper.INSTANCE;
 
     @Override
-    public Optional<TableBooking> find(BookingId id) {
+    public Optional<TableBooking> find(@NonNull BookingId id) {
         return db.withHandle(handle -> {
             final TableBookingDao dao = handle.attach(TableBookingDao.class);
             return dao.findTableBooking(id.getValue());

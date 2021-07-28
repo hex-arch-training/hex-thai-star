@@ -5,6 +5,7 @@ import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.mapper.BookingMapp
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import org.jdbi.v3.core.Jdbi;
 
 import java.util.Optional;
@@ -17,10 +18,10 @@ public class FindBookingByTokenJdbiAdapter implements FindBookingByTokenPort {
     private final BookingMapper bookingMapper = BookingMapper.INSTANCE;
 
     @Override
-    public Optional<Booking> find(String token) {
-        return db.withHandle((handle) -> {
+    public Optional<Booking> find(@NonNull String token) {
+        return db.withHandle(handle -> {
             final BookingDao dao = handle.attach(BookingDao.class);
-            return dao.findBookingByToken(token).map(bookingMapper::toDomain);
-        });
+            return dao.findBookingByToken(token);
+        }).map(bookingMapper::toDomain);
     }
 }

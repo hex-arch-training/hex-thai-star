@@ -21,9 +21,9 @@ public class FindTablesJdbiAdapter implements FindTablesPort {
     public List<Table> findTables() {
         return db.withHandle(handle -> {
             final TableDao dao = handle.attach(TableDao.class);
-            return dao.findAll().stream()
-                    .map(tableMapper::toDomain)
-                    .collect(Collectors.toList());
-        });
+            return dao.findAll();
+        }).stream()
+                .map(tableMapper::toDomain)
+                .collect(Collectors.toList());
     }
 }
