@@ -1,9 +1,13 @@
 package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TableRecord {
-    Long id;
-    int maxSeats;
+    private Long id;
+    private int maxSeats;
 }

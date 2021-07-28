@@ -1,20 +1,24 @@
 package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record;
 
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookingRecord {
-    Long id;
-    Instant creationDate;
-    Instant bookingFromTime;
-    Instant bookingToTime;
-    Instant bookingDate;
-    Instant expirationDate;
-    String email;
-    int seatsNumber;
-    BookingStatus status;
-    String token;
+    private Long id;
+    private Instant creationDate;
+    private Instant bookingFromTime;
+    private Instant bookingToTime;
+    private Instant bookingDate;
+    private Instant expirationDate;
+    private String email;
+    private int seatsNumber;
+    private BookingStatus status;
+    private String token;
 }

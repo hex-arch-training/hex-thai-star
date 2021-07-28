@@ -1,14 +1,18 @@
 package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 
-@Value
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TableBookingRecord {
-    Long id;
-    Instant bookingFrom;
-    Instant bookingTo;
-    long tableId;
-    long bookingId;
+    private Long id;
+    private Instant bookingFrom;
+    private Instant bookingTo;
+    private long tableId;
+    private long bookingId;
 }

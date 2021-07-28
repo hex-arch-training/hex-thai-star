@@ -22,6 +22,7 @@ import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -30,6 +31,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @AllArgsConstructor
 @Configuration
+@ConditionalOnProperty(name="booking.store", havingValue = "jpa")
 public class BookingAdapterOutJpaConfiguration {
 
     private final TableBookingRepository tableBookingRepository;
