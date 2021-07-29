@@ -3,7 +3,7 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jpa;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper.BookingMapper;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
 import io.github.hexarchtraining.hts.booking.domain.Booking;
-import io.github.hexarchtraining.hts.booking.common.exception.BusinessException;
+import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import lombok.AllArgsConstructor;
 
@@ -22,7 +22,7 @@ public class SaveBookingJpaAdapter implements SaveBookingPort {
                     bookingRepository.save(bookingEntity);
                 },
                 () -> {
-                    throw new BusinessException("Booking not found.");
+                    throw new BookingNotFoundException(booking.getId());
                 });
     }
 }

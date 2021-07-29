@@ -3,6 +3,7 @@ package io.github.hexarchtraining.hts.springboot.adapter.out;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionalConsumer;
 import io.github.hexarchtraining.hts.common.port.out.TransactionalMapper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
  * So, for other container framework (such as Quarkus) we would need a separate implementation.
  */
 @Service
+@ConditionalOnProperty(name = "booking.store", havingValue = "jpa")
 public class TransactionJtaAdapter implements TransactionPort {
     @Override
     @Transactional

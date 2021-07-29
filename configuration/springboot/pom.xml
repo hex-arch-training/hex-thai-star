@@ -12,10 +12,31 @@
     <version>${revision}</version>
     <name>springboot</name>
     <description>Demo project for Spring Boot</description>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jdbi</groupId>
+                <artifactId>jdbi3-bom</artifactId>
+                <type>pom</type>
+                <version>${jdbi.version}</version>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
             <artifactId>booking-adapter-out-jpa</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>booking-adapter-out-jdbi</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>common-adapter-out-jdbi</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -37,6 +58,14 @@
             <groupId>io.github.hex-arch-training</groupId>
             <artifactId>order-domain</artifactId>
             <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi3-sqlobject</artifactId>
         </dependency>
 
         <dependency>

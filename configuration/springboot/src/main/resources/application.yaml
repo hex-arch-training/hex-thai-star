@@ -9,3 +9,6 @@ logging:
 
 server:
   port: 7777
+
+booking:
+  store: jpa

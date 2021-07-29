@@ -12,6 +12,8 @@ public class DeleteTableBookingJpaAdapter implements DeleteTableBookingPort {
 
     @Override
     public void delete(TableBooking tableBooking) {
-        tableBookingRepository.deleteByBookingIdAndTableId(tableBooking.getBookingId().getValue(), tableBooking.getTableId().getValue());
+        tableBookingRepository.deleteByBookingIdAndTableId(
+                tableBooking.getBookingId().getValue(),
+                tableBooking.getTableId().getValue());
     }
 }
