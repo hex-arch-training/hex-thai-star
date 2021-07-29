@@ -18,6 +18,8 @@ import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
+import io.github.hexarchtraining.hts.common.adapter.out.jdbi.TransactionJdbiAdapter;
+import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import lombok.AllArgsConstructor;
 import org.jdbi.v3.core.Jdbi;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -30,6 +32,11 @@ import org.springframework.context.annotation.Configuration;
 public class BookingAdapterOutJdbiConfiguration {
 
     private final Jdbi jdbi;
+
+    @Bean
+    public TransactionPort transactionPort() {
+        return new TransactionJdbiAdapter(jdbi);
+    }
 
     @Bean
     public DeleteTableBookingPort deleteTableBookingPort() {
