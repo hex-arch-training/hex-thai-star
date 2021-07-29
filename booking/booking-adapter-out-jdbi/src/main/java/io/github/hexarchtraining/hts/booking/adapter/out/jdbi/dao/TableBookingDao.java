@@ -24,7 +24,10 @@ public interface TableBookingDao {
     @RegisterBeanMapper(TableBookingRecord.class)
     Optional<TableBookingRecord> findTableBooking(@Bind("bookingId") long bookingId);
 
-    @SqlQuery("SELECT tb.*, b.* FROM Table_Booking tb JOIN Booking b ON tb.booking_id = b.id")
+    @SqlQuery("SELECT tb.id tb_id, tb.booking_from tb_booking_from, tb.booking_to tb_booking_to, tb.table_id tb_table_id, tb.booking_id tb_booking_id, " +
+            "b.id b_id, b.creation_date b_creation_date, b.booking_from_time b_booking_from_time, b.booking_to_time b_booking_to_time, " +
+            "b.booking_date b_booking_date, b.expiration_date b_expiration_date, b.email b_email, b.seats_number b_seats_number, b.status b_status, b.token b_token " +
+            "FROM Table_Booking tb JOIN Booking b ON tb.booking_id = b.id")
     @RegisterBeanMapper(value = TableBookingRecord.class, prefix = "tb")
     @RegisterBeanMapper(value = BookingRecord.class, prefix = "b")
     Map<TableBookingRecord, BookingRecord> findAllTableBookingsWithBooking();
