@@ -19,8 +19,7 @@ public interface TableBookingDao {
     @SqlUpdate("DELETE FROM Table_Booking WHERE booking_id=:bookingId AND table_id=:tableId")
     void deleteTableBooking(@Bind("bookingId") long bookingId, @Bind("tableId") long tableId);
 
-    @SqlQuery("SELECT id, booking_from, booking_to, table_id, booking_id " +
-            "FROM Table_Booking WHERE booking_id=:bookingId")
+    @SqlQuery("SELECT * FROM Table_Booking WHERE booking_id=:bookingId")
     @RegisterBeanMapper(TableBookingRecord.class)
     Optional<TableBookingRecord> findTableBooking(@Bind("bookingId") long bookingId);
 

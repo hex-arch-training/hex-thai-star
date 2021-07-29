@@ -12,13 +12,11 @@ import java.util.Optional;
 
 public interface BookingDao {
 
-    @SqlQuery("SELECT id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, status, token " +
-            "FROM Booking WHERE token=:token")
+    @SqlQuery("SELECT * FROM Booking WHERE token=:token")
     @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingByToken(@Bind("token") String token);
 
-    @SqlQuery("SELECT id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, token " +
-            "FROM Booking WHERE id=:id")
+    @SqlQuery("SELECT * FROM Booking WHERE id=:id")
     @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingById(@Bind("id") long id);
 
