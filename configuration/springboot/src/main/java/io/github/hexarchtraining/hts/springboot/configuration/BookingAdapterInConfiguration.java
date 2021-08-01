@@ -5,14 +5,11 @@ import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesUseCase;
-import io.github.hexarchtraining.hts.booking.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
-import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
-import io.github.hexarchtraining.hts.booking.port.out.PersistTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SendBookingConfirmationPort;
 import io.github.hexarchtraining.hts.booking.service.CancelBookingService;
@@ -31,17 +28,11 @@ public class BookingAdapterInConfiguration {
 
     private final FindBookingByTokenPort findBookingByTokenPort;
 
-    private final FindTableBookingPort findTableBookingPort;
-
     private final SaveBookingPort saveBookingPort;
-
-    private final DeleteTableBookingPort deleteTableBookingPort;
 
     private final TransactionPort transactionPort;
 
     private final PersistBookingPort persistBookingPort;
-
-    private final PersistTableBookingPort persistTableBookingPort;
 
     private final FindFreeTablesPort findFreeTablesPort;
 
@@ -53,17 +44,17 @@ public class BookingAdapterInConfiguration {
 
     @Bean
     public CancelBookingUseCase cancelBookingUseCase() {
-        return new CancelBookingService(findBookingByTokenPort, findTableBookingPort, saveBookingPort, deleteTableBookingPort, transactionPort);
+        return new CancelBookingService(findBookingByTokenPort, saveBookingPort, transactionPort);
     }
 
     @Bean
     public ConfirmBookingUseCase confirmBookingUseCase() {
-        return new ConfirmBookingService(findBookingByTokenPort, findTableBookingPort, saveBookingPort);
+        return new ConfirmBookingService(findBookingByTokenPort, saveBookingPort);
     }
 
     @Bean
     public CreateBookingUseCase createBookingUseCase() {
-        return new CreateBookingService(persistBookingPort, persistTableBookingPort, findFreeTablesPort, sendBookingConfirmationPort, transactionPort);
+        return new CreateBookingService(persistBookingPort, saveBookingPort, findFreeTablesPort, sendBookingConfirmationPort, transactionPort);
     }
 
     @Bean

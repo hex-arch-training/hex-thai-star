@@ -1,22 +1,16 @@
 package io.github.hexarchtraining.hts.springboot.configuration;
 
-import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.DeleteTableBookingJdbiAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.FindBookingByTokenJdbiAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.FindBookingsJdbiAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.FindFreeTablesJdbiAdapter;
-import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.FindTableBookingJdbiAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.FindTablesJdbiAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.PersistBookingJdbiAdapter;
-import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.PersistTableBookingJdbiAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.SaveBookingJdbiAdapter;
-import io.github.hexarchtraining.hts.booking.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
-import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
-import io.github.hexarchtraining.hts.booking.port.out.PersistTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import io.github.hexarchtraining.hts.common.adapter.out.jdbi.TransactionJdbiAdapter;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
@@ -39,11 +33,6 @@ public class BookingAdapterOutJdbiConfiguration {
     }
 
     @Bean
-    public DeleteTableBookingPort deleteTableBookingPort() {
-        return new DeleteTableBookingJdbiAdapter(jdbi);
-    }
-
-    @Bean
     public FindBookingByTokenPort findBookingByTokenPort() {
         return new FindBookingByTokenJdbiAdapter(jdbi);
     }
@@ -54,18 +43,8 @@ public class BookingAdapterOutJdbiConfiguration {
     }
 
     @Bean
-    public FindTableBookingPort findTableBookingPort() {
-        return new FindTableBookingJdbiAdapter(jdbi);
-    }
-
-    @Bean
     public PersistBookingPort persistBookingPort() {
         return new PersistBookingJdbiAdapter(jdbi);
-    }
-
-    @Bean
-    public PersistTableBookingPort persistTableBookingPort() {
-        return new PersistTableBookingJdbiAdapter(jdbi);
     }
 
     @Bean

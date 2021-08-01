@@ -2,22 +2,20 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jpa.mapper;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.TableBookingEntity;
 import io.github.hexarchtraining.hts.booking.domain.TableBooking;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.factory.Mappers;
+import io.github.hexarchtraining.hts.booking.domain.TableId;
 
-@Mapper
-public interface TableBookingMapper {
+public class TableBookingMapper {
 
-    TableBookingMapper INSTANCE = Mappers.getMapper(TableBookingMapper.class);
+    public static final TableBookingMapper INSTANCE = new TableBookingMapper();
 
-    @Mapping(target = "bookingId.value", source="booking.id")
-    @Mapping(target = "tableId.value", source="table.id")
-    TableBooking toDomain(TableBookingEntity tableBookingEntity);
+    public TableBooking toDomain(TableBookingEntity tableBookingEntity) {
+        return TableBooking.builder()
+                .tableId(new TableId(tableBookingEntity.getTable().getId()))
+                .seatsNumber(tableBookingEntity.getSeatsNumber())
+                .build();
+    }
 
-    @Mapping(target = "booking", ignore = true)
-    @Mapping(target = "table", ignore = true)
-    @Mapping(target = "id", ignore = true)
-    void toEntity(TableBooking tableBooking, @MappingTarget TableBookingEntity tableBookingEntity);
+    public void toEntity(TableBooking tableBooking, TableBookingEntity entity) {
+        entity.setSeatsNumber(tableBooking.getSeatsNumber());
+    }
 }

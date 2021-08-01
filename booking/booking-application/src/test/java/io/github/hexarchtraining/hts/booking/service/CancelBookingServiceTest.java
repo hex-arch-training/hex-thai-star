@@ -4,14 +4,11 @@ import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.BookingId;
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
 import io.github.hexarchtraining.hts.booking.domain.Table;
-import io.github.hexarchtraining.hts.booking.domain.TableBooking;
 import io.github.hexarchtraining.hts.booking.domain.TableId;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
-import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import io.github.hexarchtraining.hts.common.adapter.out.TestTransactionAdapter;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +39,6 @@ class CancelBookingServiceTest {
 
     private FindBookingByTokenPort findBookingByTokenPort;
 
-    private FindTableBookingPort findTableBookingPort;
 
     private TestTransactionAdapter testTransactionAdapter;
 
@@ -49,16 +46,13 @@ class CancelBookingServiceTest {
 
     private SaveBookingPort saveBookingPort;
 
-    private DeleteTableBookingPort deleteTableBookingPort;
 
     @BeforeEach
     public void setUpMocks() {
         testTransactionAdapter = new TestTransactionAdapter();
         findBookingByTokenPort = mock(FindBookingByTokenPort.class);
-        findTableBookingPort = mock(FindTableBookingPort.class);
         saveBookingPort = mock(SaveBookingPort.class);
-        deleteTableBookingPort = mock(DeleteTableBookingPort.class);
-        cancelBookingService = new CancelBookingService(findBookingByTokenPort, findTableBookingPort, saveBookingPort, deleteTableBookingPort, testTransactionAdapter);
+        cancelBookingService = new CancelBookingService(findBookingByTokenPort, saveBookingPort, testTransactionAdapter);
     }
 
     @Test
@@ -77,6 +71,7 @@ class CancelBookingServiceTest {
         final Booking booking = Booking.builder()
                 .bookingFromTime(now.plus(Duration.ofHours(3)))
                 .status(BookingStatus.NEW)
+                .tableBookings(new HashSet<>())
                 .build();
         when(findBookingByTokenPort.find(token)).thenReturn(Optional.of(booking));
         final CancelBookingCommand command = new CancelBookingCommand(token);
@@ -98,21 +93,15 @@ class CancelBookingServiceTest {
                 .id(new TableId(456))
                 .maxSeats(10)
                 .build();
-        final TableBooking tableBooking = TableBooking.createTableBooking(
-                booking,
-                table,
-                booking.getBookingFromTime(),
-                booking.getBookingToTime());
+        booking.addTableBooking(table);
 
         when(findBookingByTokenPort.find(token)).thenReturn(Optional.of(booking));
-        when(findTableBookingPort.find(id)).thenReturn(Optional.of(tableBooking));
         final CancelBookingCommand command = new CancelBookingCommand(token);
         // when
         cancelBookingService.cancel(command);
         // then
         assertEquals(BookingStatus.CANCELLED, booking.getStatus());
         assertTrue(testTransactionAdapter.hasBeenCalled());
-        verify(deleteTableBookingPort).delete(tableBooking);
         verify(saveBookingPort).save(booking);
     }
 }

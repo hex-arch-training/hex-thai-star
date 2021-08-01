@@ -7,12 +7,13 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(uses = {TableBookingMapper.class})
 public interface BookingMapper {
 
     BookingMapper INSTANCE = Mappers.getMapper(BookingMapper.class);
 
     @Mapping(target="id.value", source="id")
+    @Mapping(target = "tableBookings", ignore = true)
     Booking toDomain(BookingEntity bookingEntity);
 
     @Mapping(target="id", source="id.value")

@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.Instant;
 
@@ -27,11 +26,14 @@ public class TableBookingEntity {
     @Column(name = "booking_to")
     private Instant bookingTo;
 
+    @Column(name = "seats_number")
+    private int seatsNumber;
+
     @ManyToOne
     @JoinColumn(name = "table_id", referencedColumnName = "id")
     private TableEntity table;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "booking_id", referencedColumnName = "id")
     private BookingEntity booking;
 }
