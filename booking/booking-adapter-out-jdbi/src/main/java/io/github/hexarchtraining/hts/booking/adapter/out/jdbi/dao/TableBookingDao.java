@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TableBookingDao {
 
@@ -43,8 +44,8 @@ public interface TableBookingDao {
     @RegisterBeanMapper(TableBookingRecord.class)
     List<TableBookingRecord> findBookingsIntersect(@Bind("fromTime") Instant from, @Bind("toTime") Instant to);
 
-    @SqlUpdate("INSERT INTO Table_Booking (id, booking_from, booking_to, table_id, booking_id) " +
-            "VALUES (hibernate_sequence.nextval, :bookingFrom, :bookingTo, :tableId, :bookingId)")
+    @SqlUpdate("INSERT INTO Table_Booking (id, booking_from, booking_to, table_id, booking_id, seats_number) " +
+            "VALUES (hibernate_sequence.nextval, :bookingFrom, :bookingTo, :tableId, :bookingId, :seatsNumber)")
     @GetGeneratedKeys
     long insertTableBooking(@BindBean TableBookingRecord tableBooking);
 

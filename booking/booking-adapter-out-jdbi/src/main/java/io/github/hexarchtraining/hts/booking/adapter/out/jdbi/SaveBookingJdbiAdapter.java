@@ -59,7 +59,7 @@ public class SaveBookingJdbiAdapter implements SaveBookingPort {
                     .collect(Collectors.toSet());
 
             final Set<TableId> newBookings = booking.bookingsAsTableIdStream()
-                    .filter(existingBookingEntities::contains)
+                    .filter(o -> !existingBookingEntities.contains(o))
                     .collect(Collectors.toSet());
 
             newBookings.forEach(tableId -> booking.findTable(tableId).ifPresent(tableBooking -> {
