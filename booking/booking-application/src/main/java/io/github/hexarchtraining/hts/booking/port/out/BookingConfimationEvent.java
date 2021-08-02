@@ -2,7 +2,6 @@ package io.github.hexarchtraining.hts.booking.port.out;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.BookingId;
-import io.github.hexarchtraining.hts.booking.domain.TableBooking;
 import lombok.Value;
 
 import java.time.Instant;
@@ -24,14 +23,14 @@ public class BookingConfimationEvent {
 
     int seatsNumber;
 
-    public static BookingConfimationEvent fromBooking(Booking booking, TableBooking tableBooking) {
+    public static BookingConfimationEvent fromBooking(Booking booking) {
         return new BookingConfimationEvent(
                 booking.getId(),
                 booking.getEmail(),
                 booking.getToken(),
                 booking.getBookingDate(),
-                tableBooking.getBookingFrom(),
-                tableBooking.getBookingTo(),
+                booking.getBookingFromTime(),
+                booking.getBookingToTime(),
                 booking.getSeatsNumber());
     }
 }

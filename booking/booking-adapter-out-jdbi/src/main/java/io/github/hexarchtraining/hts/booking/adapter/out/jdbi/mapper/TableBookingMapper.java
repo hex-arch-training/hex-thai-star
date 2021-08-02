@@ -2,20 +2,22 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.mapper;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.TableBookingRecord;
 import io.github.hexarchtraining.hts.booking.domain.TableBooking;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import io.github.hexarchtraining.hts.booking.domain.TableId;
 
-@Mapper
-public interface TableBookingMapper {
-    TableBookingMapper INSTANCE = Mappers.getMapper(TableBookingMapper.class);
+public class TableBookingMapper {
 
-    @Mapping(target = "bookingId.value", source="bookingId")
-    @Mapping(target = "tableId.value", source="tableId")
-    TableBooking toDomain(TableBookingRecord tableBookingRecord);
+    public static final TableBookingMapper INSTANCE = new TableBookingMapper();
 
-    @Mapping(target = "bookingId", source = "bookingId.value")
-    @Mapping(target = "tableId", source = "tableId.value")
-    @Mapping(target = "id", ignore = true)
-    TableBookingRecord toRecord(TableBooking tableBooking);
+    public TableBooking toDomain(TableBookingRecord tableBookingRecord) {
+        return TableBooking.builder()
+                .tableId(new TableId(tableBookingRecord.getTableId()))
+                .seatsNumber(tableBookingRecord.getSeatsNumber())
+                .build();
+    }
+
+    public TableBookingRecord toRecord(TableBooking tableBooking) {
+        final TableBookingRecord record = new TableBookingRecord();
+        record.setSeatsNumber(tableBooking.getSeatsNumber());
+        return record;
+    }
 }

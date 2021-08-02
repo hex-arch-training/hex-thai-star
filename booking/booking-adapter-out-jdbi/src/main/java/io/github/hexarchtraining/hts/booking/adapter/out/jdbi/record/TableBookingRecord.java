@@ -13,6 +13,7 @@ public class TableBookingRecord {
     private Long id;
     private Instant bookingFrom;
     private Instant bookingTo;
+    private int seatsNumber;
     private long tableId;
     private long bookingId;
 }

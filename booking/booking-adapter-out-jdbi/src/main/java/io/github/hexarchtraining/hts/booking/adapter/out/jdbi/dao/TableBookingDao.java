@@ -2,6 +2,7 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.dao;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.BookingRecord;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.TableBookingRecord;
+import io.github.hexarchtraining.hts.booking.domain.TableBooking;
 import org.jdbi.v3.sqlobject.config.RegisterBeanMapper;
 import org.jdbi.v3.sqlobject.customizer.Bind;
 import org.jdbi.v3.sqlobject.customizer.BindBean;
@@ -13,6 +14,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface TableBookingDao {
 
@@ -31,6 +33,10 @@ public interface TableBookingDao {
     @RegisterBeanMapper(value = BookingRecord.class, prefix = "b")
     Map<TableBookingRecord, BookingRecord> findAllTableBookingsWithBooking();
 
+    @SqlQuery("SELECT * FROM Table_Booking WHERE booking_id=:bookingId")
+    @RegisterBeanMapper(TableBookingRecord.class)
+    List<TableBookingRecord> findAllTableBookingsForBooking(@Bind("bookingId") long bookingId);
+
     @SqlQuery("SELECT * FROM Table_Booking " +
             "WHERE (booking_from <= :fromTime AND booking_to >= :fromTime) " +
             "OR (booking_from <= :toTime AND booking_to >= :toTime) " +
@@ -38,8 +44,13 @@ public interface TableBookingDao {
     @RegisterBeanMapper(TableBookingRecord.class)
     List<TableBookingRecord> findBookingsIntersect(@Bind("fromTime") Instant from, @Bind("toTime") Instant to);
 
-    @SqlUpdate("INSERT INTO Table_Booking (id, booking_from, booking_to, table_id, booking_id) " +
-            "VALUES (hibernate_sequence.nextval, :bookingFrom, :bookingTo, :tableId, :bookingId)")
+    @SqlUpdate("INSERT INTO Table_Booking (id, booking_from, booking_to, table_id, booking_id, seats_number) " +
+            "VALUES (hibernate_sequence.nextval, :bookingFrom, :bookingTo, :tableId, :bookingId, :seatsNumber)")
     @GetGeneratedKeys
     long insertTableBooking(@BindBean TableBookingRecord tableBooking);
+
+    @SqlUpdate("UPDATE Table_Booking " +
+            "SET booking_from=:bookingFrom, booking_to=:bookingTo, seats_number=:seatsNumber " +
+            "WHERE id=:id")
+    boolean updateTableBooking(@BindBean TableBookingRecord tableBooking);
 }

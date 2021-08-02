@@ -1,7 +1,7 @@
 package io.github.hexarchtraining.hts.booking.domain;
 
-import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.common.exception.BusinessException;
+import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.domain.exception.IllegalBookingStateException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,11 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
@@ -50,6 +55,10 @@ public class Booking {
     @Getter
     private final String token;
 
+    @Getter
+    @NonNull
+    private final Set<TableBooking> tableBookings;
+
     /**
      * Create new booking instance.
      */
@@ -81,7 +90,8 @@ public class Booking {
                 email,
                 seatsNumber,
                 BookingStatus.NEW,
-                buildToken(email, "CB_"));
+                buildToken(email, "CB_"),
+                new HashSet<>());
     }
 
     private static String buildToken(String email, String type) {
@@ -110,6 +120,40 @@ public class Booking {
         return type + date + sb;
     }
 
+    /**
+     * Checks whether Booking is already persisted in the booking storage.
+     */
+    public boolean isPersisted() {
+        return id != null;
+    }
+
+    /**
+     * Checks if given table is already included in this Booking.
+     */
+    public boolean containsTable(@NonNull TableId tableId) {
+        return findTable(tableId).isPresent();
+    }
+
+    /**
+     * Returns TableBooking for given table if exists.
+     */
+    public Optional<TableBooking> findTable(@NonNull TableId tableId) {
+        return tableBookings.stream().filter(tableBooking -> tableId.equals(tableBooking.getTableId())).findFirst();
+    }
+
+    /**
+     * Returns set of TableIds as contained in this Booking.
+     */
+    public Stream<TableId> bookingsAsTableIdStream() {
+        return tableBookings.stream().map(TableBooking::getTableId);
+    }
+
+    /**
+     * Checks is booked tables capacity fulfils overall Booking size.
+     */
+    public boolean hasSufficientTables() {
+        return tableBookings.stream().mapToInt(TableBooking::getSeatsNumber).sum() >= seatsNumber;
+    }
 
     /**
      * Cancels booking.
@@ -117,6 +161,7 @@ public class Booking {
     public void cancel() {
         if (status == BookingStatus.NEW || status == BookingStatus.CONFIRMED) {
             status = BookingStatus.CANCELLED;
+            tableBookings.clear();
         } else {
             throw new IllegalBookingStateException(id, status, BookingStatus.CANCELLED);
         }
@@ -134,6 +179,13 @@ public class Booking {
     }
 
     /**
+     * Adds new table to the booking.
+     */
+    public void addTableBooking(@NonNull Table table) {
+        addTableBooking(table.getId(), table.getMaxSeats());
+    }
+
+    /**
      * Change number of seats in the booking.
      * <p>
      * TODO tricky, maybe we should disallow this; use an use case for this and drop & create new booking instead.
@@ -141,5 +193,18 @@ public class Booking {
      */
     public void changeBookingSize(int newSeatsNumber) {
         seatsNumber = newSeatsNumber;
+    }
+
+    /**
+     * Adds new table to the booking.
+     */
+    private void addTableBooking(@NonNull TableId tableId, int seatsNumber) {
+        if (!isPersisted()) {
+            throw new BookingValidationException("The booking must be persisted to add tables to it.");
+        }
+        if (containsTable(tableId)) {
+            throw new BookingValidationException(String.format("The booking %d contains table %d already.", id.getValue(), tableId.getValue()));
+        }
+        tableBookings.add(TableBooking.createTableBooking(tableId, seatsNumber));
     }
 }

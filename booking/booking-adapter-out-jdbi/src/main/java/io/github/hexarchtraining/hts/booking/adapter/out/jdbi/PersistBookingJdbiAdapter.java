@@ -2,6 +2,7 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jdbi;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.dao.BookingDao;
 import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.mapper.BookingMapper;
+import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.BookingRecord;
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.BookingId;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
@@ -9,6 +10,8 @@ import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.jdbi.v3.core.Jdbi;
+
+import java.util.HashSet;
 
 @AllArgsConstructor
 public class PersistBookingJdbiAdapter implements PersistBookingPort {
@@ -24,7 +27,7 @@ public class PersistBookingJdbiAdapter implements PersistBookingPort {
             final long id = bookingDao.insertBooking(bookingMapper.toRecord(booking));
             return bookingDao
                     .findBookingById(id)
-                    .map(bookingMapper::toDomain)
+                    .map((BookingRecord bookingRecord) -> bookingMapper.toDomain(bookingRecord, new HashSet<>()))
                     .orElseThrow(() -> new BookingNotFoundException(new BookingId(id)));
         });
     }

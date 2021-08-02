@@ -5,9 +5,7 @@ import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundExc
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
-import io.github.hexarchtraining.hts.booking.port.out.DeleteTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
-import io.github.hexarchtraining.hts.booking.port.out.FindTableBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import lombok.AllArgsConstructor;
@@ -20,11 +18,7 @@ public class CancelBookingService implements CancelBookingUseCase {
 
     private final FindBookingByTokenPort findBookingByTokenPort;
 
-    private final FindTableBookingPort findTableBookingPort;
-
     private final SaveBookingPort saveBookingPort;
-
-    private final DeleteTableBookingPort deleteTableBookingPort;
 
     private final TransactionPort transactionPort;
 
@@ -39,7 +33,6 @@ public class CancelBookingService implements CancelBookingUseCase {
             }
 
             booking.cancel();
-            findTableBookingPort.find(booking.getId()).ifPresent(deleteTableBookingPort::delete);
             saveBookingPort.save(booking);
         });
     }
