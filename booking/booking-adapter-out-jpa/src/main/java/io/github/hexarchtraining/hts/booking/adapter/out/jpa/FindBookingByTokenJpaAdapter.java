@@ -17,6 +17,6 @@ public class FindBookingByTokenJpaAdapter implements FindBookingByTokenPort {
 
     @Override
     public Optional<Booking> find(String token) {
-        return bookingRepository.findBookingEntityByToken(token).map(bookingEntity -> mapper.toDomain(bookingEntity));
+        return bookingRepository.findBookingEntityByToken(token).map(mapper::toDomain);
     }
 }
