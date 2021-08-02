@@ -61,6 +61,6 @@ public class BookingAdapterOutJpaConfiguration {
 
     @Bean
     public FindBookingsPort findBookingsPort() {
-        return new FindBookinsJpaAdapter(tableBookingRepository);
+        return new FindBookinsJpaAdapter(bookingRepository);
     }
 }

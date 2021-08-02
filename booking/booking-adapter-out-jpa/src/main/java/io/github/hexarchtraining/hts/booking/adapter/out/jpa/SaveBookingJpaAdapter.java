@@ -35,8 +35,8 @@ public class SaveBookingJpaAdapter implements SaveBookingPort {
         bookingRepository.findById(booking.getId().getValue()).ifPresentOrElse(
                 bookingEntity -> {
                     bookingMapper.toEntity(booking, bookingEntity);
-                    syncTableBookings(booking, bookingEntity);
                     bookingRepository.save(bookingEntity);
+                    syncTableBookings(booking, bookingEntity);
                 },
                 () -> {
                     throw new BookingNotFoundException(booking.getId());
@@ -47,7 +47,7 @@ public class SaveBookingJpaAdapter implements SaveBookingPort {
         final Set<TableBookingEntity> tableBookingEntities = tableBookingRepository.findAllByBookingId(bookingEntity.getId());
 
         // update or delete
-        tableBookingEntities.forEach(tableBookingEntity -> booking.findTable(new TableId(tableBookingEntity.getId()))
+        tableBookingEntities.forEach(tableBookingEntity -> booking.findTable(new TableId(tableBookingEntity.getTable().getId()))
                 .ifPresentOrElse(tableBooking -> {
                     tableBookingMapper.toEntity(tableBooking, tableBookingEntity);
                     mapFromBooking(booking, tableBookingEntity);
@@ -62,7 +62,7 @@ public class SaveBookingJpaAdapter implements SaveBookingPort {
                 .collect(Collectors.toSet());
 
         final Set<TableId> newBookings = booking.bookingsAsTableIdStream()
-                .filter(existingBookingEntities::contains)
+                .filter(o -> !existingBookingEntities.contains(o))
                 .collect(Collectors.toSet());
 
         newBookings.forEach(tableId -> booking.findTable(tableId).ifPresent(tableBooking -> {
