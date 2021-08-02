@@ -7,17 +7,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 
 public interface TableBookingRepository extends CrudRepository<TableBookingEntity, Long> {
-
-    Set<TableBookingEntity> findAllByBookingId(long bookingId);
 
     // TODO change compiler settings to use -parameters switch
     @Query("from TableBookingEntity where (bookingFrom <= :fromTime and bookingTo >= :fromTime) or (bookingFrom <= :toTime and bookingTo >= :toTime) or (bookingFrom > :fromTime and bookingTo < :toTime)")
     List<TableBookingEntity> findBookingsIntersect(@Param("fromTime") Instant from, @Param("toTime") Instant to);
-
-    @Query("from TableBookingEntity tb join fetch tb.booking")
-    List<TableBookingEntity> findAllWithBookings();
 }

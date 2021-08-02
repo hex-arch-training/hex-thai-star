@@ -29,11 +29,7 @@ public class TableBookingEntity {
     @Column(name = "seats_number")
     private int seatsNumber;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "table_id", referencedColumnName = "id")
     private TableEntity table;
-
-    @ManyToOne
-    @JoinColumn(name = "booking_id", referencedColumnName = "id")
-    private BookingEntity booking;
 }

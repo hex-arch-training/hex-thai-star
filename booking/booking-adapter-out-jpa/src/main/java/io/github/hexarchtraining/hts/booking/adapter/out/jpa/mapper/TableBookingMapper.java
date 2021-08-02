@@ -14,8 +14,4 @@ public class TableBookingMapper {
                 .seatsNumber(tableBookingEntity.getSeatsNumber())
                 .build();
     }
-
-    public void toEntity(TableBooking tableBooking, TableBookingEntity entity) {
-        entity.setSeatsNumber(tableBooking.getSeatsNumber());
-    }
 }

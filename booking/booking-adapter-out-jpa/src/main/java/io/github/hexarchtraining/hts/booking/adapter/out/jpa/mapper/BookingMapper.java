@@ -18,10 +18,9 @@ public interface BookingMapper {
     BookingMapper INSTANCE = Mappers.getMapper(BookingMapper.class);
 
     @Mapping(target="id.value", source="id")
-    @Mapping(target = "tableBookings", source="tableBookingEntities")
     Booking toDomain(BookingEntity bookingEntity);
 
     @Mapping(target="id", source="id.value")
-    @Mapping(target="tableBookingEntities", ignore = true)
+    @Mapping(target="tableBookings", ignore = true)
     void toEntity(Booking booking, @MappingTarget BookingEntity bookingEntity);
 }

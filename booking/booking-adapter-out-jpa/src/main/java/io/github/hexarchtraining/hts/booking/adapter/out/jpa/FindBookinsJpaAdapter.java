@@ -24,7 +24,7 @@ public class FindBookinsJpaAdapter implements FindBookingsPort {
         return Streamable.of(bookingRepository.findBookingsWithTables())
                 .map(entity -> new BookingWithTable(
                         bookingMapper.toDomain(entity),
-                        entity.getTableBookingEntities().stream().findAny().map(tableBookingMapper::toDomain)))
+                        entity.getTableBookings().stream().findAny().map(tableBookingMapper::toDomain)))
                 .toList();
     }
 }

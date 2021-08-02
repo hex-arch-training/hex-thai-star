@@ -1,7 +1,6 @@
 package io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository;
 
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.BookingEntity;
-import io.github.hexarchtraining.hts.booking.port.out.BookingWithTable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -12,6 +11,6 @@ public interface BookingRepository extends CrudRepository<BookingEntity, Long> {
 
     Optional<BookingEntity> findBookingEntityByToken(String token);
 
-    @Query("from BookingEntity b left outer join fetch b.tableBookingEntities")
+    @Query("from BookingEntity b left outer join fetch b.tableBookings")
     List<BookingEntity> findBookingsWithTables();
 }

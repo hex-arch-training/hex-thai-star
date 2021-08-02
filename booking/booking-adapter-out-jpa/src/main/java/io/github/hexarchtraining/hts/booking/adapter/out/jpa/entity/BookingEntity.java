@@ -1,7 +1,6 @@
 package io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity;
 
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
-import io.github.hexarchtraining.hts.booking.domain.TableBooking;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -10,8 +9,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.time.Instant;
 import java.util.HashSet;
@@ -43,8 +42,9 @@ public class BookingEntity {
 
     private String token;
 
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "booking_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private Set<TableBookingEntity> tableBookingEntities = new HashSet<>();
+    private Set<TableBookingEntity> tableBookings = new HashSet<>();
 }
