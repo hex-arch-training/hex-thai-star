@@ -1,5 +1,7 @@
 package io.github.hexarchtraining.hts.booking.service;
 
+import io.github.hexarchtraining.hts.booking.domain.TableBooking;
+import io.github.hexarchtraining.hts.booking.domain.TableId;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsQuery;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsResult;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsUseCase;
@@ -17,14 +19,18 @@ public class ShowBookingsService implements ShowBookingsUseCase {
     @Override
     public List<ShowBookingsResult> showBookings(ShowBookingsQuery showBookingsQuery) {
         return findBookingsPort.findBookings().stream()
-                .map(bookingWithTable -> new ShowBookingsResult(
-                        bookingWithTable.getBooking().getEmail(),
-                        bookingWithTable.getBooking().getBookingFromTime(),
-                        bookingWithTable.getBooking().getBookingToTime(),
-                        bookingWithTable.getTableBooking().map(tableBooking -> tableBooking.getTableId().getValue()).orElse(null),
-                        bookingWithTable.getBooking().getSeatsNumber(),
-                        bookingWithTable.getBooking().getToken(),
-                        bookingWithTable.getBooking().getStatus().name()))
+                .map(booking -> new ShowBookingsResult(
+                        booking.getEmail(),
+                        booking.getBookingFromTime(),
+                        booking.getBookingToTime(),
+                        booking.getTableBookings().stream()
+                                .findFirst()
+                                .map(TableBooking::getTableId)
+                                .map(TableId::getValue)
+                                .orElse(null),
+                        booking.getSeatsNumber(),
+                        booking.getToken(),
+                        booking.getStatus().name()))
                 .collect(Collectors.toList());
     }
 }
