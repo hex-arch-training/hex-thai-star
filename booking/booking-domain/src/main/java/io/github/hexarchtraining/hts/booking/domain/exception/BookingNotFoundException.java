@@ -1,6 +1,6 @@
 package io.github.hexarchtraining.hts.booking.domain.exception;
 
-import io.github.hexarchtraining.hts.booking.common.exception.NotFoundException;
+import io.github.hexarchtraining.hts.common.domain.exception.NotFoundException;
 import io.github.hexarchtraining.hts.booking.domain.BookingId;
 
 import java.util.Optional;

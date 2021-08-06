@@ -1,6 +1,6 @@
 package io.github.hexarchtraining.hts.booking.domain;
 
-import io.github.hexarchtraining.hts.booking.common.exception.BusinessException;
+import io.github.hexarchtraining.hts.common.domain.exception.BusinessException;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.domain.exception.IllegalBookingStateException;
 import lombok.AccessLevel;
@@ -19,7 +19,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)

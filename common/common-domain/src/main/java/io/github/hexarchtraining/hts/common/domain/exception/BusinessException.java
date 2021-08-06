@@ -1,4 +1,4 @@
-package io.github.hexarchtraining.hts.booking.common.exception;
+package io.github.hexarchtraining.hts.common.domain.exception;
 
 public class BusinessException extends RuntimeException {
     public BusinessException(String msg) {

@@ -1,6 +1,6 @@
 package io.github.hexarchtraining.hts.booking.domain.exception;
 
-import io.github.hexarchtraining.hts.booking.common.exception.BusinessException;
+import io.github.hexarchtraining.hts.common.domain.exception.BusinessException;
 import io.github.hexarchtraining.hts.booking.domain.BookingId;
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
 

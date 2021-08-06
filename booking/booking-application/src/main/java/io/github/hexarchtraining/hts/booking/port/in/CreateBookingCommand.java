@@ -1,6 +1,5 @@
 package io.github.hexarchtraining.hts.booking.port.in;
 
-import io.github.hexarchtraining.hts.booking.common.exception.BusinessException;
 import io.github.hexarchtraining.hts.booking.domain.TableId;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import lombok.NonNull;

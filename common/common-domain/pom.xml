@@ -9,15 +9,10 @@
     <version>${revision}</version>
     <relativePath>../..</relativePath>
   </parent>
-  <artifactId>booking-domain</artifactId>
+  <artifactId>common-domain</artifactId>
   <version>${revision}</version>
 
   <dependencies>
-    <dependency>
-      <groupId>io.github.hex-arch-training</groupId>
-      <artifactId>common-domain</artifactId>
-      <version>${revision}</version>
-    </dependency>
   </dependencies>
 
   <build>
