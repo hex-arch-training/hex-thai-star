@@ -30,12 +30,14 @@
     <module>booking/booking-domain</module>
     <module>booking/booking-application</module>
     <module>booking/booking-adapter-in-springweb</module>
+    <module>booking/booking-adapter-in-quarkusweb</module>
     <module>booking/booking-adapter-out-jpa</module>
     <module>booking/booking-adapter-out-jdbi</module>
 
     <module>order/order-domain</module>
 
     <module>configuration/maven/spring-boot-parent</module>
+    <module>configuration/maven/quarkus-parent</module>
     <module>configuration/springboot</module>
   </modules>
 
