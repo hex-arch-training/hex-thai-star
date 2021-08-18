@@ -23,6 +23,22 @@ jobs:
           path: booking/booking-domain/target/surefire-reports
       - store_test_results:
           path: booking/booking-application/target/surefire-reports
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  deploy-aws-lambda:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploying to AWS using Serverless CLI
+          command: |
+            cd ./configuration/awslambda
+            npx serverless deploy --region eu-central-1
 
 workflows:
   # Below is the definition of your workflow.
@@ -32,3 +48,6 @@ workflows:
   ci:
     jobs:
       - build-and-test
+      - deploy-aws-lambda:
+          requires:
+            - build-and-test

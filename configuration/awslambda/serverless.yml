@@ -1,0 +1,24 @@
+service: booking
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: java11
+  lambdaHashingVersion: 20201221
+
+package:
+  artifact: target/awslambda-1.0.0-SNAPSHOT.jar
+
+functions:
+  showTables:
+    handler: io.github.hexarchtraining.hts.awslambda.ShowTablesRequestHandler
+    events:
+      - httpApi:
+          path: /booking/tables
+          method: get
+  check:
+    handler: io.github.hexarchtraining.hts.awslambda.HealthCheckRequestHandler
+    events:
+      - httpApi:
+          path: /check/{token}
+          method: get
