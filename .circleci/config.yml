@@ -35,14 +35,15 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Go to AWS Lambda config directory
-          command: cd ./configuration/awslambda
-      - run:
           name: Install Serverless plugins
-          command: npm install
+          command: |
+            cd ./configuration/awslambda
+            npm install
       - run:
           name: Deploying to AWS using Serverless CLI
-          command: npx serverless deploy --region eu-central-1
+          command: |
+            cd ./configuration/awslambda
+            npx serverless deploy --region eu-central-1
 
 workflows:
   # Below is the definition of your workflow.
