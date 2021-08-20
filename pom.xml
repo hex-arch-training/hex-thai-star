@@ -32,6 +32,7 @@
     <module>booking/booking-adapter-in-springweb</module>
     <module>booking/booking-adapter-in-quarkusweb</module>
     <module>booking/booking-adapter-in-awslambda</module>
+    <module>booking/booking-adapter-out-dynamodb</module>
     <module>booking/booking-adapter-out-jpa</module>
     <module>booking/booking-adapter-out-jdbi</module>
 
