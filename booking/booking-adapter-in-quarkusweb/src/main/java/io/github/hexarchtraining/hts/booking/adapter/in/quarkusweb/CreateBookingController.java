@@ -14,26 +14,26 @@ import java.util.Optional;
 @Path("booking")
 public class CreateBookingController {
 
-  final CreateBookingUseCase createBookingUseCase;
+    final CreateBookingUseCase createBookingUseCase;
 
-  @POST
-  @Path("/booking")
-  public CreateBookingResult createBooking(CreateBookingResource createBookingResource) {
-    final CreateBookingCommand createBookingCommand = mapInputToCommand(createBookingResource);
-    return createBookingUseCase.createBooking(createBookingCommand);
-  }
+    @POST
+    @Path("/booking")
+    public CreateBookingResult createBooking(CreateBookingResource createBookingResource) {
+        final CreateBookingCommand createBookingCommand = mapInputToCommand(createBookingResource);
+        return createBookingUseCase.createBooking(createBookingCommand);
+    }
 
-  private CreateBookingCommand mapInputToCommand(CreateBookingResource createBookingResource) {
-    TableId suggestedTable = Optional.ofNullable(createBookingResource.getSuggestedTable())
-        .map(TableId::new)
-        .orElse(null);
+    private CreateBookingCommand mapInputToCommand(CreateBookingResource createBookingResource) {
+        TableId suggestedTable = Optional.ofNullable(createBookingResource.getSuggestedTable())
+            .map(TableId::new)
+            .orElse(null);
 
-    return new CreateBookingCommand(
-        createBookingResource.getBookingFrom(),
-        createBookingResource.getBookingTo(),
-        createBookingResource.getEmail(),
-        createBookingResource.getSeatsNumber(),
-        suggestedTable);
-  }
+        return new CreateBookingCommand(
+            createBookingResource.getBookingFrom(),
+            createBookingResource.getBookingTo(),
+            createBookingResource.getEmail(),
+            createBookingResource.getSeatsNumber(),
+            suggestedTable);
+    }
 }
 
