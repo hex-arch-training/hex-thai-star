@@ -44,11 +44,6 @@
             <artifactId>booking-domain</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>order-domain</artifactId>
-            <version>${revision}</version>
-        </dependency>
 
         <dependency>
             <groupId>io.quarkus</groupId>
@@ -72,6 +67,7 @@
                         <goals>
                             <goal>build</goal>
                             <goal>generate-code</goal>
+                            <goal>generate-code-tests</goal>
                         </goals>
                     </execution>
                 </executions>
