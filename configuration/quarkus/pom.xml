@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>io.github.hex-arch-training</groupId>
-        <artifactId>spring-boot-parent</artifactId>
+        <artifactId>quarkus-parent</artifactId>
         <version>${revision}</version>
-        <relativePath>../maven/spring-boot-parent/pom.xml</relativePath>
+        <relativePath>../maven/quarkus-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>springboot</artifactId>
+    <artifactId>quarkus</artifactId>
     <version>${revision}</version>
-    <name>springboot</name>
-    <description>Demo project for Spring Boot</description>
+    <name>quarkus</name>
+    <description>Demo project for Quarkus</description>
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -31,17 +31,7 @@
         </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>booking-adapter-out-jdbi</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>common-adapter-out-jdbi</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>booking-adapter-in-springweb</artifactId>
+            <artifactId>booking-adapter-in-quarkusweb</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -54,37 +44,34 @@
             <artifactId>booking-domain</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jdbi</groupId>
-            <artifactId>jdbi3-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.jdbi</groupId>
-            <artifactId>jdbi3-sqlobject</artifactId>
-        </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-spring-data-jpa</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jdbc-h2</artifactId>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-maven-plugin</artifactId>
+                <version>2.1.1.Final</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                            <goal>generate-code</goal>
+                            <goal>generate-code-tests</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -12,18 +12,18 @@ import javax.ws.rs.PathParam;
 @Path("booking")
 public class ConfirmBookingController {
 
-  final ConfirmBookingUseCase createBookingUseCase;
+    final ConfirmBookingUseCase createBookingUseCase;
 
-  @POST
-  @Path("/booking/confirm/{token}")
-  public void confirmBooking(@PathParam("token") String token) {
-    final ConfirmBookingCommand createBookingCommand = mapInputToCommand(token);
-    createBookingUseCase.confirm(createBookingCommand);
-  }
+    @POST
+    @Path("/booking/confirm/{token}")
+    public void confirmBooking(@PathParam("token") String token) {
+        final ConfirmBookingCommand createBookingCommand = mapInputToCommand(token);
+        createBookingUseCase.confirm(createBookingCommand);
+    }
 
-  private ConfirmBookingCommand mapInputToCommand(String token) {
+    private ConfirmBookingCommand mapInputToCommand(String token) {
 
-    return new ConfirmBookingCommand(token);
-  }
+        return new ConfirmBookingCommand(token);
+    }
 }
 

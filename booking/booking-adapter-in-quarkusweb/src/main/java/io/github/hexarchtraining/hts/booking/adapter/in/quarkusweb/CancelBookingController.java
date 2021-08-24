@@ -13,17 +13,17 @@ import javax.ws.rs.PathParam;
 @Path("booking")
 public class CancelBookingController {
 
-  final CancelBookingUseCase cancelBookingUseCase;
+    final CancelBookingUseCase cancelBookingUseCase;
 
-  @POST
-  @Path("/booking/cancel/{token}")
-  public void cancelBooking(@PathParam("token") String token) {
-    final CancelBookingCommand cancelBookingCommand = mapInputToCommand(token);
-    cancelBookingUseCase.cancel(cancelBookingCommand);
-  }
+    @POST
+    @Path("/booking/cancel/{token}")
+    public void cancelBooking(@PathParam("token") String token) {
+        final CancelBookingCommand cancelBookingCommand = mapInputToCommand(token);
+        cancelBookingUseCase.cancel(cancelBookingCommand);
+    }
 
-  private CancelBookingCommand mapInputToCommand(String token) {
-    return new CancelBookingCommand(token);
-  }
+    private CancelBookingCommand mapInputToCommand(String token) {
+        return new CancelBookingCommand(token);
+    }
 }
 
