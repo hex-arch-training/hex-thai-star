@@ -1,13 +1,10 @@
 package io.github.hexarchtraining.hts.booking.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
+@ToString
 public class Table {
     @Getter @NonNull private final TableId id;
 

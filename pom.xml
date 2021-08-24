@@ -31,6 +31,8 @@
     <module>booking/booking-application</module>
     <module>booking/booking-adapter-in-springweb</module>
     <module>booking/booking-adapter-in-quarkusweb</module>
+    <module>booking/booking-adapter-in-awslambda</module>
+    <module>booking/booking-adapter-out-dynamodb</module>
     <module>booking/booking-adapter-out-jpa</module>
     <module>booking/booking-adapter-out-jdbi</module>
 
@@ -40,6 +42,7 @@
     <module>configuration/maven/quarkus-parent</module>
     <module>configuration/springboot</module>
     <module>configuration/quarkus</module>
+    <module>configuration/awslambda</module>
   </modules>
 
   <dependencies>

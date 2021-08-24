@@ -28,3 +28,10 @@ hs_err_pid*
 
 # Maven
 **/target
+
+# serverless
+.serverless
+.dynamodb
+
+# node
+node_modules
