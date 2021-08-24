@@ -13,12 +13,12 @@ import java.util.List;
 @Path("booking")
 public class ShowBookingsController {
 
-  private final ShowBookingsUseCase showBookingsUseCase;
+    private final ShowBookingsUseCase showBookingsUseCase;
 
-  @GET
-  @Path("/bookings")
-  public List<ShowBookingsResult> showBookings() {
-    // in the future, ShowBookingsQuery may contain something interesting
-    return showBookingsUseCase.showBookings(new ShowBookingsQuery());
-  }
+    @GET
+    @Path("/bookings")
+    public List<ShowBookingsResult> showBookings() {
+        // in the future, ShowBookingsQuery may contain something interesting
+        return showBookingsUseCase.showBookings(new ShowBookingsQuery());
+    }
 }

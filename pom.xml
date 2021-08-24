@@ -42,6 +42,7 @@
     <module>configuration/maven/quarkus-parent</module>
     <module>configuration/springboot</module>
     <module>configuration/awslambda</module>
+    <module>configuration/quarkus</module>
   </modules>
 
   <dependencies>
