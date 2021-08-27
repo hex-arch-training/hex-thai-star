@@ -29,9 +29,9 @@ public class CreateBookingController {
             final CreateBookingRequestBody requestBody = request.parseBody(CreateBookingRequestBody.class)
                     .orElseThrow(() -> new InvalidRequestException("Empty request body"));
             requestBody.validate();
+            final TableId suggestedTableId = requestBody.getSuggestedTable() != null ? new TableId(requestBody.getSuggestedTable()) : null;
             return new CreateBookingCommand(requestBody.getBookingFrom(),
-                    requestBody.getBookingTo(), requestBody.getEmail(), requestBody.getSeatsNumber(),
-                    new TableId(requestBody.getSuggestedTable()));
+                    requestBody.getBookingTo(), requestBody.getEmail(), requestBody.getSeatsNumber(), suggestedTableId);
         } catch (IOException exception) {
             throw new InvalidRequestException("Request body could not be parsed", exception);
         }

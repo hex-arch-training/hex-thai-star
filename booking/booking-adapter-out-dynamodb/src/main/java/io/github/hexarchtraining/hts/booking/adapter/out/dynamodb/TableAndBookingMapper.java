@@ -10,23 +10,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class TableAndBookingMapper {
-    private static final String TABLE_ID_PREFIX = "T#";
-    private static final String BOOKING_TOKEN_PREFIX = "B#";
+    public static final String TABLE_ID_PREFIX = "T#";
+    public static final String BOOKING_TOKEN_PREFIX = "B#";
 
-    private static final String PK_ATTR_NAME = "PK";
-    private static final String SK_ATTR_NAME = "SK";
+    public static final String PK_ATTR_NAME = "PK";
+    public static final String SK_ATTR_NAME = "SK";
 
-    private static final String BOOKING_ID_ATTR_NAME = "id";
-    private static final String BOOKING_CREATION_DATE_ATTR_NAME = "creationDate";
-    private static final String BOOKING_FROM_TIME_ATTR_NAME = "bookingFromTime";
-    private static final String BOOKING_TO_TIME_ATTR_NAME = "bookingToTime";
-    private static final String BOOKING_DATE_ATTR_NAME = "bookingDate";
-    private static final String BOOKING_EXPIRATION_DATE_ATTR_NAME = "expirationDate";
-    private static final String BOOKING_EMAIL_ATTR_NAME = "email";
-    private static final String BOOKING_SEATS_NUMBER_ATTR_NAME = "seatsNumber";
-    private static final String BOOKING_STATUS_ATTR_NAME = "status";
+    public static final String BOOKING_ID_ATTR_NAME = "id";
+    public static final String BOOKING_CREATION_DATE_ATTR_NAME = "creationDate";
+    public static final String BOOKING_FROM_TIME_ATTR_NAME = "bookingFromTime";
+    public static final String BOOKING_TO_TIME_ATTR_NAME = "bookingToTime";
+    public static final String BOOKING_DATE_ATTR_NAME = "bookingDate";
+    public static final String BOOKING_EXPIRATION_DATE_ATTR_NAME = "expirationDate";
+    public static final String BOOKING_EMAIL_ATTR_NAME = "email";
+    public static final String BOOKING_SEATS_NUMBER_ATTR_NAME = "seatsNumber";
+    public static final String BOOKING_STATUS_ATTR_NAME = "status";
 
-    private static final String TABLE_MAX_SEATS_ATTR_NAME = "maxSeats";
+    public static final String TABLE_MAX_SEATS_ATTR_NAME = "maxSeats";
 
     @Getter
     private final List<Table> tables = new ArrayList<>();
@@ -85,7 +85,7 @@ public class TableAndBookingMapper {
                 }
                 tables.add(createTable(tableOrBookingAttrs.get(0)));
             } else if (primaryKey.startsWith(BOOKING_TOKEN_PREFIX)) {
-                createBookingAlongWithTableBookings(tableOrBookingAttrs);
+                bookings.add(createBookingAlongWithTableBookings(tableOrBookingAttrs));
             } else {
                 throw new IllegalStateException("Unknown PK prefix :".concat(primaryKey));
             }
@@ -94,7 +94,7 @@ public class TableAndBookingMapper {
         return this;
     }
 
-    private void createBookingAlongWithTableBookings(@NonNull List<Map<String, AttributeValue>> attrsOfBookings) {
+    private Booking createBookingAlongWithTableBookings(@NonNull List<Map<String, AttributeValue>> attrsOfBookings) {
         final Map<Boolean, List<Map<String, AttributeValue>>> bookingAndTableBookings = attrsOfBookings.stream()
                 .collect(Collectors.partitioningBy(attrsOfBookingOrTableBookings -> {
                     final String primaryKey = attrsOfBookingOrTableBookings.get(PK_ATTR_NAME).s();
@@ -116,6 +116,7 @@ public class TableAndBookingMapper {
                     .build();
             booking.addTableBooking(tableBooking);
         });
+        return booking;
     }
 
     private Booking createBooking(@NonNull Map<String, AttributeValue> bookingAttrs) {
