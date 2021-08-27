@@ -79,17 +79,27 @@ public class Booking {
             throw new BookingValidationException(String.format("The booking date %s is too late to do the booking for given time.", bookingDate));
         }
 
+        return createNewBooking(id, now, bookingFromTime, bookingToTime, bookingDate, bookingDate.minus(expiry), email, seatsNumber, BookingStatus.NEW,
+                buildToken(email, "CB_"));
+    }
+
+    /**
+     * For adapters.
+     */
+    public static Booking createNewBooking(BookingId id, @NonNull Instant creationDate, @NonNull Instant bookingFromTime,
+                                           @NonNull Instant bookingToTime, @NonNull Instant bookingDate, @NonNull Instant expirationDate,
+                                           @NonNull String email, int seatsNumber, @NonNull BookingStatus status, @NonNull String token) {
         return new Booking(
                 id,
-                now,
+                creationDate,
                 bookingFromTime,
                 bookingToTime,
                 bookingDate,
-                bookingDate.minus(expiry),
+                expirationDate,
                 email,
                 seatsNumber,
-                BookingStatus.NEW,
-                buildToken(email, "CB_"),
+                status,
+                token,
                 new HashSet<>());
     }
 

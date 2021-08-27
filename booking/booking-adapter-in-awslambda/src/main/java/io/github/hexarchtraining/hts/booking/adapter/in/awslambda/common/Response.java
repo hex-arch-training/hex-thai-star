@@ -2,6 +2,8 @@ package io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.ToString;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -50,7 +52,7 @@ public class Response {
 
 		private static final Logger LOG = LogManager.getLogger(Builder.class);
 
-		private static final ObjectMapper objectMapper = new ObjectMapper();
+		private final ObjectMapper objectMapper;
 
 		private int statusCode = 200;
 		private Map<String, String> headers = Collections.emptyMap();
@@ -58,6 +60,12 @@ public class Response {
 		private Object objectBody;
 		private byte[] binaryBody;
 		private boolean base64Encoded;
+
+		public Builder() {
+			objectMapper = new ObjectMapper();
+			objectMapper.registerModule(new JavaTimeModule());
+			objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+		}
 
 		public Builder setStatusCode(int statusCode) {
 			this.statusCode = statusCode;

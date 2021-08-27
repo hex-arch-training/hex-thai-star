@@ -16,7 +16,7 @@ public class FindTablesDynamoDbAdapter extends AbstractDynamoDbAdapter implement
     public List<Table> findTables() {
         DynamoDbClient ddb = getClient();
         ScanResponse response = ddb.scan(ScanRequest.builder().tableName(getDynamoDbTableName()).build());
-        return new TableAndBookingMapper().from(response.items()).getTables();
+        return new TableAndBookingMapper().parse(response.items()).getTables();
     }
 
     public static void main(String[] args) {

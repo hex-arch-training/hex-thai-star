@@ -21,6 +21,7 @@ custom:
 provider:
   name: aws
   runtime: java11
+  timeout: 10
   stage: dev
   lambdaHashingVersion: 20201221
 
@@ -53,6 +54,18 @@ functions:
       - httpApi:
           path: /booking/tables
           method: get
+  showBookings:
+    handler: io.github.hexarchtraining.hts.awslambda.ShowBookingsRequestHandler
+    events:
+      - httpApi:
+          path: /booking/bookings
+          method: get
+  createBooking:
+    handler: io.github.hexarchtraining.hts.awslambda.CreateBookingRequestHandler
+    events:
+      - httpApi:
+          path: /booking/bookings
+          method: post
   check:
     handler: io.github.hexarchtraining.hts.awslambda.HealthCheckRequestHandler
     events:
