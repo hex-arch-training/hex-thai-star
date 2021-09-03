@@ -6,7 +6,6 @@ import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRep
 import io.github.hexarchtraining.hts.booking.domain.Table;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import lombok.AllArgsConstructor;
-import org.springframework.data.util.Streamable;
 
 import java.time.Instant;
 import java.util.List;
@@ -25,9 +24,10 @@ public class FindFreeTablesJpaAdapter implements FindFreeTablesPort {
     @Override
     public List<Table> find(Instant from, Instant to) {
         final Set<Long> bookedTableIds = tableBookingRepository.findBookingsIntersect(from, to).stream().map(entity -> entity.getTable().getId()).collect(Collectors.toSet());
-        return Streamable.of(tableRepository.findAll())
-                .filter(entity -> !bookedTableIds.contains(entity.getId()))
-                .map(tableMapper::toDomain)
-                .toList();
+        return tableRepository.findAll()
+            .stream()
+            .filter(entity -> !bookedTableIds.contains(entity.getId()))
+            .map(tableMapper::toDomain)
+            .collect(Collectors.toList());
     }
 }

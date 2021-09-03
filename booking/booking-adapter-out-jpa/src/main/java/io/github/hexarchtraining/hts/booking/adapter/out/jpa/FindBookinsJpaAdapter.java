@@ -5,9 +5,9 @@ import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingR
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import lombok.AllArgsConstructor;
-import org.springframework.data.util.Streamable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 public class FindBookinsJpaAdapter implements FindBookingsPort {
@@ -18,8 +18,9 @@ public class FindBookinsJpaAdapter implements FindBookingsPort {
 
     @Override
     public List<Booking> findBookings() {
-        return Streamable.of(bookingRepository.findBookingsWithTables())
-                .map(bookingMapper::toDomain)
-                .toList();
+        return bookingRepository.findBookingsWithTables()
+            .stream()
+            .map(bookingMapper::toDomain)
+            .collect(Collectors.toList());
     }
 }
