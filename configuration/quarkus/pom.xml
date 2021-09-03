@@ -12,17 +12,6 @@
     <version>${revision}</version>
     <name>quarkus</name>
     <description>Demo project for Quarkus</description>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jdbi</groupId>
-                <artifactId>jdbi3-bom</artifactId>
-                <type>pom</type>
-                <version>${jdbi.version}</version>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
