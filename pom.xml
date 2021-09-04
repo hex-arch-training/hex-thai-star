@@ -45,6 +45,7 @@
         <module>booking/booking-adapter-out-awsmail</module>
 
         <module>order/order-domain</module>
+    <module>order/order-application</module>
 
         <module>configuration/maven/spring-boot-parent</module>
         <module>configuration/maven/quarkus-parent</module>
