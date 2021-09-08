@@ -10,6 +10,7 @@ import software.amazon.awssdk.services.dynamodb.model.Put;
 import software.amazon.awssdk.services.dynamodb.model.TransactWriteItem;
 import software.amazon.awssdk.services.dynamodb.model.TransactWriteItemsRequest;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,11 +20,6 @@ import static com.aventrix.jnanoid.jnanoid.NanoIdUtils.DEFAULT_NUMBER_GENERATOR;
 public class SaveBookingDynamoDbAdapter extends AbstractDynamoDbAdapter implements SaveBookingPort, PersistBookingPort {
     private static final char[] ID_ALPHABET = "123456789".toCharArray();
     private static final int ID_LENGTH = 10;
-
-    private static long nextId() {
-        final String nextIdAsString = NanoIdUtils.randomNanoId(DEFAULT_NUMBER_GENERATOR, ID_ALPHABET, ID_LENGTH);
-        return Long.parseLong(nextIdAsString);
-    }
 
     @Override
     public Booking persist(Booking booking) {
@@ -63,5 +59,10 @@ public class SaveBookingDynamoDbAdapter extends AbstractDynamoDbAdapter implemen
         getClient().transactWriteItems(TransactWriteItemsRequest.builder()
                 .transactItems(transactWriteItems)
                 .build());
+    }
+
+    private long nextId() {
+        final String nextIdAsString = NanoIdUtils.randomNanoId(new SecureRandom(), ID_ALPHABET, ID_LENGTH);
+        return Long.parseLong(nextIdAsString);
     }
 }
