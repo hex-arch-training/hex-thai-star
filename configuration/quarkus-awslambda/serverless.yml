@@ -1,0 +1,61 @@
+service: booking-native
+frameworkVersion: '2'
+
+custom:
+  tableAndBookingDynamoDbTableName: 'table-and-booking-native-${self:provider.stage}'
+
+provider:
+  name: aws
+  runtime: provided
+  stage: dev
+  lambdaHashingVersion: 20201221
+
+  environment:
+    AWS_TABLE_AND_BOOKING_TABLE: ${self:custom.tableAndBookingDynamoDbTableName}
+
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+          Resource:
+            - { "Fn::GetAtt": [ "tableAndBookingTable", "Arn" ] }
+            - Fn::Join:
+                - '/'
+                - - { "Fn::GetAtt": [ "tableAndBookingTable", "Arn" ] }
+                  - 'index/*'
+
+package:
+  artifact: target/function.zip
+
+functions:
+  slsQuarkusJaxrsDemo:
+    handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
+    events:
+      - httpApi:
+          path: '*'
+          method: '*'
+
+resources:
+  Resources:
+    tableAndBookingTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.tableAndBookingDynamoDbTableName}
+        AttributeDefinitions:
+          - AttributeName: PK
+            AttributeType: S
+          - AttributeName: SK
+            AttributeType: S
+        KeySchema:
+          - AttributeName: PK
+            KeyType: HASH
+          - AttributeName: SK
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
