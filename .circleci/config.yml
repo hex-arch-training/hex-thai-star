@@ -54,9 +54,9 @@ jobs:
           command: ./mvnw clean package -Pnative -DskipTests -pl :quarkus-awslambda -am
           no_output_timeout: 30m
       - persist_to_workspace:
-          root: .
+          root: /tmp/native-build
           paths:
-            - .
+            - configuration/quarkus-awslambda
 
   deploy-aws-lambda:
     docker:
@@ -84,7 +84,7 @@ jobs:
       - run:
           name: Deploying to AWS using Serverless CLI
           command: |
-            cd ./configuration/quarkus-awslambda
+            cd /tmp/native-build/configuration/quarkus-awslambda
             npx serverless deploy --region eu-central-1
 
 workflows:
