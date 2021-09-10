@@ -35,6 +35,7 @@ jobs:
     environment:
       MAVEN_OPTS: -Xmx6400m
       GRAALVM_HOME: /home/circleci/repo/.graalvm
+      JAVA_HOME: /home/circleci/repo/.graalvm
     steps:
       - checkout
       # Install GraalVM and native-image, needed for a native Quarkus build
