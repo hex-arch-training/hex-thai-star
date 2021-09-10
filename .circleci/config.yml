@@ -47,8 +47,8 @@ jobs:
           name: Install native-image
           command: $GRAALVM_HOME/bin/gu install native-image
       - run:
-          name: Maven Version Check
-          command: java --version
+          name: Java Version Check
+          command: java -version
       - run:
           name: Build (Native)
           command: ./mvnw clean package -Pnative -DskipTests -pl :quarkus-awslambda -am
