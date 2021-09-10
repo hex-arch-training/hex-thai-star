@@ -47,14 +47,14 @@ jobs:
           command: $GRAALVM_HOME/bin/gu install native-image
       - run:
           name: Maven Version Check
-          command: mvn --version
+          command: ./mvnw --version
       - run:
           name: Build (Native)
-          command: mvn clean package -Pnative -DskipTests -Dmaven.test.skip=true
+          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
           no_output_timeout: 30m
       - run:
           name: Verify (Native)
-          command: mvn verify -Pnative
+          command: ./mvnw verify -Pnative
           no_output_timeout: 30m
 
   deploy-aws-lambda:
