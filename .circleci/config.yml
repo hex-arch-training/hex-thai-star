@@ -50,7 +50,7 @@ jobs:
           command: ./mvnw --version
       - run:
           name: Build (Native)
-          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
+          command: ./mvnw clean package -Pnative -DskipTests -pl :quarkus-awslambda -am
           no_output_timeout: 30m
       - run:
           name: Verify (Native)
