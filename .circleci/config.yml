@@ -28,6 +28,19 @@ jobs:
           paths:
             - .
 
+  build-native-exec:
+    docker:
+      - image: cimg/openjdk:11.0
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - setup_remote_docker:
+          version: 20.10.7
+      - run:
+          name: Build native executable for Quarkus app
+          command: ./mvnw package -Dnative -Dquarkus.native.container-build=true -pl :quarkus-awslambda -am
+
   deploy-aws-lambda:
     docker:
       - image: circleci/node:lts
@@ -54,5 +67,8 @@ workflows:
     jobs:
       - build-and-test
       - deploy-aws-lambda:
+          requires:
+            - build-and-test
+      - build-native-exec:
           requires:
             - build-and-test
