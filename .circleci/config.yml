@@ -29,15 +29,30 @@ jobs:
             - .
 
   build-native-exec:
-    docker:
-      - image: cimg/openjdk:11.0
+    machine: true
+    resource_class: medium
+    working_directory: ~/repo
+    environment:
+      MAVEN_OPTS: -Xmx6400m
+      GRAALVM_HOME: /home/circleci/repo/.graalvm
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.7
+      # Install GraalVM and native-image, needed for a native Quarkus build
+      # ########################
       - run:
-          name: Build native executable for Quarkus app
-          command: ./mvnw clean package -Dnative -Dquarkus.native.container-build=true
+          name: Install GraalVM
+          command: curl https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-21.2.0/graalvm-ce-java11-linux-amd64-21.2.0.tar.gz -O -J -L && tar xfz graalvm-ce-java11-linux-amd64-21.2.0.tar.gz && mv graalvm-ce-21.2.0 .graalvm && rm graalvm-ce-java11-linux-amd64-21.2.0.tar.gz
+      - run:
+          name: Install native-image
+          command: $GRAALVM_HOME/bin/gu install native-image
+      - run:
+          name: Build (Native)
+          command: ./mvnw clean package -Pnative -DskipTests -Dmaven.test.skip=true
+          no_output_timeout: 30m
+      - run:
+          name: Verify (Native)
+          command: ./mvnw verify -Pnative
+          no_output_timeout: 30m
 
   deploy-aws-lambda:
     docker:
