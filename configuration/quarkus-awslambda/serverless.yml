@@ -2,7 +2,7 @@ service: booking-native
 frameworkVersion: '2'
 
 custom:
-  tableAndBookingDynamoDbTableName: 'table-and-booking-quarkus-${self:provider.stage}'
+  tableAndBookingDynamoDbTableName: 'table-and-booking-qn-${self:provider.stage}'
 
 provider:
   name: aws
