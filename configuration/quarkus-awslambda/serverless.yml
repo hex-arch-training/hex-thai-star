@@ -2,7 +2,7 @@ service: booking-native
 frameworkVersion: '2'
 
 custom:
-  tableAndBookingDynamoDbTableName: 'table-and-booking-native-${self:provider.stage}'
+  tableAndBookingDynamoDbTableName: 'table-and-booking-quarkus-${self:provider.stage}'
 
 provider:
   name: aws
@@ -33,7 +33,7 @@ package:
   artifact: target/function.zip
 
 functions:
-  slsQuarkusJaxrsDemo:
+  bookingRequestHandler:
     handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
     events:
       - httpApi:
