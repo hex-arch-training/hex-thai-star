@@ -84,7 +84,7 @@ jobs:
       - run:
           name: Deploying to AWS using Serverless CLI
           command: |
-            cd /tmp/native-build/configuration/quarkus-awslambda
+            cd ./configuration/quarkus-awslambda
             npx serverless deploy --region eu-central-1
 
 workflows:
