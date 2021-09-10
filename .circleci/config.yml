@@ -53,10 +53,10 @@ jobs:
           name: Build (Native)
           command: ./mvnw clean package -Pnative -DskipTests -pl :quarkus-awslambda -am
           no_output_timeout: 30m
-      - run:
-          name: Verify (Native)
-          command: ./mvnw verify -Pnative
-          no_output_timeout: 30m
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
 
   deploy-aws-lambda:
     docker:
@@ -75,6 +75,18 @@ jobs:
             cd ./configuration/awslambda
             npx serverless deploy --region eu-central-1
 
+  deploy-quarkus-aws-lambda:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Deploying to AWS using Serverless CLI
+          command: |
+            cd ./configuration/quarkus-awslambda
+            npx serverless deploy --region eu-central-1
+
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
@@ -89,3 +101,6 @@ workflows:
       - build-native-exec:
           requires:
             - build-and-test
+      - deploy-quarkus-aws-lambda:
+          requires:
+            - build-native-exec
