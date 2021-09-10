@@ -54,9 +54,9 @@ jobs:
           command: ./mvnw clean package -Pnative -DskipTests -pl :quarkus-awslambda -am
           no_output_timeout: 30m
       - persist_to_workspace:
-          root: /tmp/native-build
+          root: .
           paths:
-            - configuration/quarkus-awslambda
+            - .
 
   deploy-aws-lambda:
     docker:
