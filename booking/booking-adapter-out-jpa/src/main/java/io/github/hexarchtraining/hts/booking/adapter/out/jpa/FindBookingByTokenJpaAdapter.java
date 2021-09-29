@@ -13,7 +13,7 @@ import lombok.AllArgsConstructor;
 import java.util.Optional;
 
 @AllArgsConstructor
-public class FindBookingByTokenJpaAdapter implements FindBookingByTokenPort, FindBookingByTokenUseCase {
+public class FindBookingByTokenJpaAdapter implements FindBookingByTokenPort {
 
     private final BookingRepository bookingRepository;
 
@@ -22,11 +22,5 @@ public class FindBookingByTokenJpaAdapter implements FindBookingByTokenPort, Fin
     @Override
     public Optional<Booking> find(String token) {
         return bookingRepository.findBookingEntityByToken(token).map(mapper::toDomain);
-    }
-
-    @Override
-    public BookingByTokenResult findBookingByToken(FindBookingByTokenCommand findBookingByTokenCommand) {
-        Optional<Booking> booking = bookingRepository.findBookingEntityByToken(findBookingByTokenCommand.getToken()).map(mapper::toDomain);
-        return new BookingByTokenResult(booking.orElseThrow(IllegalStateException::new).getId().getValue());
     }
 }

@@ -19,6 +19,7 @@ import io.github.hexarchtraining.hts.booking.service.CreateBookingService;
 import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
 import io.github.hexarchtraining.hts.booking.service.ShowBookingsService;
 import io.github.hexarchtraining.hts.booking.service.ShowTablesService;
+import io.github.hexarchtraining.hts.booking.service.bci.FindBookingByTokenService;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import io.github.hexarchtraining.hts.order.port.out.FindBookingForOrderByTokenAdapter;
 import lombok.AllArgsConstructor;
@@ -73,5 +74,11 @@ public class BookingAdapterInConfiguration {
     @Bean
     public ShowBookingsUseCase showBookingsUseCase() {
         return new ShowBookingsService(findBookingsPort);
+    }
+
+    //bci - could be moved to separate configuration class
+    @Bean
+    public FindBookingByTokenUseCase findBookingByTokenUseCase() {
+        return new FindBookingByTokenService(findBookingByTokenPort);
     }
 }

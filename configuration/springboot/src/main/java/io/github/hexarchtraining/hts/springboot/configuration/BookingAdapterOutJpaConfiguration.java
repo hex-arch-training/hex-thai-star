@@ -64,9 +64,4 @@ public class BookingAdapterOutJpaConfiguration {
     public FindBookingsPort findBookingsPort() {
         return new FindBookingsJpaAdapter(bookingRepository);
     }
-
-    @Bean
-    public FindBookingByTokenUseCase findBookingByTokenUseCase() {
-        return new FindBookingByTokenJpaAdapter(bookingRepository);
-    }
 }
