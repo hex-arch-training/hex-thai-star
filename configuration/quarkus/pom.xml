@@ -11,7 +11,7 @@
     <artifactId>quarkus</artifactId>
     <version>${revision}</version>
     <name>quarkus</name>
-    <description>Demo project for Quarkus</description>
+    <description>Demo project for Quarkus (java/native)</description>
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
@@ -49,8 +49,7 @@
             <plugin>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-maven-plugin</artifactId>
-                <version>2.1.1.Final</version>
-                <extensions>true</extensions>
+                <version>${quarkus-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -61,6 +60,35 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <systemPropertyVariables>
+                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>java</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <!-- nothing special -->
+        </profile>
+        <profile>
+            <id>native</id>
+            <properties>
+                <quarkus.package.type>native</quarkus.package.type>
+            </properties>
+        </profile>
+    </profiles>
 </project>

@@ -14,12 +14,17 @@
 
     <description>Parent pom for quarkus projects</description>
 
+    <properties>
+        <quarkus-maven-plugin.version>2.2.1.Final</quarkus-maven-plugin.version>
+        <quarkus-bom.version>2.2.1.Final</quarkus-bom.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>io.quarkus</groupId>
                 <artifactId>quarkus-bom</artifactId>
-                <version>2.1.1.Final</version>
+                <version>${quarkus-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
