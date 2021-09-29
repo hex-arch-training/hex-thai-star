@@ -1,9 +1,8 @@
 package io.github.hexarchtraining.hts.order.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
-@AllArgsConstructor
+@Value
 public class OrderId {
-    @Getter private final long value;
+    long value;
 }

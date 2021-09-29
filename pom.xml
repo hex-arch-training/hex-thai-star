@@ -46,6 +46,9 @@
 
         <module>order/order-domain</module>
     <module>order/order-application</module>
+    <module>order/order-adapter-out-booking</module>
+    <module>order/order-adapter-out-jpa</module>
+    <module>order/order-adapter-in-springweb</module>
 
         <module>configuration/maven/spring-boot-parent</module>
         <module>configuration/maven/quarkus-parent</module>
