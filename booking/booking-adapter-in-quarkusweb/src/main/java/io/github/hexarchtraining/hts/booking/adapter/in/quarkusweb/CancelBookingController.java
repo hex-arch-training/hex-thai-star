@@ -1,7 +1,7 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.quarkusweb;
 
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.CancelBookingPort;
 import lombok.RequiredArgsConstructor;
 
 import javax.ws.rs.POST;
@@ -13,13 +13,13 @@ import javax.ws.rs.PathParam;
 @Path("booking")
 public class CancelBookingController {
 
-    final CancelBookingUseCase cancelBookingUseCase;
+    final CancelBookingPort cancelBookingPort;
 
     @POST
     @Path("/booking/cancel/{token}")
     public void cancelBooking(@PathParam("token") String token) {
         final CancelBookingCommand cancelBookingCommand = mapInputToCommand(token);
-        cancelBookingUseCase.cancel(cancelBookingCommand);
+        cancelBookingPort.cancel(cancelBookingCommand);
     }
 
     private CancelBookingCommand mapInputToCommand(String token) {
