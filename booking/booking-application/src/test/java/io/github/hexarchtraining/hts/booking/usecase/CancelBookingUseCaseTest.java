@@ -1,4 +1,4 @@
-package io.github.hexarchtraining.hts.booking.service;
+package io.github.hexarchtraining.hts.booking.usecase;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.BookingId;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 
-class CancelBookingServiceTest {
+class CancelBookingUseCaseTest {
 
     private static final String VALID_EMAIL = "john.doe@acme.inc";
 
@@ -42,7 +42,7 @@ class CancelBookingServiceTest {
 
     private TestTransactionAdapter testTransactionAdapter;
 
-    private CancelBookingService cancelBookingService;
+    private CancelBookingUseCase cancelBookingUseCase;
 
     private SaveBookingPort saveBookingPort;
 
@@ -52,7 +52,7 @@ class CancelBookingServiceTest {
         testTransactionAdapter = new TestTransactionAdapter();
         findBookingByTokenPort = mock(FindBookingByTokenPort.class);
         saveBookingPort = mock(SaveBookingPort.class);
-        cancelBookingService = new CancelBookingService(findBookingByTokenPort, saveBookingPort, testTransactionAdapter);
+        cancelBookingUseCase = new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, testTransactionAdapter);
     }
 
     @Test
@@ -61,7 +61,7 @@ class CancelBookingServiceTest {
         when(findBookingByTokenPort.find(token)).thenReturn(Optional.empty());
         final CancelBookingCommand command = new CancelBookingCommand(token);
         // then
-        assertThrows(BookingNotFoundException.class, () -> cancelBookingService.cancel(command));
+        assertThrows(BookingNotFoundException.class, () -> cancelBookingUseCase.cancel(command));
     }
 
     @Test
@@ -76,7 +76,7 @@ class CancelBookingServiceTest {
         when(findBookingByTokenPort.find(token)).thenReturn(Optional.of(booking));
         final CancelBookingCommand command = new CancelBookingCommand(token);
         // then
-        assertThrows(BookingValidationException.class, () -> cancelBookingService.cancel(command));
+        assertThrows(BookingValidationException.class, () -> cancelBookingUseCase.cancel(command));
     }
 
     @Test
@@ -98,7 +98,7 @@ class CancelBookingServiceTest {
         when(findBookingByTokenPort.find(token)).thenReturn(Optional.of(booking));
         final CancelBookingCommand command = new CancelBookingCommand(token);
         // when
-        cancelBookingService.cancel(command);
+        cancelBookingUseCase.cancel(command);
         // then
         assertEquals(BookingStatus.CANCELLED, booking.getStatus());
         assertTrue(testTransactionAdapter.hasBeenCalled());

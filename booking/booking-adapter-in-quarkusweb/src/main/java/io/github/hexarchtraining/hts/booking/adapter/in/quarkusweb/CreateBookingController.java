@@ -3,7 +3,7 @@ package io.github.hexarchtraining.hts.booking.adapter.in.quarkusweb;
 import io.github.hexarchtraining.hts.booking.domain.TableId;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingCommand;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingResult;
-import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingPort;
 import lombok.RequiredArgsConstructor;
 
 import javax.ws.rs.POST;
@@ -14,13 +14,13 @@ import java.util.Optional;
 @Path("booking")
 public class CreateBookingController {
 
-    final CreateBookingUseCase createBookingUseCase;
+    final CreateBookingPort createBookingPort;
 
     @POST
     @Path("/booking")
     public CreateBookingResult createBooking(CreateBookingResource createBookingResource) {
         final CreateBookingCommand createBookingCommand = mapInputToCommand(createBookingResource);
-        return createBookingUseCase.createBooking(createBookingCommand);
+        return createBookingPort.createBooking(createBookingCommand);
     }
 
     private CreateBookingCommand mapInputToCommand(CreateBookingResource createBookingResource) {

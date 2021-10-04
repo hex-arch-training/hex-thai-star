@@ -1,8 +1,12 @@
 package io.github.hexarchtraining.hts.quarkusawslambda.configuration;
 
-import io.github.hexarchtraining.hts.booking.port.in.*;
+import io.github.hexarchtraining.hts.booking.port.in.CancelBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsPort;
+import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.*;
-import io.github.hexarchtraining.hts.booking.service.*;
+import io.github.hexarchtraining.hts.booking.usecase.*;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionalMapper;
 import lombok.AllArgsConstructor;
@@ -34,28 +38,28 @@ public class BookingAdapterInConfiguration {
     private final FindBookingsPort findBookingsPort;
 
     @Produces
-    public CancelBookingUseCase cancelBookingUseCase() {
-        return new CancelBookingService(findBookingByTokenPort, saveBookingPort, dummyTransactionPort);
+    public CancelBookingPort cancelBookingUseCase() {
+        return new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, dummyTransactionPort);
     }
 
     @Produces
-    public ConfirmBookingUseCase confirmBookingUseCase() {
-        return new ConfirmBookingService(findBookingByTokenPort, saveBookingPort);
+    public ConfirmBookingPort confirmBookingUseCase() {
+        return new ConfirmBookingUseCase(findBookingByTokenPort, saveBookingPort);
     }
 
     @Produces
-    public CreateBookingUseCase createBookingUseCase() {
-        return new CreateBookingService(persistBookingPort, saveBookingPort, findFreeTablesPort, event -> {
+    public CreateBookingPort createBookingUseCase() {
+        return new CreateBookingUseCase(persistBookingPort, saveBookingPort, findFreeTablesPort, event -> {
         }, dummyTransactionPort);
     }
 
     @Produces
-    public ShowTablesUseCase showTablesUseCase() {
-        return new ShowTablesService(findTablesPort);
+    public ShowTablesPort showTablesUseCase() {
+        return new ShowTablesUseCase(findTablesPort);
     }
 
     @Produces
-    public ShowBookingsUseCase showBookingsUseCase() {
-        return new ShowBookingsService(findBookingsPort);
+    public ShowBookingsPort showBookingsUseCase() {
+        return new ShowBookingsUseCase(findBookingsPort);
     }
 }

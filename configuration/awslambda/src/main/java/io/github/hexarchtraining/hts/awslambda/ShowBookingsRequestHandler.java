@@ -4,10 +4,10 @@ import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.ShowBookingsCo
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Request;
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Response;
 import io.github.hexarchtraining.hts.booking.adapter.out.dynamodb.FindBookingsDynamoDbAdapter;
-import io.github.hexarchtraining.hts.booking.service.ShowBookingsService;
+import io.github.hexarchtraining.hts.booking.usecase.ShowBookingsUseCase;
 
 public class ShowBookingsRequestHandler extends AbstractRequestHandler {
-    final ShowBookingsController controller = new ShowBookingsController(new ShowBookingsService(new FindBookingsDynamoDbAdapter()));
+    final ShowBookingsController controller = new ShowBookingsController(new ShowBookingsUseCase(new FindBookingsDynamoDbAdapter()));
 
     @Override
     protected Response handleRequest(Request request) {

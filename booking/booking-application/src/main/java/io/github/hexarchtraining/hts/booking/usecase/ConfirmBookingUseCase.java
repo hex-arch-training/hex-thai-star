@@ -1,16 +1,16 @@
-package io.github.hexarchtraining.hts.booking.service;
+package io.github.hexarchtraining.hts.booking.usecase;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
 import io.github.hexarchtraining.hts.booking.domain.exception.IncompleteBookingException;
 import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ConfirmBookingService implements ConfirmBookingUseCase {
+public class ConfirmBookingUseCase implements ConfirmBookingPort {
 
     private final FindBookingByTokenPort findBookingByTokenPort;
 

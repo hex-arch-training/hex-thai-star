@@ -8,17 +8,14 @@ import io.github.hexarchtraining.hts.booking.port.in.*;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 
 @RequiredArgsConstructor
 public class CreateBookingController {
-    private final CreateBookingUseCase createBookingUseCase;
+    private final CreateBookingPort createBookingPort;
 
     public Response createBooking(Request request) {
         final CreateBookingCommand command = mapToCreateBookingCommand(request);
-        final CreateBookingResult result = createBookingUseCase.createBooking(command);
+        final CreateBookingResult result = createBookingPort.createBooking(command);
         return Response.builder()
                 .setObjectBody(result)
                 .build();

@@ -1,10 +1,10 @@
-package io.github.hexarchtraining.hts.booking.service;
+package io.github.hexarchtraining.hts.booking.usecase;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.CancelBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 @AllArgsConstructor
-public class CancelBookingService implements CancelBookingUseCase {
+public class CancelBookingUseCase implements CancelBookingPort {
 
     private final FindBookingByTokenPort findBookingByTokenPort;
 

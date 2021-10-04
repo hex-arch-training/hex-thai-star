@@ -1,11 +1,10 @@
-package io.github.hexarchtraining.hts.booking.service;
+package io.github.hexarchtraining.hts.booking.usecase;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.Table;
-import io.github.hexarchtraining.hts.booking.domain.TableBooking;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingCommand;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingResult;
-import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.BookingConfimationEvent;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class CreateBookingService implements CreateBookingUseCase {
+public class CreateBookingUseCase implements CreateBookingPort {
 
     private final PersistBookingPort persistBookingPort;
 

@@ -4,10 +4,10 @@ import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.ShowTablesCont
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Request;
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Response;
 import io.github.hexarchtraining.hts.booking.adapter.out.dynamodb.FindTablesDynamoDbAdapter;
-import io.github.hexarchtraining.hts.booking.service.ShowTablesService;
+import io.github.hexarchtraining.hts.booking.usecase.ShowTablesUseCase;
 
 public class ShowTablesRequestHandler extends AbstractRequestHandler {
-    final ShowTablesController controller = new ShowTablesController(new ShowTablesService(new FindTablesDynamoDbAdapter()));
+    final ShowTablesController controller = new ShowTablesController(new ShowTablesUseCase(new FindTablesDynamoDbAdapter()));
 
     @Override
     protected Response handleRequest(Request request) {

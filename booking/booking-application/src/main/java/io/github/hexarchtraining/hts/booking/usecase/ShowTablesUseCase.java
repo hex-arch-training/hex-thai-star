@@ -1,8 +1,8 @@
-package io.github.hexarchtraining.hts.booking.service;
+package io.github.hexarchtraining.hts.booking.usecase;
 
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesQuery;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesResult;
-import io.github.hexarchtraining.hts.booking.port.in.ShowTablesUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import lombok.AllArgsConstructor;
 
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class ShowTablesService implements ShowTablesUseCase {
+public class ShowTablesUseCase implements ShowTablesPort {
 
     private final FindTablesPort findTablesPort;
 
