@@ -1,8 +1,8 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.quarkusweb;
 
+import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesQuery;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesResult;
-import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
 import lombok.RequiredArgsConstructor;
 
 import javax.ws.rs.GET;

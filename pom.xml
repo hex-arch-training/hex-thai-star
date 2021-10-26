@@ -40,6 +40,7 @@
     <module>booking/booking-adapter-out-jpa</module>
     <module>booking/booking-adapter-out-jdbi</module>
     <module>booking/booking-adapter-out-springmail</module>
+    <module>booking/booking-adapter-out-quarkusmail</module>
 
     <module>order/order-domain</module>
 

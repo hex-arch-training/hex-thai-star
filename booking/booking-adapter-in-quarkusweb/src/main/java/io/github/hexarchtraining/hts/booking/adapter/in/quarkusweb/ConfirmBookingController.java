@@ -12,7 +12,7 @@ import javax.ws.rs.PathParam;
 @Path("booking")
 public class ConfirmBookingController {
 
-    final ConfirmBookingPort createBookingUseCase;
+    private final ConfirmBookingPort createBookingUseCase;
 
     @POST
     @Path("/booking/confirm/{token}")
