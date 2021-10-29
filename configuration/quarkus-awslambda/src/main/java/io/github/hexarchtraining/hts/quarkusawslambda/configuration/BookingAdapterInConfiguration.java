@@ -5,8 +5,18 @@ import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingPort;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingPort;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
-import io.github.hexarchtraining.hts.booking.port.out.*;
-import io.github.hexarchtraining.hts.booking.usecase.*;
+import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
+import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
+import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
+import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
+import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
+import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
+import io.github.hexarchtraining.hts.booking.port.out.SendBookingConfirmationPort;
+import io.github.hexarchtraining.hts.booking.usecase.CancelBookingUseCase;
+import io.github.hexarchtraining.hts.booking.usecase.ConfirmBookingUseCase;
+import io.github.hexarchtraining.hts.booking.usecase.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.usecase.ShowBookingsUseCase;
+import io.github.hexarchtraining.hts.booking.usecase.ShowTablesUseCase;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionalMapper;
 import lombok.AllArgsConstructor;
@@ -37,6 +47,8 @@ public class BookingAdapterInConfiguration {
 
     private final FindBookingsPort findBookingsPort;
 
+    private final SendBookingConfirmationPort sendBookingConfirmationPort;
+
     @Produces
     public CancelBookingPort cancelBookingUseCase() {
         return new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, dummyTransactionPort);
@@ -49,8 +61,12 @@ public class BookingAdapterInConfiguration {
 
     @Produces
     public CreateBookingPort createBookingUseCase() {
-        return new CreateBookingUseCase(persistBookingPort, saveBookingPort, findFreeTablesPort, event -> {
-        }, dummyTransactionPort);
+        return new CreateBookingUseCase(
+            persistBookingPort,
+            saveBookingPort,
+            findFreeTablesPort,
+            sendBookingConfirmationPort,
+            dummyTransactionPort);
     }
 
     @Produces
