@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.github.hex-arch-training</groupId>
+    <artifactId>spring-boot-parent</artifactId>
+    <version>${revision}</version>
+    <relativePath>../../configuration/maven/spring-boot-parent</relativePath>
+  </parent>
+  <artifactId>booking-adapter-out-springmail</artifactId>
+  <version>${revision}</version>
+
+  <dependencies>
+    <!-- hex-thai-star -->
+    <dependency>
+      <groupId>io.github.hex-arch-training</groupId>
+      <artifactId>booking-domain</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.github.hex-arch-training</groupId>
+      <artifactId>booking-application</artifactId>
+      <version>${revision}</version>
+    </dependency>
+
+    <!-- framework -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+  </dependencies>
+</project>

@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 @Path("booking")
 public class CancelBookingController {
 
-    final CancelBookingPort cancelBookingPort;
+    private final CancelBookingPort cancelBookingPort;
 
     @POST
     @Path("/booking/cancel/{token}")

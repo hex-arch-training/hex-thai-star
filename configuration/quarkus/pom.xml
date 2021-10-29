@@ -13,6 +13,12 @@
     <name>quarkus</name>
     <description>Demo project for Quarkus (java/native)</description>
     <dependencies>
+        <!-- hex-thai-star -->
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>booking-adapter-out-quarkusmail</artifactId>
+            <version>${revision}</version>
+        </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
             <artifactId>booking-adapter-out-jpa</artifactId>
@@ -34,6 +40,7 @@
             <version>${revision}</version>
         </dependency>
 
+        <!-- framework -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-spring-data-jpa</artifactId>

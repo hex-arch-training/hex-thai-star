@@ -12,3 +12,8 @@ server:
 
 booking:
   store: jpa
+
+spring:
+  mail:
+    host: localhost
+    port: 30025
