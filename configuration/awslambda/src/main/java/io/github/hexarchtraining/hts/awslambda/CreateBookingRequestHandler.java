@@ -3,6 +3,7 @@ package io.github.hexarchtraining.hts.awslambda;
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.CreateBookingController;
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Request;
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Response;
+import io.github.hexarchtraining.hts.booking.adapter.out.awsmail.SendBookingConfirmationAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.dynamodb.FindFreeTablesDynamoDbAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.dynamodb.SaveBookingDynamoDbAdapter;
 import io.github.hexarchtraining.hts.booking.usecase.CreateBookingUseCase;
@@ -14,20 +15,21 @@ public class CreateBookingRequestHandler extends AbstractRequestHandler {
 
     public CreateBookingRequestHandler() {
         final SaveBookingDynamoDbAdapter saveBookingDynamoDbAdapter = new SaveBookingDynamoDbAdapter();
+        final FindFreeTablesDynamoDbAdapter findFreeTablesDynamoDbAdapter = new FindFreeTablesDynamoDbAdapter();
+        final SendBookingConfirmationAdapter sendBookingConfirmationAdapter = new SendBookingConfirmationAdapter();
 
         controller = new CreateBookingController(
-                new CreateBookingUseCase(
-                        saveBookingDynamoDbAdapter,
-                        saveBookingDynamoDbAdapter,
-                        new FindFreeTablesDynamoDbAdapter(),
-                        event -> {
-                        },
-                        new TransactionPort() {
-                            @Override
-                            public <T> T inTransaction(TransactionalMapper<T> handler) {
-                                return handler.accept();
-                            }
-                        }));
+            new CreateBookingUseCase(
+                saveBookingDynamoDbAdapter,
+                saveBookingDynamoDbAdapter,
+                findFreeTablesDynamoDbAdapter,
+                sendBookingConfirmationAdapter,
+                new TransactionPort() {
+                    @Override
+                    public <T> T inTransaction(TransactionalMapper<T> handler) {
+                        return handler.accept();
+                    }
+                }));
     }
 
     @Override
