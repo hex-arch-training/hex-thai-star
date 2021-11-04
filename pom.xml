@@ -41,11 +41,14 @@
     <module>booking/booking-adapter-out-jdbi</module>
     <module>booking/booking-adapter-out-springmail</module>
     <module>booking/booking-adapter-out-quarkusmail</module>
+    <module>booking/booking-adapter-out-awsmail</module>
 
     <module>order/order-domain</module>
 
     <module>configuration/maven/spring-boot-parent</module>
     <module>configuration/maven/quarkus-parent</module>
+    <module>configuration/maven/aws-parent</module>
+
     <module>configuration/springboot</module>
     <module>configuration/awslambda</module>
     <module>configuration/quarkus</module>
