@@ -22,6 +22,8 @@ public class CancelBookingUseCase implements CancelBookingPort {
 
     private final TransactionPort transactionPort;
 
+    private final SendBookingStatusUseCase sendBookingStatusUseCase;
+
     @Override
     public void cancel(CancelBookingCommand command) {
         transactionPort.withTransaction(() -> {
@@ -34,6 +36,8 @@ public class CancelBookingUseCase implements CancelBookingPort {
 
             booking.cancel();
             saveBookingPort.save(booking);
+
+            sendBookingStatusUseCase.sendBookingStatus(booking);
         });
     }
 }

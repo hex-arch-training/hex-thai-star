@@ -11,10 +11,11 @@ import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
-import io.github.hexarchtraining.hts.booking.port.out.SendBookingConfirmationPort;
+import io.github.hexarchtraining.hts.booking.port.out.SendBookingStatusEventPort;
 import io.github.hexarchtraining.hts.booking.usecase.CancelBookingUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.ConfirmBookingUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.usecase.SendBookingStatusUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.ShowBookingsUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.ShowTablesUseCase;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
@@ -37,25 +38,30 @@ public class BookingAdapterInConfiguration {
 
     private final FindFreeTablesPort findFreeTablesPort;
 
-    private final SendBookingConfirmationPort sendBookingConfirmationPort;
+    private final SendBookingStatusEventPort sendBookingStatusEventPort;
 
     private final FindTablesPort findTablesPort;
 
     private final FindBookingsPort findBookingsPort;
 
     @Produces
+    public SendBookingStatusUseCase sendBookingStatusUseCase() {
+        return new SendBookingStatusUseCase(sendBookingStatusEventPort);
+    }
+
+    @Produces
     public CancelBookingPort cancelBookingUseCase() {
-        return new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, transactionPort);
+        return new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, transactionPort, sendBookingStatusUseCase());
     }
 
     @Produces
     public ConfirmBookingPort confirmBookingUseCase() {
-        return new ConfirmBookingUseCase(findBookingByTokenPort, saveBookingPort);
+        return new ConfirmBookingUseCase(findBookingByTokenPort, saveBookingPort, sendBookingStatusUseCase());
     }
 
     @Produces
     public CreateBookingPort createBookingUseCase() {
-        return new CreateBookingUseCase(persistBookingPort, saveBookingPort, findFreeTablesPort, sendBookingConfirmationPort, transactionPort);
+        return new CreateBookingUseCase(persistBookingPort, saveBookingPort, findFreeTablesPort, transactionPort, sendBookingStatusUseCase());
     }
 
     @Produces
