@@ -6,6 +6,7 @@
 [![Code Climate](https://codeclimate.com/github/hex-arch-training/hex-thai-star.svg?branch=main)](https://codeclimate.com/github/hex-arch-training/hex-thai-star?branch=main)
 [![Issue Count](https://codeclimate.com/github/hex-arch-training/hex-thai-star/badges/issue_count.svg)](https://codeclimate.com/github/hex-arch-training/hex-thai-star)
 ![License](https://img.shields.io/badge/License-MIT-blue)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star?ref=badge_shield)
 
 ## Note on Booking ***out*** adapters
 
@@ -48,3 +49,7 @@ The Booking (micro)service / app can be started using the following configuratio
    
   This is in fact a [Quarkus](https://quarkus.io/) application which uses the [`quarkus-amazon-lambda-http`](https://quarkus.io/guides/amazon-lambda-http) and [`quarkus-amazon-dynamodb`](https://quarkus.io/guides/amazon-dynamodb) extensions. During the build on the [CircleCI](https://app.circleci.com/pipelines/github/hex-arch-training/hex-thai-star?branch=main) platform, the [`Quarkus`](https://quarkus.io/) app is built with with [GraalVM](https://www.graalvm.org/)
   and the native executable is then deployed using the [Serverless Framework](https://serverless.com/). The Booking service (its Table endpoint) is available [here](https://zhjq4x9nq8.execute-api.eu-central-1.amazonaws.com/booking/tables). Now the ***cold*** start takes about 1 second while the ***hot*** one is more or less the same.
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star?ref=badge_large)
