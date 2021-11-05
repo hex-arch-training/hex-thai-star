@@ -5,7 +5,7 @@
 [![CodeQL](https://github.com/hex-arch-training/hex-thai-star/workflows/CodeQL/badge.svg)](https://github.com/hex-arch-training/hex-thai-star/actions?query=workflow%3ACodeQL "Code quality workflow status")
 [![Code Climate](https://codeclimate.com/github/hex-arch-training/hex-thai-star.svg?branch=main)](https://codeclimate.com/github/hex-arch-training/hex-thai-star?branch=main)
 [![Issue Count](https://codeclimate.com/github/hex-arch-training/hex-thai-star/badges/issue_count.svg)](https://codeclimate.com/github/hex-arch-training/hex-thai-star)
-[![FOSSA Status](https://app.fossa.com/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star?ref=badge_shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fhex-arch-training%2Fhex-thai-star?ref=badge_shield)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ## Note on Booking ***out*** adapters
