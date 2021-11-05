@@ -3,6 +3,8 @@
 [![CircleCI](https://circleci.com/gh/hex-arch-training/hex-thai-star/tree/main.svg?style=shield)](https://circleci.com/gh/hex-arch-training/hex-thai-star/tree/main)
 ![Java CI with Maven](https://github.com/hex-arch-training/hex-thai-star/actions/workflows/maven.yml/badge.svg)
 [![CodeQL](https://github.com/hex-arch-training/hex-thai-star/workflows/CodeQL/badge.svg)](https://github.com/hex-arch-training/hex-thai-star/actions?query=workflow%3ACodeQL "Code quality workflow status")
+[![Code Climate](https://codeclimate.com/github/hex-arch-training/hex-thai-star.svg?branch=main)](https://codeclimate.com/github/hex-arch-training/hex-thai-star?branch=main)
+[![Issue Count](https://codeclimate.com/github/hex-arch-training/hex-thai-star/badges/issue_count.svg)](https://codeclimate.com/github/hex-arch-training/hex-thai-star)
 ![License](https://img.shields.io/badge/License-MIT-blue)
 
 ## Note on Booking ***out*** adapters
