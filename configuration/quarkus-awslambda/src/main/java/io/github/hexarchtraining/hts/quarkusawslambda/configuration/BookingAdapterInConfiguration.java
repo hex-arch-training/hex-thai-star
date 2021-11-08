@@ -11,10 +11,11 @@ import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
-import io.github.hexarchtraining.hts.booking.port.out.SendBookingConfirmationPort;
+import io.github.hexarchtraining.hts.booking.port.out.SendBookingStatusEventPort;
 import io.github.hexarchtraining.hts.booking.usecase.CancelBookingUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.ConfirmBookingUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.usecase.SendBookingStatusUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.ShowBookingsUseCase;
 import io.github.hexarchtraining.hts.booking.usecase.ShowTablesUseCase;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
@@ -47,16 +48,21 @@ public class BookingAdapterInConfiguration {
 
     private final FindBookingsPort findBookingsPort;
 
-    private final SendBookingConfirmationPort sendBookingConfirmationPort;
+    private final SendBookingStatusEventPort sendBookingStatusEventPort;
+
+    @Produces
+    public SendBookingStatusUseCase sendBookingStatusUseCase() {
+        return new SendBookingStatusUseCase(sendBookingStatusEventPort);
+    }
 
     @Produces
     public CancelBookingPort cancelBookingUseCase() {
-        return new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, dummyTransactionPort);
+        return new CancelBookingUseCase(findBookingByTokenPort, saveBookingPort, dummyTransactionPort, sendBookingStatusUseCase());
     }
 
     @Produces
     public ConfirmBookingPort confirmBookingUseCase() {
-        return new ConfirmBookingUseCase(findBookingByTokenPort, saveBookingPort);
+        return new ConfirmBookingUseCase(findBookingByTokenPort, saveBookingPort, sendBookingStatusUseCase());
     }
 
     @Produces
@@ -65,8 +71,8 @@ public class BookingAdapterInConfiguration {
             persistBookingPort,
             saveBookingPort,
             findFreeTablesPort,
-            sendBookingConfirmationPort,
-            dummyTransactionPort);
+            dummyTransactionPort,
+            sendBookingStatusUseCase());
     }
 
     @Produces

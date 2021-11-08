@@ -16,6 +16,8 @@ public class ConfirmBookingUseCase implements ConfirmBookingPort {
 
     private final SaveBookingPort saveBookingPort;
 
+    private final SendBookingStatusUseCase sendBookingStatusUseCase;
+
     @Override
     public void confirm(ConfirmBookingCommand command) {
         final Booking booking = findBookingByTokenPort.find(command.getToken()).orElseThrow(() -> new BookingNotFoundException(command.getToken()));
@@ -24,5 +26,7 @@ public class ConfirmBookingUseCase implements ConfirmBookingPort {
         }
         booking.confirm();
         saveBookingPort.save(booking);
+
+        sendBookingStatusUseCase.sendBookingStatus(booking);
     }
 }
