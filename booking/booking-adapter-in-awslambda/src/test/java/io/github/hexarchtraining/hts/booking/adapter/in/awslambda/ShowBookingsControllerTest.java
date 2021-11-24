@@ -4,7 +4,7 @@ import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Request
 import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Response;
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsResult;
-import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsPort;
+import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsUseCase;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -37,7 +37,7 @@ class ShowBookingsControllerTest {
                 .concat("\"bookingFrom\":\"").concat(bookingFrom.toString()).concat("\",")
                 .concat("\"bookingTo\":\"").concat(bookingTo.toString()).concat("\"")
                 .concat("}]");
-        final ShowBookingsPort useCaseMock = mock(ShowBookingsPort.class);
+        final ShowBookingsUseCase useCaseMock = mock(ShowBookingsUseCase.class);
         when(useCaseMock.showBookings(any())).thenReturn(Collections.singletonList(
                 new ShowBookingsResult(email, bookingFrom, bookingTo, tableId, maxSeats, token, bookingStatus)));
         final ShowBookingsController controller = new ShowBookingsController(useCaseMock);

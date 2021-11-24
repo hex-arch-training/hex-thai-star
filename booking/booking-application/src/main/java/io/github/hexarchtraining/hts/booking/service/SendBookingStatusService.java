@@ -1,4 +1,4 @@
-package io.github.hexarchtraining.hts.booking.usecase;
+package io.github.hexarchtraining.hts.booking.service;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.port.out.BookingStatusEvent;
@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 @AllArgsConstructor
-public class SendBookingStatusUseCase {
+public class SendBookingStatusService {
 
     private static final String END_OF_LINE = "\n";
     private static final DateTimeFormatter DATE_TIME_FORMATTER_ENGLISH_LOCALE = DateTimeFormatter

@@ -1,5 +1,5 @@
 package io.github.hexarchtraining.hts.booking.port.in;
 
-public interface CancelBookingPort {
+public interface CancelBookingUseCase {
     void cancel(CancelBookingCommand command);
 }

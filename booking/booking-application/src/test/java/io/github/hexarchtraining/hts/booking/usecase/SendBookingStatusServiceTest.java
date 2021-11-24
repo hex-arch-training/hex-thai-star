@@ -5,7 +5,7 @@ import io.github.hexarchtraining.hts.booking.domain.BookingId;
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
 import io.github.hexarchtraining.hts.booking.port.out.BookingStatusEvent;
 import io.github.hexarchtraining.hts.booking.port.out.SendBookingStatusEventPort;
-import io.github.hexarchtraining.hts.booking.usecase.SendBookingStatusUseCase;
+import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class SendBookingStatusUseCaseTest {
+class SendBookingStatusServiceTest {
 
     private final static BookingId BOOKING_ID = new BookingId(6394287366L);
     private final static String EMAIL = "john@example.com";
@@ -45,7 +45,7 @@ class SendBookingStatusUseCaseTest {
         "Booking time: 28-Aug-2021 17:00 - 28-Aug-2021 21:00\n";
 
     @InjectMocks
-    private SendBookingStatusUseCase sendBookingStatusUseCase;
+    private SendBookingStatusService sendBookingStatusService;
 
     @Mock
     private SendBookingStatusEventPort sendBookingStatusEventPort;
@@ -59,7 +59,7 @@ class SendBookingStatusUseCaseTest {
         // given from provider
 
         // when
-        sendBookingStatusUseCase.sendBookingStatus(givenBooking);
+        sendBookingStatusService.sendBookingStatus(givenBooking);
 
         // then
         verify(sendBookingStatusEventPort).send(bookingStatusEventArgumentCaptor.capture());

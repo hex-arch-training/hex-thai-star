@@ -1,10 +1,10 @@
-package io.github.hexarchtraining.hts.booking.usecase;
+package io.github.hexarchtraining.hts.booking.service;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.CancelBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
@@ -14,7 +14,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 @AllArgsConstructor
-public class CancelBookingUseCase implements CancelBookingPort {
+public class CancelBookingService implements CancelBookingUseCase {
 
     private final FindBookingByTokenPort findBookingByTokenPort;
 
@@ -22,7 +22,7 @@ public class CancelBookingUseCase implements CancelBookingPort {
 
     private final TransactionPort transactionPort;
 
-    private final SendBookingStatusUseCase sendBookingStatusUseCase;
+    private final SendBookingStatusService sendBookingStatusService;
 
     @Override
     public void cancel(CancelBookingCommand command) {
@@ -37,7 +37,7 @@ public class CancelBookingUseCase implements CancelBookingPort {
             booking.cancel();
             saveBookingPort.save(booking);
 
-            sendBookingStatusUseCase.sendBookingStatus(booking);
+            sendBookingStatusService.sendBookingStatus(booking);
         });
     }
 }

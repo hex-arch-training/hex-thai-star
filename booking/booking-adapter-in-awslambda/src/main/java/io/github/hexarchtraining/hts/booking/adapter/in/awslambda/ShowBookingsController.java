@@ -9,10 +9,10 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class ShowBookingsController {
-    private final ShowBookingsPort showBookingsPort;
+    private final ShowBookingsUseCase showBookingsUseCase;
 
     public Response showTables(Request request) {
-        final List<ShowBookingsResult> tables = showBookingsPort.showBookings(new ShowBookingsQuery());
+        final List<ShowBookingsResult> tables = showBookingsUseCase.showBookings(new ShowBookingsQuery());
         return Response.builder()
                 .setObjectBody(tables)
                 .build();

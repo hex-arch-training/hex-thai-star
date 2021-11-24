@@ -6,8 +6,8 @@ import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Respons
 import io.github.hexarchtraining.hts.booking.adapter.out.awsmail.SendBookingStatusEventAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.dynamodb.FindFreeTablesDynamoDbAdapter;
 import io.github.hexarchtraining.hts.booking.adapter.out.dynamodb.SaveBookingDynamoDbAdapter;
-import io.github.hexarchtraining.hts.booking.usecase.CreateBookingUseCase;
-import io.github.hexarchtraining.hts.booking.usecase.SendBookingStatusUseCase;
+import io.github.hexarchtraining.hts.booking.service.CreateBookingService;
+import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
 import io.github.hexarchtraining.hts.common.port.out.TransactionalMapper;
 
@@ -19,10 +19,10 @@ public class CreateBookingRequestHandler extends AbstractRequestHandler {
         final FindFreeTablesDynamoDbAdapter findFreeTablesDynamoDbAdapter = new FindFreeTablesDynamoDbAdapter();
         final SendBookingStatusEventAdapter bookingStatusEventAdapter = new SendBookingStatusEventAdapter();
 
-        final SendBookingStatusUseCase sendBookingStatusUseCase = new SendBookingStatusUseCase(bookingStatusEventAdapter);
+        final SendBookingStatusService sendBookingStatusService = new SendBookingStatusService(bookingStatusEventAdapter);
 
         controller = new CreateBookingController(
-            new CreateBookingUseCase(
+            new CreateBookingService(
                 saveBookingDynamoDbAdapter,
                 saveBookingDynamoDbAdapter,
                 findFreeTablesDynamoDbAdapter,
@@ -32,7 +32,7 @@ public class CreateBookingRequestHandler extends AbstractRequestHandler {
                         return handler.accept();
                     }
                 },
-                sendBookingStatusUseCase));
+              sendBookingStatusService));
     }
 
     @Override

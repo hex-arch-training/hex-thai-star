@@ -1,9 +1,9 @@
-package io.github.hexarchtraining.hts.booking.usecase;
+package io.github.hexarchtraining.hts.booking.service;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.Table;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.CreateBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingResult;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
 import io.github.hexarchtraining.hts.booking.port.out.PersistBookingPort;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class CreateBookingUseCase implements CreateBookingPort {
+public class CreateBookingService implements CreateBookingUseCase {
 
     private final PersistBookingPort persistBookingPort;
 
@@ -26,7 +26,7 @@ public class CreateBookingUseCase implements CreateBookingPort {
 
     private final TransactionPort transactionPort;
 
-    private final SendBookingStatusUseCase sendBookingStatusUseCase;
+    private final SendBookingStatusService sendBookingStatusService;
 
     @Override
     public CreateBookingResult createBooking(CreateBookingCommand command) {
@@ -53,7 +53,7 @@ public class CreateBookingUseCase implements CreateBookingPort {
                 booking.addTableBooking(selectedTable);
                 saveBookingPort.save(booking);
 
-                sendBookingStatusUseCase.sendBookingStatus(booking);
+                sendBookingStatusService.sendBookingStatus(booking);
             }
             return new CreateBookingResult(
                 booking.getId().getValue(),
