@@ -5,7 +5,7 @@ import io.github.hexarchtraining.hts.booking.adapter.in.awslambda.common.Respons
 import io.github.hexarchtraining.hts.booking.domain.TableId;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingCommand;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingResult;
-import io.github.hexarchtraining.hts.booking.port.in.CreateBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -44,7 +44,7 @@ class CreateBookingControllerTest {
                 .concat("\"token\":\"").concat(token).concat("\"")
                 .concat("}");
 
-        final CreateBookingPort useCaseMock = mock(CreateBookingPort.class);
+        final CreateBookingUseCase useCaseMock = mock(CreateBookingUseCase.class);
         when(useCaseMock.createBooking(any())).thenReturn(new CreateBookingResult(bookingId, tableId, token));
         final CreateBookingController controller = new CreateBookingController(useCaseMock);
         // when

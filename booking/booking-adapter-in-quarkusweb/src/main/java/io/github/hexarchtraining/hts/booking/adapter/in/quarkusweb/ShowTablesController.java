@@ -1,6 +1,6 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.quarkusweb;
 
-import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
+import io.github.hexarchtraining.hts.booking.port.in.ShowTablesUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesQuery;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesResult;
 import lombok.RequiredArgsConstructor;
@@ -13,12 +13,12 @@ import java.util.List;
 @Path("booking")
 public class ShowTablesController {
 
-    private final ShowTablesPort showTablesPort;
+    private final ShowTablesUseCase showTablesUseCase;
 
     @GET
     @Path("/tables")
     public List<ShowTablesResult> showTables() {
         // in the future, ShowTablesQuery may contain something interesting
-        return showTablesPort.showTables(new ShowTablesQuery());
+        return showTablesUseCase.showTables(new ShowTablesQuery());
     }
 }

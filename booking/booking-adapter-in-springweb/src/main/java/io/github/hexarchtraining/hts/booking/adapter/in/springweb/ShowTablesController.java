@@ -2,7 +2,7 @@ package io.github.hexarchtraining.hts.booking.adapter.in.springweb;
 
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesQuery;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesResult;
-import io.github.hexarchtraining.hts.booking.port.in.ShowTablesPort;
+import io.github.hexarchtraining.hts.booking.port.in.ShowTablesUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,11 +15,11 @@ import java.util.List;
 @RequestMapping("booking")
 public class ShowTablesController {
 
-    private final ShowTablesPort showTablesPort;
+    private final ShowTablesUseCase showTablesUseCase;
 
     @GetMapping(value = "/tables")
     public List<ShowTablesResult> showTables() {
         // in the future, ShowTablesQuery may contain something interesting
-        return showTablesPort.showTables(new ShowTablesQuery());
+        return showTablesUseCase.showTables(new ShowTablesQuery());
     }
 }

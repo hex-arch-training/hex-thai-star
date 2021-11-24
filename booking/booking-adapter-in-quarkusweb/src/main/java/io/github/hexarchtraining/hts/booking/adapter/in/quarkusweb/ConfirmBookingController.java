@@ -1,7 +1,7 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.quarkusweb;
 
 import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingUseCase;
 import lombok.RequiredArgsConstructor;
 
 import javax.ws.rs.POST;
@@ -12,7 +12,7 @@ import javax.ws.rs.PathParam;
 @Path("booking")
 public class ConfirmBookingController {
 
-    private final ConfirmBookingPort createBookingUseCase;
+    private final ConfirmBookingUseCase createBookingUseCase;
 
     @POST
     @Path("/booking/confirm/{token}")

@@ -1,7 +1,7 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.springweb;
 
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
-import io.github.hexarchtraining.hts.booking.port.in.CancelBookingPort;
+import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("booking")
 public class CancelBookingController {
 
-  final CancelBookingPort cancelBookingPort;
+  final CancelBookingUseCase cancelBookingUseCase;
 
   @PostMapping(value = "/booking/cancel/{token}")
   public void cancelBooking(@PathVariable String token) {
     final CancelBookingCommand cancelBookingCommand = mapInputToCommand(token);
-    cancelBookingPort.cancel(cancelBookingCommand);
+    cancelBookingUseCase.cancel(cancelBookingCommand);
   }
 
   private CancelBookingCommand mapInputToCommand(String token) {

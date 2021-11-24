@@ -11,11 +11,11 @@ import java.io.IOException;
 
 @RequiredArgsConstructor
 public class CreateBookingController {
-    private final CreateBookingPort createBookingPort;
+    private final CreateBookingUseCase createBookingUseCase;
 
     public Response createBooking(Request request) {
         final CreateBookingCommand command = mapToCreateBookingCommand(request);
-        final CreateBookingResult result = createBookingPort.createBooking(command);
+        final CreateBookingResult result = createBookingUseCase.createBooking(command);
         return Response.builder()
                 .setObjectBody(result)
                 .build();

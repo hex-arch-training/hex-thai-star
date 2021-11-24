@@ -10,6 +10,8 @@ import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationE
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
+import io.github.hexarchtraining.hts.booking.service.CancelBookingService;
+import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
 import io.github.hexarchtraining.hts.common.adapter.out.TestTransactionAdapter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +33,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CancelBookingUseCaseTest {
+class CancelBookingServiceTest {
 
     private static final String VALID_EMAIL = "john.doe@acme.inc";
     private final Instant now = Instant.now();
@@ -40,7 +42,7 @@ class CancelBookingUseCaseTest {
     private final String token = "CB_467365462647836274673";
 
     @InjectMocks
-    private CancelBookingUseCase cancelBookingUseCase;
+    private CancelBookingService cancelBookingService;
 
     @Mock
     private FindBookingByTokenPort findBookingByTokenPort;
@@ -49,7 +51,7 @@ class CancelBookingUseCaseTest {
     private SaveBookingPort saveBookingPort;
 
     @Mock
-    private SendBookingStatusUseCase sendBookingStatusUseCase;
+    private SendBookingStatusService sendBookingStatusService;
 
     @Spy
     private TestTransactionAdapter testTransactionAdapter = new TestTransactionAdapter();
@@ -61,7 +63,7 @@ class CancelBookingUseCaseTest {
         final CancelBookingCommand command = new CancelBookingCommand(token);
 
         // when, then
-        assertThrows(BookingNotFoundException.class, () -> cancelBookingUseCase.cancel(command));
+        assertThrows(BookingNotFoundException.class, () -> cancelBookingService.cancel(command));
     }
 
     @Test
@@ -76,7 +78,7 @@ class CancelBookingUseCaseTest {
         when(findBookingByTokenPort.find(token)).thenReturn(Optional.of(booking));
         final CancelBookingCommand command = new CancelBookingCommand(token);
         // then
-        assertThrows(BookingValidationException.class, () -> cancelBookingUseCase.cancel(command));
+        assertThrows(BookingValidationException.class, () -> cancelBookingService.cancel(command));
     }
 
     @Test
@@ -99,12 +101,12 @@ class CancelBookingUseCaseTest {
         final CancelBookingCommand command = new CancelBookingCommand(token);
 
         // when
-        cancelBookingUseCase.cancel(command);
+        cancelBookingService.cancel(command);
 
         // then
         assertEquals(BookingStatus.CANCELLED, booking.getStatus());
         verify(testTransactionAdapter).inTransaction(any());
         verify(saveBookingPort).save(booking);
-        verify(sendBookingStatusUseCase).sendBookingStatus(booking);
+        verify(sendBookingStatusService).sendBookingStatus(booking);
     }
 }
