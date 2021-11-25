@@ -2,6 +2,7 @@ package io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity;
 
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,23 +14,23 @@ import java.time.Instant;
 
 @Entity
 @Data
-@Table(name="table_booking")
+@Table(name = "table_booking")
 public class TableBookingEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
+  @Id
+  @GeneratedValue
+  private Long id;
 
-    @Column(name = "booking_from")
-    private Instant bookingFrom;
+  @Column(name = "booking_from")
+  private Instant bookingFrom;
 
-    @Column(name = "booking_to")
-    private Instant bookingTo;
+  @Column(name = "booking_to")
+  private Instant bookingTo;
 
-    @Column(name = "seats_number")
-    private int seatsNumber;
+  @Column(name = "seats_number")
+  private int seatsNumber;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "table_id", referencedColumnName = "id")
-    private TableEntity table;
+  @ManyToOne(cascade = CascadeType.ALL, optional = false)
+  @JoinColumn(name = "table_id", referencedColumnName = "id")
+  private TableEntity table;
 }
