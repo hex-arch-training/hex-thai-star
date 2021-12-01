@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class FindBookinsJpaAdapter implements FindBookingsPort {
+public class FindBookingsJpaAdapter implements FindBookingsPort {
 
     private final BookingRepository bookingRepository;
 
