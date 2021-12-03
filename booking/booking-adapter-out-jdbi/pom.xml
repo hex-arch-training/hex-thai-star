@@ -24,11 +24,17 @@
             <artifactId>booking-application</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>common-adapter-out-jdbi</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
         <!-- framework (test) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
+            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

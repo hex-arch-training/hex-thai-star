@@ -1,14 +1,13 @@
-package io.github.hexarchtraining.hts.booking.adapter.out.jpa.testdata;
+package io.github.hexarchtraining.hts.booking.adapter.out.jdbi.testdata;
 
-import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.BookingEntity;
-import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.TableBookingEntity;
-import io.github.hexarchtraining.hts.booking.adapter.out.jpa.entity.TableEntity;
+import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.BookingRecord;
+import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.TableBookingRecord;
+import io.github.hexarchtraining.hts.booking.adapter.out.jdbi.record.TableRecord;
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
-import org.assertj.core.util.Sets;
 
 import java.time.Instant;
 
-public class BookingJpaTestData {
+public class BookingJdbiTestData {
 
     // entity Table
     public final static int TABLE__MAX_SEATS = 4;
@@ -29,24 +28,25 @@ public class BookingJpaTestData {
     public final static BookingStatus BOOKING__STATUS = BookingStatus.CONFIRMED;
     public final static String BOOKING__TOKEN = "CB_20210827_18e151ee9dc8c89d3f3c4e705f6b79ee";
 
-    public static TableEntity newTable() {
-        TableEntity table = new TableEntity();
+    public static TableRecord newTable() {
+        TableRecord table = new TableRecord();
         table.setMaxSeats(TABLE__MAX_SEATS);
         return table;
     }
 
-    public static TableBookingEntity newTableBooking() {
-        TableBookingEntity tableBooking = new TableBookingEntity();
+    public static TableBookingRecord newTableBooking(long bookingId, long tableId) {
+        TableBookingRecord tableBooking = new TableBookingRecord();
         tableBooking.setBookingTo(TABLE_BOOKING__BOOKING_TO);
         tableBooking.setBookingFrom(TABLE_BOOKING__BOOKING_FROM);
         tableBooking.setSeatsNumber(TABLE_BOOKING__SEATS_NUMBER);
-        tableBooking.setTable(newTable());
+        tableBooking.setBookingId(bookingId);
+        tableBooking.setTableId(tableId);
 
         return tableBooking;
     }
 
-    public static BookingEntity newBooking() {
-        BookingEntity booking = new BookingEntity();
+    public static BookingRecord newBooking() {
+        BookingRecord booking = new BookingRecord();
         booking.setCreationDate(BOOKING__CREATION_DATE);
         booking.setBookingFromTime(BOOKING__BOOKING_FROM_TIME);
         booking.setBookingToTime(BOOKING__BOOKING_TO_TIME);
@@ -56,7 +56,6 @@ public class BookingJpaTestData {
         booking.setSeatsNumber(BOOKING__SEATS_NUMBER);
         booking.setStatus(BOOKING__STATUS);
         booking.setToken(BOOKING__TOKEN);
-        booking.setTableBookings(Sets.set(newTableBooking()));
 
         return booking;
     }

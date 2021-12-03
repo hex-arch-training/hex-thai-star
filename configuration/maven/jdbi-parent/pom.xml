@@ -14,10 +14,6 @@
 
     <description>Parent pom for jdbi projects</description>
 
-    <properties>
-        <jdbi.version>3.24.1</jdbi.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>

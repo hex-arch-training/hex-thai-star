@@ -16,6 +16,19 @@ import java.util.stream.Stream;
 
 public interface BookingDao {
 
+    @SqlUpdate("CREATE TABLE booking (id bigint NOT NULL, " +
+        "booking_date timestamp, " +
+        "booking_from_time timestamp, " +
+        "booking_to_time timestamp, " +
+        "creation_date timestamp, " +
+        "email varchar(255), " +
+        "expiration_date timestamp, " +
+        "seats_number integer NOT NULL, " +
+        "status integer, " +
+        "token varchar(255), " +
+        "PRIMARY KEY (id))")
+    void createTable();
+
     @SqlQuery("SELECT * FROM Booking WHERE token=:token")
     @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingByToken(@Bind("token") String token);
@@ -24,24 +37,25 @@ public interface BookingDao {
     @RegisterBeanMapper(BookingRecord.class)
     Optional<BookingRecord> findBookingById(@Bind("id") long id);
 
-    @SqlQuery("SELECT tb.id tb_id, tb.booking_from tb_booking_from, tb.booking_to tb_booking_to, tb.table_id tb_table_id, tb.booking_id tb_booking_id, " +
-            "b.id b_id, b.creation_date b_creation_date, b.booking_from_time b_booking_from_time, b.booking_to_time b_booking_to_time, " +
-            "b.booking_date b_booking_date, b.expiration_date b_expiration_date, b.email b_email, b.seats_number b_seats_number, b.status b_status, b.token b_token " +
-            "FROM Booking b LEFT JOIN Table_Booking tb ON b.id = tb.booking_id")
+    @SqlQuery("SELECT tb.id tb_id, tb.booking_from tb_booking_from, tb.booking_to tb_booking_to, tb.seats_number tb_seats_number, tb.table_id tb_table_id, tb.booking_id tb_booking_id, " +
+        "b.id b_id, b.creation_date b_creation_date, b.booking_from_time b_booking_from_time, b.booking_to_time b_booking_to_time, " +
+        "b.booking_date b_booking_date, b.expiration_date b_expiration_date, b.email b_email, b.seats_number b_seats_number, b.status b_status, b.token b_token " +
+        "FROM Booking b " +
+        "LEFT JOIN Table_Booking tb ON b.id = tb.booking_id")
     @RegisterBeanMapper(value = BookingRecord.class, prefix = "b")
     @RegisterBeanMapper(value = TableBookingRecord.class, prefix = "tb")
     @RegisterJoinRowMapper({BookingRecord.class, TableBookingRecord.class})
     Stream<JoinRow> findAllBookingsWithTableBookingsAsStream();
 
     @SqlUpdate("INSERT INTO " +
-            "Booking(id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, status, token) " +
-            "VALUES (hibernate_sequence.nextval, :creationDate, :bookingFromTime, :bookingToTime, :bookingDate, :expirationDate, :email, :seatsNumber, :status, :token)")
+        "Booking(id, creation_date, booking_from_time, booking_to_time, booking_date, expiration_date, email, seats_number, status, token) " +
+        "VALUES (hibernate_sequence.nextval, :creationDate, :bookingFromTime, :bookingToTime, :bookingDate, :expirationDate, :email, :seatsNumber, :status, :token)")
     @GetGeneratedKeys
     long insertBooking(@BindBean BookingRecord booking);
 
     @SqlUpdate("UPDATE Booking " +
-            "SET creation_date=:creationDate, booking_from_time=:bookingFromTime, booking_to_time=:bookingToTime, " +
-            "expiration_date=:expirationDate, email=:email, seats_number=:seatsNumber, status=:status, token=:token " +
-            "WHERE id=:id")
+        "SET creation_date=:creationDate, booking_from_time=:bookingFromTime, booking_to_time=:bookingToTime, " +
+        "expiration_date=:expirationDate, email=:email, seats_number=:seatsNumber, status=:status, token=:token " +
+        "WHERE id=:id")
     boolean updateBooking(@BindBean BookingRecord booking);
 }
