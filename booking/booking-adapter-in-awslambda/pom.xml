@@ -12,6 +12,10 @@
     <artifactId>booking-adapter-in-awslambda</artifactId>
     <version>${revision}</version>
 
+    <properties>
+        <jackson.version>2.13.0</jackson.version>
+    </properties>
+
     <dependencies>
         <!-- hex-thai-star -->
         <dependency>
@@ -43,22 +47,22 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.9.10</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.9.10</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.9.10</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.9.10</version>
+            <version>${jackson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.skyscreamer</groupId>
