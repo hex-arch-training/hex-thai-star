@@ -1,9 +1,9 @@
 package io.github.hexarchtraining.hts.booking.adapter.in.springweb;
 
-import io.github.hexarchtraining.hts.common.domain.exception.NotFoundException;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationException;
 import io.github.hexarchtraining.hts.booking.domain.exception.IllegalBookingStateException;
 import io.github.hexarchtraining.hts.booking.domain.exception.IncompleteBookingException;
+import io.github.hexarchtraining.hts.common.domain.exception.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

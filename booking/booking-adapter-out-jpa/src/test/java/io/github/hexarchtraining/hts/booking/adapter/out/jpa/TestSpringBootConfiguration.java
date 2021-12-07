@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = TestSpringBootConfiguration.BASE_PACKAGE)
 @EntityScan(basePackages = TestSpringBootConfiguration.BASE_PACKAGE)
 class TestSpringBootConfiguration {
-  public static final String BASE_PACKAGE = "io.github.hexarchtraining.hts.booking.adapter.out.jpa";
+    public static final String BASE_PACKAGE = "io.github.hexarchtraining.hts.booking.adapter.out.jpa";
 }

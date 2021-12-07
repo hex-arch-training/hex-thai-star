@@ -23,7 +23,8 @@
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <springboot.version>2.5.2</springboot.version>
         <lombok.version>1.18.20</lombok.version>
-        <jdbi.version>3.23.0</jdbi.version>
+        <jdbi.version>3.24.1</jdbi.version>
+        <h2.version>1.4.200</h2.version>
     </properties>
 
     <modules>
@@ -48,6 +49,7 @@
         <module>configuration/maven/spring-boot-parent</module>
         <module>configuration/maven/quarkus-parent</module>
         <module>configuration/maven/aws-parent</module>
+        <module>configuration/maven/jdbi-parent</module>
 
         <module>configuration/springboot</module>
         <module>configuration/awslambda</module>
