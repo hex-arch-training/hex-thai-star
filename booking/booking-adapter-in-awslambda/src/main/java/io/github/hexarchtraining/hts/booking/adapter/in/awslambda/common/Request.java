@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.Optional;
 
 public class Request {
-    public static final String QUERY_PARAMS = "queryStringParameters";
-    public static final String PATH_PARAMS = "pathParameters";
     public static final String BODY = "body";
 
     private final ObjectMapper objectMapper;
@@ -37,23 +35,4 @@ public class Request {
         return this.rawRequest;
     }
 
-    public Optional<String> getQueryParam(String paramName) {
-        if (rawRequest.containsKey(QUERY_PARAMS)) {
-            final Map<String, String> queryParams = (Map<String, String>) rawRequest.get(QUERY_PARAMS);
-            if (queryParams.containsKey(paramName)) {
-                return Optional.of(queryParams.get(paramName));
-            }
-        }
-        return Optional.empty();
-    }
-
-    public Optional<String> getPathParamFromRequest(String paramName) {
-        if (rawRequest.containsKey(PATH_PARAMS)) {
-            Map<String, String> pathParameters = (Map<String, String>) rawRequest.get(PATH_PARAMS);
-            if (pathParameters.containsKey(paramName)) {
-                return Optional.of(pathParameters.get(paramName));
-            }
-        }
-        return Optional.empty();
-    }
 }
