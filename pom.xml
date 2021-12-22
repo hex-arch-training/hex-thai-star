@@ -49,6 +49,7 @@
         <module>configuration/maven/spring-boot-parent</module>
         <module>configuration/maven/quarkus-parent</module>
         <module>configuration/maven/aws-parent</module>
+        <module>configuration/maven/aws-v2-parent</module>
         <module>configuration/maven/jdbi-parent</module>
 
         <module>configuration/springboot</module>
