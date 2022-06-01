@@ -21,7 +21,7 @@
         </dependency>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>booking-application</artifactId>
+            <artifactId>booking-api-out</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
