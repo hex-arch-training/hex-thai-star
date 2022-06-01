@@ -1,10 +1,10 @@
-package io.github.hexarchtraining.hts.booking.service.bci;
+package io.github.hexarchtraining.hts.booking.service;
 
 import io.github.hexarchtraining.hts.booking.domain.Booking;
 import io.github.hexarchtraining.hts.booking.domain.exception.BookingNotFoundException;
-import io.github.hexarchtraining.hts.booking.port.in.bci.BookingByTokenResult;
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenCommand;
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.BookingByTokenResult;
+import io.github.hexarchtraining.hts.booking.port.in.FindBookingByTokenCommand;
+import io.github.hexarchtraining.hts.booking.port.in.FindBookingByTokenUseCase;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import lombok.AllArgsConstructor;
 

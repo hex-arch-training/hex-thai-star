@@ -1,8 +1,8 @@
 package io.github.hexarchtraining.hts.order.port.out;
 
-import io.github.hexarchtraining.hts.booking.port.in.bci.BookingByTokenResult;
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenCommand;
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.BookingByTokenResult;
+import io.github.hexarchtraining.hts.booking.port.in.FindBookingByTokenCommand;
+import io.github.hexarchtraining.hts.booking.port.in.FindBookingByTokenUseCase;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

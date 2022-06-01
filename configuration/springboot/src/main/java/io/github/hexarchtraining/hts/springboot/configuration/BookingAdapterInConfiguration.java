@@ -3,9 +3,9 @@ package io.github.hexarchtraining.hts.springboot.configuration;
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ConfirmBookingUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.CreateBookingUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.FindBookingByTokenUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ShowBookingsUseCase;
 import io.github.hexarchtraining.hts.booking.port.in.ShowTablesUseCase;
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenUseCase;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;
@@ -16,12 +16,11 @@ import io.github.hexarchtraining.hts.booking.port.out.SendBookingStatusEventPort
 import io.github.hexarchtraining.hts.booking.service.CancelBookingService;
 import io.github.hexarchtraining.hts.booking.service.ConfirmBookingService;
 import io.github.hexarchtraining.hts.booking.service.CreateBookingService;
+import io.github.hexarchtraining.hts.booking.service.FindBookingByTokenService;
 import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
 import io.github.hexarchtraining.hts.booking.service.ShowBookingsService;
 import io.github.hexarchtraining.hts.booking.service.ShowTablesService;
-import io.github.hexarchtraining.hts.booking.service.bci.FindBookingByTokenService;
 import io.github.hexarchtraining.hts.common.port.out.TransactionPort;
-import io.github.hexarchtraining.hts.order.port.out.FindBookingForOrderByTokenAdapter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -76,7 +75,6 @@ public class BookingAdapterInConfiguration {
         return new ShowBookingsService(findBookingsPort);
     }
 
-    //bci - could be moved to separate configuration class
     @Bean
     public FindBookingByTokenUseCase findBookingByTokenUseCase() {
         return new FindBookingByTokenService(findBookingByTokenPort);
