@@ -1,6 +1,6 @@
 package io.github.hexarchtraining.hts.springboot.configuration;
 
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenUseCase;
+import io.github.hexarchtraining.hts.booking.port.in.FindBookingByTokenUseCase;
 import io.github.hexarchtraining.hts.order.port.out.CreateOrderPort;
 import io.github.hexarchtraining.hts.order.port.out.FindBookingForOrderByTokenAdapter;
 import io.github.hexarchtraining.hts.order.port.out.FindBookingForOrderByTokenPort;

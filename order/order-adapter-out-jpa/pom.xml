@@ -15,10 +15,10 @@
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>order-application</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <artifactId>order-api-out</artifactId>
+            <version>${revision}</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>

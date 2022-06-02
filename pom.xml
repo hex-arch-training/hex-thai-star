@@ -33,6 +33,8 @@
         <module>common/common-adapter-out-jdbi</module>
 
         <module>booking/booking-domain</module>
+        <module>booking/booking-api-in</module>
+        <module>booking/booking-api-out</module>
         <module>booking/booking-application</module>
         <module>booking/booking-adapter-in-springweb</module>
         <module>booking/booking-adapter-in-quarkusweb</module>
@@ -45,16 +47,19 @@
         <module>booking/booking-adapter-out-awsmail</module>
 
         <module>order/order-domain</module>
-    <module>order/order-application</module>
-    <module>order/order-adapter-out-booking</module>
-    <module>order/order-adapter-out-jpa</module>
-    <module>order/order-adapter-in-springweb</module>
+        <module>order/order-api-in</module>
+        <module>order/order-api-out</module>
+        <module>order/order-application</module>
+        <module>order/order-adapter-out-booking</module>
+        <module>order/order-adapter-out-jpa</module>
+        <module>order/order-adapter-in-springweb</module>
 
         <module>configuration/maven/spring-boot-parent</module>
         <module>configuration/maven/quarkus-parent</module>
         <module>configuration/maven/aws-parent</module>
         <module>configuration/maven/aws-v2-parent</module>
         <module>configuration/maven/jdbi-parent</module>
+        <module>configuration/maven/api-parent</module>
 
         <module>configuration/springboot</module>
         <module>configuration/awslambda</module>

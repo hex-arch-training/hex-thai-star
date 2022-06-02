@@ -15,15 +15,14 @@
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>booking-application</artifactId>
+            <artifactId>order-api-out</artifactId>
             <version>${revision}</version>
         </dependency>
 
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
-            <artifactId>order-application</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <artifactId>booking-api-in</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 

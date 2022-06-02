@@ -9,7 +9,6 @@ import io.github.hexarchtraining.hts.booking.adapter.out.jpa.SaveBookingJpaAdapt
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.BookingRepository;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableBookingRepository;
 import io.github.hexarchtraining.hts.booking.adapter.out.jpa.repository.TableRepository;
-import io.github.hexarchtraining.hts.booking.port.in.bci.FindBookingByTokenUseCase;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingsPort;
 import io.github.hexarchtraining.hts.booking.port.out.FindFreeTablesPort;

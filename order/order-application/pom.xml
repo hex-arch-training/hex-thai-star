@@ -15,6 +15,16 @@
     <dependencies>
         <dependency>
             <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>order-api-in</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
+            <artifactId>order-api-out</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.hex-arch-training</groupId>
             <artifactId>order-domain</artifactId>
             <version>${revision}</version>
         </dependency>
