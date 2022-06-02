@@ -60,11 +60,15 @@
         <module>configuration/maven/aws-v2-parent</module>
         <module>configuration/maven/jdbi-parent</module>
         <module>configuration/maven/api-parent</module>
+        <module>configuration/maven/plain-java-parent</module>
 
         <module>configuration/springboot</module>
         <module>configuration/awslambda</module>
         <module>configuration/quarkus</module>
         <module>configuration/quarkus-awslambda</module>
+
+        <module>configuration/archunit</module>
+
     </modules>
 
     <dependencies>

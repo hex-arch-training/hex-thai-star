@@ -10,8 +10,8 @@ import io.github.hexarchtraining.hts.booking.domain.exception.BookingValidationE
 import io.github.hexarchtraining.hts.booking.port.in.CancelBookingCommand;
 import io.github.hexarchtraining.hts.booking.port.out.FindBookingByTokenPort;
 import io.github.hexarchtraining.hts.booking.port.out.SaveBookingPort;
-import io.github.hexarchtraining.hts.booking.service.CancelBookingService;
-import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
+import io.github.hexarchtraining.hts.booking.application.service.CancelBookingService;
+import io.github.hexarchtraining.hts.booking.application.service.SendBookingStatusService;
 import io.github.hexarchtraining.hts.common.adapter.out.TestTransactionAdapter;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

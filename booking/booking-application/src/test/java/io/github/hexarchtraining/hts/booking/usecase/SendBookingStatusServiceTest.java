@@ -5,7 +5,7 @@ import io.github.hexarchtraining.hts.booking.domain.BookingId;
 import io.github.hexarchtraining.hts.booking.domain.BookingStatus;
 import io.github.hexarchtraining.hts.booking.port.out.BookingStatusEvent;
 import io.github.hexarchtraining.hts.booking.port.out.SendBookingStatusEventPort;
-import io.github.hexarchtraining.hts.booking.service.SendBookingStatusService;
+import io.github.hexarchtraining.hts.booking.application.service.SendBookingStatusService;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;

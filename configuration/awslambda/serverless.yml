@@ -49,25 +49,25 @@ package:
 
 functions:
   showTables:
-    handler: io.github.hexarchtraining.hts.awslambda.ShowTablesRequestHandler
+    handler: io.github.hexarchtraining.hts.configuration.awslambda.ShowTablesRequestHandler
     events:
       - httpApi:
           path: /booking/tables
           method: get
   showBookings:
-    handler: io.github.hexarchtraining.hts.awslambda.ShowBookingsRequestHandler
+    handler: io.github.hexarchtraining.hts.configuration.awslambda.ShowBookingsRequestHandler
     events:
       - httpApi:
           path: /booking/bookings
           method: get
   createBooking:
-    handler: io.github.hexarchtraining.hts.awslambda.CreateBookingRequestHandler
+    handler: io.github.hexarchtraining.hts.configuration.awslambda.CreateBookingRequestHandler
     events:
       - httpApi:
           path: /booking/bookings
           method: post
   check:
-    handler: io.github.hexarchtraining.hts.awslambda.HealthCheckRequestHandler
+    handler: io.github.hexarchtraining.hts.configuration.awslambda.HealthCheckRequestHandler
     events:
       - httpApi:
           path: /check/{token}
