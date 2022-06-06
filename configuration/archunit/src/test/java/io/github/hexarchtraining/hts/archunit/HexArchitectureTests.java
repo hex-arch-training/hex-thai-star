@@ -3,12 +3,9 @@ package io.github.hexarchtraining.hts.archunit;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
-import com.tngtech.archunit.junit.ArchUnitRunner;
 import com.tngtech.archunit.lang.ArchRule;
 import io.github.hexarchtraining.hts.archunit.architecture.HexArchitecture;
-import org.junit.runner.RunWith;
 
-@RunWith(ArchUnitRunner.class)
 @AnalyzeClasses(
     packages = "io.github.hexarchtraining.hts",
     importOptions = ImportOption.DoNotIncludeTests.class
