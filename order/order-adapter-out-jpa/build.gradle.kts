@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":order-api-out"))
-    implementation(project(":order-domain"))
+    implementation(project(":order:order-api-out"))
+    implementation(project(":order:order-domain"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation(libs.h2)
 }

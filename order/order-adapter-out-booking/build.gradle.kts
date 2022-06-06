@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":order-api-out"))
-    implementation(project(":booking-api-in"))
+    implementation(project(":order:order-api-out"))
+    implementation(project(":booking:booking-api-in"))
 }
 
 description = "order-adapter-out-booking"

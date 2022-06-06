@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":booking-domain"))
+    implementation(project(":booking:booking-domain"))
 }
 
 description = "booking-api-out"

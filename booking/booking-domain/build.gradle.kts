@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common-domain"))
+    implementation(project(":common:common-domain"))
 }
 
 description = "booking-domain"

@@ -6,14 +6,14 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common-application"))
-    implementation(project(":booking-application"))
-    implementation(project(":booking-api-out"))
-    implementation(project(":booking-api-in"))
-    implementation(project(":booking-domain"))
-    implementation(project(":booking-adapter-in-quarkusweb"))
-    implementation(project(":booking-adapter-out-quarkusmail"))
-    implementation(project(":booking-adapter-out-dynamodb"))
+    implementation(project(":common:common-application"))
+    implementation(project(":booking:booking-application"))
+    implementation(project(":booking:booking-api-out"))
+    implementation(project(":booking:booking-api-in"))
+    implementation(project(":booking:booking-domain"))
+    implementation(project(":booking:booking-adapter-in-quarkusweb"))
+    implementation(project(":booking:booking-adapter-out-quarkusmail"))
+    implementation(project(":booking:booking-adapter-out-dynamodb"))
     implementation("io.quarkus:quarkus-amazon-dynamodb")
     implementation("software.amazon.awssdk:url-connection-client")
     implementation("software.amazon.awssdk:netty-nio-client")

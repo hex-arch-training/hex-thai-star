@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":order-api-in"))
+    implementation(project(":order:order-api-in"))
     implementation("org.springframework.boot:spring-boot-starter-web")
 }
 

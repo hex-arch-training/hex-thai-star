@@ -3,9 +3,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":order-domain"))
-    implementation(project(":common-domain"))
-    implementation(project(":common-application"))
+    implementation(project(":order:order-domain"))
+    implementation(project(":common:common-domain"))
+    implementation(project(":common:common-application"))
 }
 
 description = "order-api-in"

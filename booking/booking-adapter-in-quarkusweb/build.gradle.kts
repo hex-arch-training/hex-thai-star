@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":booking-domain"))
-    implementation(project(":booking-api-in"))
+    implementation(project(":booking:booking-domain"))
+    implementation(project(":booking:booking-api-in"))
     implementation("io.quarkus:quarkus-resteasy-jackson")
 }
 

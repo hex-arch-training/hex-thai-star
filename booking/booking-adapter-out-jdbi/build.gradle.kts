@@ -5,10 +5,10 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":booking-domain"))
-    implementation(project(":booking-api-out"))
-    implementation(project(":common-domain"))
-    implementation(project(":common-adapter-out-jdbi"))
+    implementation(project(":booking:booking-domain"))
+    implementation(project(":booking:booking-api-out"))
+    implementation(project(":common:common-domain"))
+    implementation(project(":common:common-adapter-out-jdbi"))
 }
 
 description = "booking-adapter-out-jdbi"

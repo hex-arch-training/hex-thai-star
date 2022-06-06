@@ -5,9 +5,9 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common-domain"))
-    implementation(project(":booking-domain"))
-    implementation(project(":booking-api-out"))
+    implementation(project(":common:common-domain"))
+    implementation(project(":booking:booking-domain"))
+    implementation(project(":booking:booking-api-out"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     testImplementation(libs.h2)
 }

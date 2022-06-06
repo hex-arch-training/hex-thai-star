@@ -5,8 +5,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":booking-domain"))
-    implementation(project(":booking-api-in"))
+    implementation(project(":booking:booking-domain"))
+    implementation(project(":booking:booking-api-in"))
     implementation(libs.aws.lambda.java.log4j2)
     implementation(libs.log4j.core)
     implementation(libs.log4j.api)

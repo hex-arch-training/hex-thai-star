@@ -5,7 +5,7 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":common-application"))
+    implementation(project(":common:common-application"))
 }
 
 description = "common-adapter-out-jdbi"

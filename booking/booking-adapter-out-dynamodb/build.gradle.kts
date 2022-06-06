@@ -4,8 +4,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":booking-api-out"))
-    implementation(project(":booking-domain"))
+    implementation(project(":booking:booking-api-out"))
+    implementation(project(":booking:booking-domain"))
     implementation(libs.dynamodb.enhanced)
     implementation(libs.jnanoid)
 }

@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    implementation(project(":booking-domain"))
-    implementation(project(":common-domain"))
+    implementation(project(":booking:booking-domain"))
+    implementation(project(":common:common-domain"))
 }
 
 description = "booking-api-in"
