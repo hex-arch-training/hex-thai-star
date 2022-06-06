@@ -26,8 +26,8 @@ dependencies {
     implementation("org.jdbi:jdbi3-sqlobject")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.icegreen:greenmail-spring:1.6.4")
-    runtimeOnly("com.h2database:h2:1.4.200")
+    implementation(libs.greenmail.spring)
+    runtimeOnly(libs.h2)
 }
 
 description = "springboot"

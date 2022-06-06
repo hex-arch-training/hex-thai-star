@@ -57,3 +57,36 @@ project(":archunit").projectDir = file("configuration/archunit")
 project(":common-application").projectDir = file("common/common-application")
 project(":booking-domain").projectDir = file("booking/booking-domain")
 project(":booking-api-in").projectDir = file("booking/booking-api-in")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        create("libs") {
+            version("aws-lambda-java-log4j2", "1.1.0")
+            version("log4j", "2.8.2")
+            version("jackson", "2.13.1")
+            version("jsonassert", "1.5.0")
+            version("dynamodb-enhanced", "2.17.97")
+            version("jnanoid", "2.0.0")
+            version("h2", "1.4.200")
+            version("guava", "30.1.1-jre")
+            version("archunit", "0.23.1")
+            version("greenmail-spring", "1.6.4")
+            version("aws-lambda-java-core", "1.2.1")
+            library("aws-lambda-java-log4j2", "com.amazonaws", "aws-lambda-java-log4j2").versionRef("aws-lambda-java-log4j2")
+            library("log4j-core", "org.apache.logging.log4j", "log4j-core").versionRef("log4j")
+            library("log4j-api", "org.apache.logging.log4j", "log4j-api").versionRef("log4j")
+            library("jackson-core", "com.fasterxml.jackson.core", "jackson-core").versionRef("jackson")
+            library("jackson-databind", "com.fasterxml.jackson.core", "jackson-databind").versionRef("jackson")
+            library("jackson-annotations", "com.fasterxml.jackson.core", "jackson-annotations").versionRef("jackson")
+            library("jackson-datatype-jsr310", "com.fasterxml.jackson.datatype", "jackson-datatype-jsr310").versionRef("jackson")
+            library("jsonassert", "org.skyscreamer", "jsonassert").versionRef("jsonassert")
+            library("dynamodb-enhanced", "software.amazon.awssdk", "dynamodb-enhanced").versionRef("dynamodb-enhanced")
+            library("jnanoid", "com.aventrix.jnanoid", "jnanoid").versionRef("jnanoid")
+            library("h2", "com.h2database", "h2").versionRef("h2")
+            library("guava", "com.google.guava", "guava").versionRef("guava")
+            library("archunit-junit5", "com.tngtech.archunit", "archunit-junit5").versionRef("archunit")
+            library("greenmail-spring", "com.icegreen", "greenmail-spring").versionRef("greenmail-spring")
+            library("aws-lambda-java-core", "com.amazonaws", "aws-lambda-java-core").versionRef("aws-lambda-java-core")
+        }
+    }
+}

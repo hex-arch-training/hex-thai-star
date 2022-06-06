@@ -8,7 +8,7 @@ dependencies {
     implementation(project(":order-api-out"))
     implementation(project(":order-domain"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("com.h2database:h2:1.4.200")
+    testImplementation(libs.h2)
 }
 
 description = "order-adapter-out-jpa"

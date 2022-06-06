@@ -9,7 +9,7 @@ dependencies {
     implementation(project(":booking-domain"))
     implementation(project(":booking-api-out"))
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    testImplementation("com.h2database:h2:1.4.200")
+    testImplementation(libs.h2)
 }
 
 description = "booking-adapter-out-jpa"

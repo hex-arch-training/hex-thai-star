@@ -14,9 +14,9 @@ dependencies {
     implementation(project(":booking-adapter-out-awsmail"))
     implementation(project(":order-api-out"))
     implementation(project(":order-api-in"))
-    implementation("org.apache.logging.log4j:log4j-core:2.8.2")
-    implementation("org.apache.logging.log4j:log4j-api:2.8.2")
-    implementation("com.amazonaws:aws-lambda-java-core:1.2.1")
+    implementation(libs.log4j.core)
+    implementation(libs.log4j.api)
+    implementation(libs.aws.lambda.java.core)
 }
 
 description = "awslambda"
