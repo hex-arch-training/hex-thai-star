@@ -15,7 +15,7 @@
     <description>Parent pom for AWS projects</description>
 
     <properties>
-        <aws-bom.version>1.12.101</aws-bom.version>
+        <aws-bom.version>1.12.293</aws-bom.version>
     </properties>
 
     <dependencyManagement>
