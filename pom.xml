@@ -23,7 +23,7 @@
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <springboot.version>2.5.2</springboot.version>
         <lombok.version>1.18.22</lombok.version>
-        <jdbi.version>3.24.1</jdbi.version>
+        <jdbi.version>3.34.0</jdbi.version>
         <h2.version>1.4.200</h2.version>
     </properties>
 
